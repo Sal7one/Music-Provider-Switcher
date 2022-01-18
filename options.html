@@ -9,38 +9,65 @@
     <style>
 
         *{
-            padding: 2px;
-            margin: 10px;
-            font-family: Haettenschweiler, 'Arial Bold', sans-serif;
-            font-size: 24px;
+            font-family:'Arial  ', sans-serif;
+            font-weight: 700;
+            text-align: center;
+            font-size: 20px;
         }
 
         html,body{
+            width: 450px;
+            background-color: rgb(2, 173, 150);
+        }
+
+        .musicSwitcherbody{
             margin: 5px;
-            width: 350px;
-            background-color: cadetblue;
+            padding: 8px;
         }
         button{
+            display: block;
             padding: 3px;
-            background-color: white;
+            margin: 5px;
+            background-color: rgb(217, 255, 0);
+            font-size: medium;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            margin-left: 100px;
         }
         p{
             color: rgb(0, 0, 0);
         }
         #hiddenpara{
             padding: 0px;
-            margin: 0px;
+            margin-right: 10px;
             font-size: 20px;
             font-family:  'Arial Bold', sans-serif;
-            color: rgb(179, 14, 14);
+            color: rgb(255, 217, 0);
         }
+        #musicProvider{
+            display: block;
+            width: 65%;
+            margin-left: 40px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+        }
+        .hidertext{
+            display: inline-block;
+            margin: 4px;
+            background-color: white;
+        }
+       
     </style>
 </head>
 
 <body>
-    
+
+    <div class="musicSwitcherbody">
+
     <p id="hiddenpara"></p>
-    <p >Choose Your preferred music provider</p>
+        <p class="musicHeader">Choose Your preferred music provider</p>
+    
+    
 
     <select name="music" id="musicProvider">
       <option value="Spotify">Spotify</option>
@@ -51,6 +78,15 @@
     <button id="updaterbtn">Update preferences</button>
 
     <p>Now I'll try to switch all music links you click on Twitter to this music provider</p>
+</div>
+
+<div class="hidertext">
+    <p class="hidertext">Contact Dev: </h1>
+      <a href="https://github.com/Sal7one"target="_newtab"> <p class="hidertext">Github  </p></a>
+      <a href="https://twitter.com/Sal_7one"
+        target="_newtab"> <p  class="hidertext" sty >Twitter</p></a
+      >
+  </div>
 
     <script src="bower_components/jquery.js"></script>
     <script src="bower_components/utils.js"></script>
