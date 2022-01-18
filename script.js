@@ -26,6 +26,14 @@ Get().then(values=>{
         SetChrome("userPlayer", "Spotify");
     }
     else{
+
+        try {
+            
+            $('#musicProvider').val(values['userPlayer']).change();
+
+        } catch (error) {
+            
+        }
         console.log("user player is...");
         console.log(values['userPlayer']);
         userPlayer = values['userPlayer'];
