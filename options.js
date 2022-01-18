@@ -3,6 +3,8 @@
 
 
  try {
+    let messageAlert = document.querySelector("#hiddenpara");
+
      
  let updatebtn = document.querySelector("#updaterbtn");
 
@@ -12,7 +14,7 @@
         console.log("Requested provider change!")
       SetChrome("userPlayer",  musicProvider.value )
 
-      document.querySelector("#hiddenpara").innerText ="Change complete! Refresh!"
+      messageAlert.innerText ="Change complete. Refresh Twitter!";
     })
 
  } catch (error) {
@@ -25,7 +27,8 @@ Get().then(values=>{
         if(values['userPlayer'] == null){
             console.log("first run detected"); // Can be a background option on install.
             SetChrome("userPlayer", "Spotify");
-            document.querySelector("#hiddenpara").innerText ="Hello! First time here? Spotify is the deafult choice.. change it if you want"
+            messageAlert.innerText ="Hello! First time here? Spotify is the deafult choice.. change it if you want";
+
         }
         else{
             // Change Selection ui based on saved value
