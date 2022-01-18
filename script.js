@@ -1,10 +1,7 @@
-console.log("Switcher is running");
-
 
 const AppleMusic = `link[href="//music.apple.com"]`;
 const Spotify = `link[href="//open.spotify.com"]`;
 const Anghami = `link[href="//play.anghami.com"]`;
-
 const AppleMusicSearch = "https://music.apple.com/us/search?term=";
 const SpotifySearch = "https://open.spotify.com/search/";
 const AnghamiSearch = "https://play.anghami.com/search/";
@@ -16,22 +13,18 @@ let songsList = "";
 
 
 Get().then(values=>{
-
     if(values['userPlayer'] == null){
-        console.log("first run detected"); // Can be a background option on install.
         SetChrome("userPlayer", "Spotify");
+        configureApp("Spotify");
+        observeTweets();
     }
     else{
-        console.log("user player is...");
-        console.log(values['userPlayer']);
-
         configureApp(values['userPlayer']);
-        obeserveTimeLine();
+        observeTweets();
     }
   })
 
   function configureApp(userPlayer){
-
     switch(userPlayer){
       case "Spotify": choosenPlayers = AppleMusic + "," + Anghami; choosenSearch = SpotifySearch;
       break;
@@ -43,12 +36,6 @@ Get().then(values=>{
   }
 
   }
-
-function obeserveTimeLine(){
-
-    getTweets();
-
-}
 
 function getsongName(song){
     let thesong = "";
@@ -87,25 +74,12 @@ function changeMusic(){
     songName = getsongName(song);
     changeLink(song.parentNode, choosenSearch + songName)
     });
-
-      // //TODO Thread of music
-      // let isSingleTweet = location.href.includes("status");
-      // if(isSingleTweet){
-        
-      //   console.log("single tweet found");
-      //   console.log(document.querySelectorAll(choosenPlayers));
-
-      // }else{
-      // let num = 0;
-
- 
-   // }
 }
 
 var MouseEvent = new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true});
 
 
-function getTweets(){
+function observeTweets(){
   var arriveOptions = {
     fireOnAttributesModification: true, 
     onceOnly: true                   ,
@@ -113,17 +87,9 @@ function getTweets(){
 };
   try {
     document.arrive(`[data-testid="tweet"]`,arriveOptions, (tweet)=>{
-
       tweet.addEventListener('mouseover', function() {
         changeMusic();
       });
-
-      // console.log("Arrived") Timeline arrived
-
-      // let timeLine = document.querySelectorAll(`section[role="region"]`)[0];
-      // console.log("Time Line is")
-      // let tweets = timeLine.children[1].children[0].children;
-      // return tweets;
     })
    
   } catch (error) {
