@@ -1,3 +1,36 @@
+// Scroll handler
+var didScroll = false;
+var lastScrollTop = 0;
+var delta = 10;
+
+
+$(window).scroll(function (event) {
+    didScroll = true;
+  });
+
+  setInterval(function () {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+  function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    // Return if they scroll less than 20px (delta)
+    if (Math.abs(lastScrollTop - st) <= delta) return;
+
+    // Do what you want here
+
+    try {
+        replaceSite();
+    } catch (error) {}
+
+    lastScrollTop = st;
+  }
+
+
 console.log("Switcher is running");
 
 const AppleMusic = `link[href="//music.apple.com"]`;
@@ -27,21 +60,16 @@ switch(userPlayer){
 }
 
 
-
-setInterval(() => {
-    console.log("try now")
-
-let songs = document.querySelectorAll(choosenPlayers);
+function replaceSite(){
+    let songs = document.querySelectorAll(choosenPlayers);
 
 songs.forEach(song =>{
     // Will get 
-
+    console.log(song)
     songName = getsongName(song);
-
     changeLink(song.parentNode, choosenSearch + songName)
     })
-}, 500);
-
+}
 
 function getsongName(song){
     let thesong = "";
