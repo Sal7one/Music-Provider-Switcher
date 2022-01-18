@@ -1,35 +1,16 @@
-// Scroll handler
-var didScroll = false;
-var lastScrollTop = 0;
-var delta = 10;
+let userPlayer = "Spotify";
 
 
-$(window).scroll(function (event) {
-    didScroll = true;
-  });
+  Get().then(values=>{
 
-  setInterval(function () {
-    if (didScroll) {
-      hasScrolled();
-      didScroll = false;
+    if(values['userPlayer'] == null){
+        console.log("first run detected") // Can be a background option on install.
+        SetChrome("userPlayer", "Spotify")
     }
-  }, 250);
-
-  function hasScrolled() {
-    var st = $(this).scrollTop();
-
-    // Return if they scroll less than 20px (delta)
-    if (Math.abs(lastScrollTop - st) <= delta) return;
-
-    // Do what you want here
-
-    try {
-        replaceSite();
-    } catch (error) {}
-
-    lastScrollTop = st;
-  }
-
+    else{
+        userPlayer = values['userPlayer'];
+    }
+  })
 
 console.log("Switcher is running");
 
@@ -44,8 +25,6 @@ const AnghamiSearch = "https://play.anghami.com/search/";
 const urlSpace = "%20";
 let songName = "";
 
-// Static for now..
-let userPlayer = "Spotify";
 let choosenPlayers = "";
 let choosenSearch = "";
 
@@ -108,3 +87,48 @@ function changeLink(element, linkofsong){
     element.children[2].children[1].children[0].href = linkofsong;
     console.log( element.children[2].children[1].children[0].href)
 }
+
+function SetChrome(key, thingy) {
+    chrome.storage.local.set({ [key]: thingy });
+  }
+
+  function Get() {
+    return new Promise(function (resolve, _reject) {
+      chrome.storage.local.get(null, function (items) {
+        resolve(items);
+      });
+    });
+  }
+
+  
+// Scroll handler
+var didScroll = false;
+var lastScrollTop = 0;
+var delta = 10;
+
+
+$(window).scroll(function (event) {
+    didScroll = true;
+  });
+
+  setInterval(function () {
+    if (didScroll) {
+      hasScrolled();
+      didScroll = false;
+    }
+  }, 250);
+
+  function hasScrolled() {
+    var st = $(this).scrollTop();
+
+    // Return if they scroll less than 20px (delta)
+    if (Math.abs(lastScrollTop - st) <= delta) return;
+
+    // Do what you want here
+
+    try {
+        replaceSite();
+    } catch (error) {}
+
+    lastScrollTop = st;
+  }
