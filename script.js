@@ -1,6 +1,5 @@
 console.log("Switcher is running");
 
-let songsList = "";
 
 const AppleMusic = `link[href="//music.apple.com"]`;
 const Spotify = `link[href="//open.spotify.com"]`;
@@ -11,10 +10,9 @@ const SpotifySearch = "https://open.spotify.com/search/";
 const AnghamiSearch = "https://play.anghami.com/search/";
 
 let songName = "";
-
 let choosenPlayers = "";
 let choosenSearch = "";
-let userPlayer= "";
+let songsList = "";
 
 
 Get().then(values=>{
@@ -24,40 +22,32 @@ Get().then(values=>{
         SetChrome("userPlayer", "Spotify");
     }
     else{
-      
         console.log("user player is...");
         console.log(values['userPlayer']);
-        userPlayer = values['userPlayer'];
 
-        replaceSite();
+        configureApp(values['userPlayer']);
+        obeserveTimeLine();
     }
   })
 
+  function configureApp(userPlayer){
 
-
-
-function replaceSite(){
-    
     switch(userPlayer){
-        case "Spotify": choosenPlayers = AppleMusic + "," + Anghami; choosenSearch = SpotifySearch;
-        break;
-        case "Apple": choosenPlayers = Spotify + "," + Anghami; choosenSearch = AppleMusicSearch;
-        break;
-        case "Anghami": choosenPlayers = AppleMusic + "," + Spotify; choosenSearch = AnghamiSearch;
-        break;
-        default : choosenPlayers =  AppleMusic;
-    }
+      case "Spotify": choosenPlayers = AppleMusic + "," + Anghami; choosenSearch = SpotifySearch;
+      break;
+      case "Apple": choosenPlayers = Spotify + "," + Anghami; choosenSearch = AppleMusicSearch;
+      break;
+      case "Anghami": choosenPlayers = AppleMusic + "," + Spotify; choosenSearch = AnghamiSearch;
+      break;
+      default : choosenPlayers =  AppleMusic;
+  }
 
+  }
 
+function obeserveTimeLine(){
 
-     songsList = document.querySelectorAll(choosenPlayers);
-    let num = 0;
-    songsList.forEach(song =>{
-    // Will get 
-    console.log(`Num of songs:  ${++num}`)
-    songName = getsongName(song);
-    changeLink(song.parentNode, choosenSearch + songName)
-    })
+    getTweets();
+
 }
 
 function getsongName(song){
@@ -88,42 +78,45 @@ function changeLink(element, linkofsong){
     element.children[2].children[1].children[0].href = linkofsong;
 }
 
-  
-// Scroll handler
-var didScroll = false;
-var lastScrollTop = 0;
-var delta = 10;
+function getTweets(){
+  var arriveOptions = {
+    fireOnAttributesModification: true, 
+    onceOnly: true                   ,
+    existing: true               
+};
+  try {
+    document.arrive(`[data-testid="tweet"]`,arriveOptions, ()=>{
+      console.log("TimeLine Changed!")
+      //TODO Thread of music
+      let isSingleTweet = location.href.includes("status");
+      if(isSingleTweet){
 
-try {
+      }else{
+      let num = 0;
+
+    document.querySelectorAll(choosenPlayers).forEach(song =>{
+      // Will get 
+      console.log(`Num of songs:  ${++num}`)
+      songName = getsongName(song);
+      changeLink(song.parentNode, choosenSearch + songName)
+      });
+    }
+
     
 
+      // console.log("Arrived") Timeline arrived
 
-$(window).scroll(function (event) {
-    didScroll = true;
-  });
-
-  setInterval(function () {
-    if (didScroll) {
-      hasScrolled();
-      didScroll = false;
-    }
-  }, 250);
-
-  function hasScrolled() {
-    var st = $(this).scrollTop();
-
-    // Return if they scroll less than 20px (delta)
-    if (Math.abs(lastScrollTop - st) <= delta) return;
-
-    // Do what you want here
-    try {
-        replaceSite();
-    } catch (error) {}
-
-    lastScrollTop = st;
+      // let timeLine = document.querySelectorAll(`section[role="region"]`)[0];
+      // console.log("Time Line is")
+      // let tweets = timeLine.children[1].children[0].children;
+      // return tweets;
+    })
+   
+  } catch (error) {
+    console.log("timeline or children error")
+    console.log(error)
+  }
   }
 
-} catch (error) {
-}
 
 
