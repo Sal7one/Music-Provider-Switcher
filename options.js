@@ -1,10 +1,6 @@
- // Local extnesion handler
-
-
 
  try {
     let messageAlert = document.querySelector("#hiddenpara");
-
      
  let updatebtn = document.querySelector("#updaterbtn");
 
@@ -20,7 +16,6 @@
  } catch (error) {
      
     }
-
 
 Get().then(values=>{
 

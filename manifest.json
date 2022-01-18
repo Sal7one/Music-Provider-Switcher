@@ -1,6 +1,6 @@
 {
     "manifest_version": 3,
-    "name": "TwitterMusicProvider",
+    "name": "Twitter Music Provider",
     "version": "0.7.0",
     "description": "Switch to any from tweet link",
     "content_scripts": [
@@ -15,7 +15,7 @@
         "matches": ["https://twitter.com/*"]
       }
     ],
-    "permissions": ["storage", "activeTab","tabs"],
+    "permissions": ["storage"],
     "icons": {
       "48": "icon48.png",
       "128": "icon128.png"
@@ -25,6 +25,5 @@
       "default_icon": "icon128.png"
 
     }
-
   }
   
