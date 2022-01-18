@@ -14,7 +14,7 @@ let songName = "";
 
 let choosenPlayers = "";
 let choosenSearch = "";
-let userPlayer= "";
+let userPlayer = "";
 
 
 Get().then(values=>{
@@ -49,8 +49,8 @@ function replaceSite(){
     }
 
 
-
      songsList = document.querySelectorAll(choosenPlayers);
+
     let num = 0;
     songsList.forEach(song =>{
     // Will get 
