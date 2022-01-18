@@ -61,24 +61,31 @@ function replaceSite(){
 }
 
 function getsongName(song){
-    let thesong = "";
-    let artist = "";
-    if(song.href.includes("spotify")){
+  let thesong = "";
+  let artist = "";
+  let newsongname = "";
 
-        thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
-        artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
-        thesong += " " + artist.substring(0, artist.indexOf("·"));
-    }
-    else if(song.href.includes("anghami")){
+  if(song.href.includes("spotify")){
 
-        thesong =  song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
-        thesong = thesong.substring(0, thesong.indexOf("|"));
-    }
-    else if(song.href.includes("apple"))
-    thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
+      thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
+      artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
+      thesong += " " + artist.substring(0, artist.indexOf("·"));
+  }
+  else if(song.href.includes("anghami")){
+    thesong =  song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
+    
+    // Anghami if name is too long they break the | rule
+      newsongname = thesong.substring(0, thesong.indexOf("|"));
+      if(newsongname.length < 1)
+      thesong = thesong;
+      else
+      thesong = newsongname;
 
-   
-     return thesong.replaceAll(" ", "%20");
+  }
+  else if(song.href.includes("apple"))
+  thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
+
+   return thesong.replaceAll(" ", "%20");
 }
 
 
