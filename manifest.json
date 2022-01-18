@@ -1,13 +1,14 @@
 {
     "manifest_version": 3,
     "name": "TwitterMusicProvider",
-    "version": "0.3.7",
+    "version": "0.3.8",
     "description": "Switch to any from tweet link",
     "content_scripts": [
       {
         "run_at":"document_end",
         "js": [
-          "jquery.js",
+          "bower_components/jquery.js",
+          "bower_components/utils.js",
           "bower_components/arrive/src/arrive.js",
           "options.js",
           "script.js"],
