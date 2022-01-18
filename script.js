@@ -1,18 +1,7 @@
-let userPlayer = "Spotify";
-
-
-  Get().then(values=>{
-
-    if(values['userPlayer'] == null){
-        console.log("first run detected") // Can be a background option on install.
-        SetChrome("userPlayer", "Spotify")
-    }
-    else{
-        userPlayer = values['userPlayer'];
-    }
-  })
-
 console.log("Switcher is running");
+
+
+ 
 
 const AppleMusic = `link[href="//music.apple.com"]`;
 const Spotify = `link[href="//open.spotify.com"]`;
@@ -28,18 +17,40 @@ let songName = "";
 let choosenPlayers = "";
 let choosenSearch = "";
 
-switch(userPlayer){
-    case "Spotify": choosenPlayers = AppleMusic + "," + Anghami; choosenSearch = SpotifySearch;
-    break;
-    case "Apple": choosenPlayers = Spotify + "," + Anghami; choosenSearch = AppleMusicSearch;
-    break;
-    case "Anghami": choosenPlayers = AppleMusic + "," + Spotify; choosenSearch = AnghamiSearch;
-    break;
-    default : choosenPlayers =  AppleMusic;
-}
+
+
+Get().then(values=>{
+
+    if(values['userPlayer'] == null){
+        console.log("first run detected"); // Can be a background option on install.
+        SetChrome("userPlayer", "Spotify");
+    }
+    else{
+        console.log("user player is...");
+        console.log(values['userPlayer']);
+        userPlayer = values['userPlayer'];
+
+        replaceSite(userPlayer);
+    }
+  })
+
+
 
 
 function replaceSite(){
+    
+    switch(userPlayer){
+        case "Spotify": choosenPlayers = AppleMusic + "," + Anghami; choosenSearch = SpotifySearch;
+        break;
+        case "Apple": choosenPlayers = Spotify + "," + Anghami; choosenSearch = AppleMusicSearch;
+        break;
+        case "Anghami": choosenPlayers = AppleMusic + "," + Spotify; choosenSearch = AnghamiSearch;
+        break;
+        default : choosenPlayers =  AppleMusic;
+    }
+
+
+
     let songs = document.querySelectorAll(choosenPlayers);
 
 songs.forEach(song =>{
@@ -71,15 +82,6 @@ function getsongName(song){
      return thesong.replaceAll(" ", "%20");
 }
 
-    
-
-// TODO Perfrances 
-
-// Detector For each card.. 
-
-// Ignore main card
-
-// TODO Scroll handler
 
 
 function changeLink(element, linkofsong){
@@ -106,6 +108,9 @@ var didScroll = false;
 var lastScrollTop = 0;
 var delta = 10;
 
+try {
+    
+
 
 $(window).scroll(function (event) {
     didScroll = true;
@@ -125,10 +130,28 @@ $(window).scroll(function (event) {
     if (Math.abs(lastScrollTop - st) <= delta) return;
 
     // Do what you want here
-
     try {
         replaceSite();
     } catch (error) {}
 
     lastScrollTop = st;
+  }
+
+} catch (error) {
+    
+}
+
+  try {
+      let updatebtn = document.querySelector("#updaterbtn");
+
+      updatebtn.addEventListener("click", ()=>{
+        let musicProvider = document.querySelector("#musicProvider");
+
+          console.log("Requested provider change!")
+        SetChrome("userPlayer",  musicProvider.value )
+
+        document.querySelector("#hiddenpara").innerText ="Change complete! Refresh!"
+      })
+  } catch (error) {
+      
   }

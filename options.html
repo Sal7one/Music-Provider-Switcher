@@ -17,7 +17,7 @@
 
         html,body{
             margin: 5px;
-            width: 200px;
+            width: 250px;
             background-color: cadetblue;
         }
         button{
@@ -27,23 +27,28 @@
         p{
             color: rgb(0, 0, 0);
         }
+        #hiddenpara{
+            color: red;
+        }
     </style>
 </head>
 
 
 <body>
     
+    <p id="hiddenpara"></p>
     <p >Choose Your preferred music provider</p>
 
     <select name="music" id="musicProvider">
-      <option value="spotify">Spotify</option>
-      <option value="anghami">Anghami</option>
-      <option value="applemusic">Apple Music</option>
+      <option value="Spotify">Spotify</option>
+      <option value="Anghami">Anghami</option>
+      <option value="Apple">Apple Music</option>
     </select>
 
-    <button>Update preferences</button>
+    <button id="updaterbtn">Update preferences</button>
 
     <p>Now I'll try to switch all music links you click on Twitter to this music provider</p>
 
+    <script src="script.js"></script>
 </body>
 </html>
