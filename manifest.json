@@ -1,7 +1,7 @@
 {
     "manifest_version": 3,
     "name": "TwitterMusicProvider",
-    "version": "0.4.0",
+    "version": "0.5.5",
     "description": "Switch to any from tweet link",
     "content_scripts": [
       {

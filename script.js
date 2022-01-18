@@ -78,6 +78,33 @@ function changeLink(element, linkofsong){
     element.children[2].children[1].children[0].href = linkofsong;
 }
 
+
+function changeMusic(){
+        
+
+  document.querySelectorAll(choosenPlayers).forEach(song =>{
+    console.log("Itrarting")
+    songName = getsongName(song);
+    changeLink(song.parentNode, choosenSearch + songName)
+    });
+
+      // //TODO Thread of music
+      // let isSingleTweet = location.href.includes("status");
+      // if(isSingleTweet){
+        
+      //   console.log("single tweet found");
+      //   console.log(document.querySelectorAll(choosenPlayers));
+
+      // }else{
+      // let num = 0;
+
+ 
+   // }
+}
+
+var MouseEvent = new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true});
+
+
 function getTweets(){
   var arriveOptions = {
     fireOnAttributesModification: true, 
@@ -85,24 +112,11 @@ function getTweets(){
     existing: true               
 };
   try {
-    document.arrive(`[data-testid="tweet"]`,arriveOptions, ()=>{
-      console.log("TimeLine Changed!")
-      //TODO Thread of music
-      let isSingleTweet = location.href.includes("status");
-      if(isSingleTweet){
+    document.arrive(`[data-testid="tweet"]`,arriveOptions, (tweet)=>{
 
-      }else{
-      let num = 0;
-
-    document.querySelectorAll(choosenPlayers).forEach(song =>{
-      // Will get 
-      console.log(`Num of songs:  ${++num}`)
-      songName = getsongName(song);
-      changeLink(song.parentNode, choosenSearch + songName)
+      tweet.addEventListener('mouseover', function() {
+        changeMusic();
       });
-    }
-
-    
 
       // console.log("Arrived") Timeline arrived
 
