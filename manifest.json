@@ -1,0 +1,23 @@
+{
+    "manifest_version": 3,
+    "name": "TwitterMusicProvider",
+    "version": "0.1.0",
+    "description": "Switch to any from tweet link",
+    "content_scripts": [
+      {
+        "run_at":"document_end",
+        "js": [
+          "jquery.js",
+          "bower_components/arrive/src/arrive.js",
+          "script.js"],
+        "matches": ["https://twitter.com/*"]
+      }
+    ],
+    "permissions": ["storage", "activeTab","tabs"],
+    "icons": {
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+
+  }
+  
