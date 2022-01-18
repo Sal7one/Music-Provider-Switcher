@@ -40,6 +40,8 @@ Get().then(values=>{
 function getsongName(song){
     let thesong = "";
     let artist = "";
+    let newsongname = "";
+
     if(song.href.includes("spotify")){
 
         thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
@@ -47,14 +49,19 @@ function getsongName(song){
         thesong += " " + artist.substring(0, artist.indexOf("·"));
     }
     else if(song.href.includes("anghami")){
+      thesong =  song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
+      
+      // Anghami if name is too long they break the | rule
+        newsongname = thesong.substring(0, thesong.indexOf("|"));
+        if(newsongname.length < 1)
+        thesong = thesong;
+        else
+        thesong = newsongname;
 
-        thesong =  song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
-        thesong = thesong.substring(0, thesong.indexOf("|"));
     }
     else if(song.href.includes("apple"))
     thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
 
-   
      return thesong.replaceAll(" ", "%20");
 }
 
@@ -72,6 +79,9 @@ function changeMusic(){
     console.log("Itrarting")
     songName = getsongName(song);
     changeLink(song.parentNode, choosenSearch + songName)
+   // Mark Song as modifed 
+    // song.href = "#"
+
     });
 }
 
