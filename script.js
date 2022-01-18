@@ -1,7 +1,6 @@
 console.log("Switcher is running");
 
-
- 
+let songsList = "";
 
 const AppleMusic = `link[href="//music.apple.com"]`;
 const Spotify = `link[href="//open.spotify.com"]`;
@@ -11,12 +10,11 @@ const AppleMusicSearch = "https://music.apple.com/us/search?term=";
 const SpotifySearch = "https://open.spotify.com/search/";
 const AnghamiSearch = "https://play.anghami.com/search/";
 
-const urlSpace = "%20";
 let songName = "";
 
 let choosenPlayers = "";
 let choosenSearch = "";
-
+let userPlayer= "";
 
 
 Get().then(values=>{
@@ -26,19 +24,12 @@ Get().then(values=>{
         SetChrome("userPlayer", "Spotify");
     }
     else{
-
-        try {
-            
-            $('#musicProvider').val(values['userPlayer']).change();
-
-        } catch (error) {
-            
-        }
+      
         console.log("user player is...");
         console.log(values['userPlayer']);
         userPlayer = values['userPlayer'];
 
-        replaceSite(userPlayer);
+        replaceSite();
     }
   })
 
@@ -59,11 +50,11 @@ function replaceSite(){
 
 
 
-    let songs = document.querySelectorAll(choosenPlayers);
-
-songs.forEach(song =>{
+     songsList = document.querySelectorAll(choosenPlayers);
+    let num = 0;
+    songsList.forEach(song =>{
     // Will get 
-    console.log(song)
+    console.log(`Num of songs:  ${++num}`)
     songName = getsongName(song);
     changeLink(song.parentNode, choosenSearch + songName)
     })
@@ -95,20 +86,7 @@ function getsongName(song){
 function changeLink(element, linkofsong){
     element.children[2].children[0].children[0].href = linkofsong;
     element.children[2].children[1].children[0].href = linkofsong;
-    console.log( element.children[2].children[1].children[0].href)
 }
-
-function SetChrome(key, thingy) {
-    chrome.storage.local.set({ [key]: thingy });
-  }
-
-  function Get() {
-    return new Promise(function (resolve, _reject) {
-      chrome.storage.local.get(null, function (items) {
-        resolve(items);
-      });
-    });
-  }
 
   
 // Scroll handler
@@ -146,20 +124,6 @@ $(window).scroll(function (event) {
   }
 
 } catch (error) {
-    
 }
 
-  try {
-      let updatebtn = document.querySelector("#updaterbtn");
 
-      updatebtn.addEventListener("click", ()=>{
-        let musicProvider = document.querySelector("#musicProvider");
-
-          console.log("Requested provider change!")
-        SetChrome("userPlayer",  musicProvider.value )
-
-        document.querySelector("#hiddenpara").innerText ="Change complete! Refresh!"
-      })
-  } catch (error) {
-      
-  }
