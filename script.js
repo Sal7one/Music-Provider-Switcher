@@ -80,12 +80,10 @@ function changeMusic(){
     songName = getsongName(song);
     changeLink(song.parentNode, choosenSearch + songName)
    // Mark Song as modifed 
-    // song.href = "#"
+    song.href = "#"
 
     });
 }
-
-var MouseEvent = new MouseEvent('mouseover', {view: window, bubbles: true, cancelable: true});
 
 
 function observeTweets(){
