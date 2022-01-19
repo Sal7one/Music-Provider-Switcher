@@ -1,8 +1,8 @@
 {
     "manifest_version": 3,
     "name": "Twitter Music Provider",
-    "version": "0.7.0",
-    "description": "Switch to any from tweet link",
+    "version": "0.7.1",
+    "description": "Switch to other music providers from tweet link",
     "content_scripts": [
       {
         "run_at":"document_end",

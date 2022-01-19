@@ -59,9 +59,13 @@ function getsongName(song){
         thesong = newsongname;
 
     }
-    else if(song.href.includes("apple"))
-    thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
+    else if(song.href.includes("apple")){
 
+      
+      thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
+      if(thesong.includes("لـ"))
+      thesong = thesong.replaceAll("لـ", " ");
+    }
      return thesong.replaceAll(" ", "%20");
 }
 
