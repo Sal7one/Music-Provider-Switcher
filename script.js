@@ -80,7 +80,6 @@ function changeLink(element, linkofsong){
 function changeMusic(){
         
   document.querySelectorAll(choosenPlayers).forEach(song =>{
-    console.log("Itrarting")
     songName = getsongName(song);
     changeLink(song.parentNode, choosenSearch + songName)
    // Mark Song as modifed 
