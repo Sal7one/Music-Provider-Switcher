@@ -13,8 +13,9 @@ let songsList = "";
 
 
 Get().then(values=>{
+    console.log(values)
     if(values['userPlayer'] == null){
-        SetChrome("userPlayer", "Spotify");
+      SetFireFox("userPlayer", "Spotify");
         configureApp("Spotify");
         observeTweets();
     }
