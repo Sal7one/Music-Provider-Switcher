@@ -1,0 +1,28 @@
+{
+    "manifest_version": 2,
+    "name": "Twitter Music Provider",
+    "version": "0.7.1",
+    "description": "Switch to other music providers from tweet link",
+    "content_scripts": [
+      {
+        "run_at":"document_end",
+        "js": [
+          "bower_components/jquery.js",
+          "bower_components/utils.js",
+          "bower_components/arrive/src/arrive.js",
+          "options.js",
+          "script.js"],
+        "matches": ["https://twitter.com/*"]
+      }
+    ],
+    "permissions": ["storage"],
+    "icons": {
+      "48": "icon48.png",
+      "128": "icon128.png"
+    }
+    , "browser_action": {
+      "default_popup":"options.html",
+      "default_icon": "icon128.png"
+    }
+  }
+ 
