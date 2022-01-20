@@ -8,7 +8,7 @@
       let musicProvider = document.querySelector("#musicProvider");
 
         console.log("Requested provider change!")
-        SetFireFox("userPlayer",  musicProvider.value )
+      SetChrome("userPlayer",  musicProvider.value )
 
       messageAlert.innerText ="Change complete. Refresh Twitter!";
     })
@@ -21,7 +21,7 @@ Get().then(values=>{
 
         if(values['userPlayer'] == null){
             console.log("first run detected"); // Can be a background option on install.
-            SetFireFox("userPlayer", "Spotify");
+            SetChrome("userPlayer", "Spotify");
             messageAlert.innerText ="Hello! First time here? Spotify is the deafult choice.. change it if you want";
 
         }
