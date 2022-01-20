@@ -1,4 +1,4 @@
-# Twitter Music Switcher (chrome)
+# TwitterMusicSwitcher
 
 # Installation
 
