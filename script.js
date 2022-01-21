@@ -9,7 +9,7 @@ let songName = "";
 let choosenProvider = "";
 let choosenSearch = "";
 let songsList = "";
-
+var searchforPlaylist = false;
 
 Get().then(savedData=>{
   console.log("saved data")
@@ -55,10 +55,10 @@ function getSongName(song){
 
         thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
         artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
-        if(artist.includes("Spotify") && artist.includes("Playlist") && !searchforPlaylist){
+        if(artist.includes("Spotify") && artist.includes("Playlist")){
+        console.log("Spotify playlist detected");
           return "Playlist";
         }
-        console.log("Spotify playlist detected");
 
         // Spotify sperates the artist and song names with this symbol ·
         thesong += " " + artist.substring(0, artist.indexOf("·"));
@@ -73,8 +73,17 @@ function getSongName(song){
     }
     else if(song.href.includes("apple")){
 
-      thesong =  song.parentNode.children[2].children[0].children[0].children[0].children[1].children[0].getAttribute("aria-label");
-      // Apple music arabic tweet replace with space
+      let thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
+      let songdetails = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText
+
+      // TODO array check of apple array of words and other music providers arrrays
+      if(songdetails.includes("Playlist")){
+        return "Playlist";
+      }else if(songdetails.includes("Album")){
+        return "Album"
+      }
+
+      // // Apple music arabic tweet replace with space
       if(thesong.includes("لـ"))
       thesong = thesong.replaceAll("لـ", " ");
     }
