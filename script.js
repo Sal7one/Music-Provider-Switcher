@@ -9,7 +9,8 @@ let songName = "";
 let choosenProvider = "";
 let choosenSearch = "";
 let songsList = "";
-var searchforPlaylist = false;
+
+let searchforPlaylistandAlbums = false;
 
 Get().then(savedData=>{
   console.log("saved data")
@@ -57,7 +58,7 @@ function getSongName(song){
         artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
         if(artist.includes("Spotify") && artist.includes("Playlist")){
         console.log("Spotify playlist detected");
-          return "Playlist";
+          return "Playlist-->";
         }
 
         // Spotify sperates the artist and song names with this symbol ·
@@ -73,25 +74,25 @@ function getSongName(song){
     }
     else if(song.href.includes("apple")){
 
-      let thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
+      thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
       let songdetails = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText
-
-      // TODO array check of apple array of words and other music providers arrrays
-      if(songdetails.includes("Playlist")){
-        return "Playlist";
-      }else if(songdetails.includes("Album")){
-        return "Album"
-      }
 
       // // Apple music arabic tweet replace with space
       if(thesong.includes("لـ"))
       thesong = thesong.replaceAll("لـ", " ");
+
+      // TODO array check of apple array of words and other music providers arrrays
+      if(songdetails.includes("Playlist")){
+        return "Playlist-->" + thesong;
+      }else if(songdetails.includes("Album")){
+        return "Album-->"+thesong
+      }
+
     }
 
     // Return the song with URL ready format 
-     return thesong.replaceAll(" ", "%20");
-}
-
+     return thesong;
+    }
 
 
 function changeLink(element, linkofsong){
@@ -108,21 +109,24 @@ function changeLink(element, linkofsong){
 
 function findMusicTweets(){
 
+  let isSong = true;
+
   // Using saved provider query select all music tweets 
   document.querySelectorAll(choosenProvider).forEach(song =>{
 
     // Get song name
     songName = getSongName(song);
     
-    if(songName == "Playlist"){
+    if((songName.includes("Playlist-->") || songName.includes( "Album-->"))){
+      songName = songName.substring(songName.indexOf("-->")+3);
 
-
-
-    }else{
-    // Change Tweet link of the song to search for it in our chosen provider
-    changeLink(song.parentNode, choosenSearch + songName);
-
+      if(!searchforPlaylistandAlbums)
+      isSong = false;
     }
+
+    // Change Tweet link of the song to search for it in our chosen provider
+      if(isSong)
+      changeLink(song.parentNode, choosenSearch + encodeURIComponent(songName));
     
    // Mark Song as modifed 
     song.href = "#";
