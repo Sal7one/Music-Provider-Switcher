@@ -13,17 +13,21 @@ let songsList = "";
 let searchforPlaylistandAlbums = false;
 
 Get().then(savedData=>{
-  console.log("saved data")
   let MusicProvider = savedData['MusicProvider']
-  console.log(MusicProvider)
-
+  let PlayListChoice = savedData['searchforPlaylistandAlbums']
 
     if(MusicProvider == null){
         Set("MusicProvider", "Spotify");
+        Set("searchforPlaylistandAlbums", false);
         configureApp("Spotify");
         observeTweets();
     }
     else{
+          if(PlayListChoice == null)
+          Set("searchforPlaylistandAlbums", false);
+          else
+          searchforPlaylistandAlbums = PlayListChoice;  
+
         configureApp(MusicProvider);
         observeTweets();
     }
