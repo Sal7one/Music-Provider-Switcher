@@ -35,8 +35,15 @@ Get().then(values=>{
 
         }
         else{
+          try {
             // Change Selection element ui based on saved value
             $('#musicProvider').val(values['MusicProvider']).change();
+            document.querySelector("#playListbutton").checked = values['searchforPlaylistandAlbums']
+            
+          } catch (error) {
+            
+          }
+
         }
       })
     

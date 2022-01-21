@@ -60,9 +60,11 @@ function getSongName(song){
 
         thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
         artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
-        if(artist.includes("Spotify") && artist.includes("Playlist")){
-        console.log("Spotify playlist detected");
-          return "Playlist-->";
+
+        if(artist.includes("· Playlist")){
+          return "Playlist-->" + thesong;
+        }else if(artist.includes("· Album")){
+          return "Album-->"+thesong
         }
 
         // Spotify sperates the artist and song names with this symbol ·
