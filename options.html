@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="button.css">
     <title>Options</title>
 
     <style>
@@ -16,7 +17,7 @@
         }
 
         html,body{
-            width: 570px;
+            width: 590px;
             background-color: rgb(2, 173, 150);
         }
 
@@ -24,16 +25,7 @@
             margin: 5px;
             padding: 8px;
         }
-        button{
-            display: block;
-            padding: 3px;
-            margin: 5px;
-            background-color: gold;
-            font-size: medium;
-            margin-top: 20px;
-            margin-bottom: 20px;
-            margin-left: 200px;
-        }
+      
         p{
             color: rgb(0, 0, 0);
             display: inline-block !important;
@@ -59,7 +51,7 @@
         }
         .option{
             border: white solid 2px;
-            width: 240px;
+            width: 250px;
             height: 110px;
             display: inline-block
         }
@@ -85,11 +77,13 @@
 
     <div class="option">
 
-    <p class="optionsLabel" style="font-size: 14px;" >Search for Playlist?</p>
+    <p class="optionsLabel" style="font-size: 14px;" >Search for Playlist/Albums?</p>
     <input type="checkbox" name="playListbutton"  id="playListbutton">
     <p class="optionsLabel" style="font-size: 9px; margin-bottom: 20px;" >If Unchecked I will just open the original Music provider</p>
 </div>
-<button id="updaterbtn">Update Settings</button>
+<div class="wrap">
+    <button class="button" id="updaterbtn">Update Settings</button>
+  </div>
 
     <p>Now I'll try to switch all music links you click on Twitter to this music provider</p>
 </div>
