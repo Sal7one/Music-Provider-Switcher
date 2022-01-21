@@ -12,13 +12,18 @@ let songsList = "";
 
 
 Get().then(savedData=>{
-    if(savedData['MusicProvider'] == null){
+  console.log("saved data")
+  let MusicProvider = savedData['MusicProvider']
+  console.log(MusicProvider)
+
+
+    if(MusicProvider == null){
         Set("MusicProvider", "Spotify");
         configureApp("Spotify");
         observeTweets();
     }
     else{
-        configureApp(savedData['MusicProvider']);
+        configureApp(MusicProvider);
         observeTweets();
     }
   })
@@ -50,6 +55,10 @@ function getSongName(song){
 
         thesong = song.parentNode.children[2].children[1].children[0].children[0].children[1].children[0].children[0].innerText;
         artist = song.parentNode.children[2].children[1].children[0].children[0].children[2].children[0].children[0].innerText;
+        if(artist.includes("Spotify") && artist.includes("Playlist") && !searchforPlaylist){
+          return "Playlist";
+        }
+        console.log("Spotify playlist detected");
 
         // Spotify sperates the artist and song names with this symbol ·
         thesong += " " + artist.substring(0, artist.indexOf("·"));
@@ -96,9 +105,16 @@ function findMusicTweets(){
     // Get song name
     songName = getSongName(song);
     
+    if(songName == "Playlist"){
+
+
+
+    }else{
     // Change Tweet link of the song to search for it in our chosen provider
     changeLink(song.parentNode, choosenSearch + songName);
 
+    }
+    
    // Mark Song as modifed 
     song.href = "#";
     });

@@ -16,7 +16,7 @@
         }
 
         html,body{
-            width: 350px;
+            width: 570px;
             background-color: rgb(2, 173, 150);
         }
 
@@ -28,33 +28,39 @@
             display: block;
             padding: 3px;
             margin: 5px;
-            background-color: rgb(217, 255, 0);
+            background-color: gold;
             font-size: medium;
             margin-top: 20px;
             margin-bottom: 20px;
-            margin-left: 70px;
+            margin-left: 200px;
         }
         p{
             color: rgb(0, 0, 0);
+            display: inline-block !important;
         }
         #hiddenpara{
             padding: 0px;
             margin-right: 10px;
             font-size: 20px;
             font-family:  'Arial Bold', sans-serif;
-            color: rgb(255, 217, 0);
+            color: rgb(255, 222, 37);
         }
         #musicProvider{
             display: block;
-            width: 65%;
+            width: 150px;
             margin-left: 40px;
-            margin-top: 10px;
             margin-bottom: 10px;
         }
         .hidertext{
-            display: inline-block;
+            display: block;
             margin: 4px;
             background-color: white;
+        }
+        .option{
+            border: white solid 2px;
+            width: 240px;
+            height: 110px;
+            display: inline-block
         }
        
     </style>
@@ -64,21 +70,30 @@
 
     <div class="musicSwitcherbody">
 
-    <p id="hiddenpara"></p>
-        <p class="musicHeader">Choose Your preferred music provider</p>
     
     
+    <div class="option">
+        <p class="musicHeader" style="margin-bottom: 30px;">Choose Your preferred music provider</p>
 
     <select name="music" id="musicProvider">
       <option value="Spotify">Spotify</option>
       <option value="Anghami">Anghami</option>
       <option value="Apple">Apple Music</option>
     </select>
+</div>
 
-    <button id="updaterbtn">Update preferences</button>
+    <div class="option">
+
+    <p class="optionsLabel" style="font-size: 14px;" >Search for Playlist?</p>
+    <input type="checkbox" name="playListbutton"  id="playListbutton">
+    <p class="optionsLabel" style="font-size: 9px; margin-bottom: 20px;" >If Unchecked I will just open the original Music provider</p>
+</div>
+<button id="updaterbtn">Update Settings</button>
 
     <p>Now I'll try to switch all music links you click on Twitter to this music provider</p>
 </div>
+<p id="hiddenpara"></p>
+
 
 <div class="hidertext">
     <p class="hidertext">Contact Dev: </h1>
@@ -88,7 +103,7 @@
       >
   </div>
 
-    <script src="bower_components/jquery.js"></script>
+    <script src="bower_components/jquery.min.js"></script>
     <script src="bower_components/utils.js"></script>
     <script src="options.js" defer></script>
 </body>

@@ -1,15 +1,15 @@
 {
     "manifest_version": 3,
     "name": "Twitter Music Provider",
-    "version": "0.7.2",
+    "version": "0.7.3",
     "description": "Switch to other music providers from tweet link",
     "content_scripts": [
       {
         "run_at":"document_end",
         "js": [
           "bower_components/jquery.min.js",
-          "bower_components/utils.js",
           "bower_components/arrive/src/arrive.js",
+          "bower_components/utils.js", 
           "options.js",
           "script.js"],
         "matches": ["https://twitter.com/*"]
