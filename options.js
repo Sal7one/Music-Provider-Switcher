@@ -11,7 +11,6 @@
 
       Set("MusicProvider",  musicProvider.value )
       Set("searchforPlaylistandAlbums",  albumPlaylist.checked)
-     // Set("searchforPlaylistandAlbums",  musicProvider.value )
       messageAlert.innerText ="Change complete. Refresh Twitter!";
     })
 
