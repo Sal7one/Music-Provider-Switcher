@@ -10,35 +10,27 @@
     <style>
 
         *{
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            font-weight: 700;
+            font-weight: 400;
             text-align: center;
-            font-size: 23px;
+            font-size: 18px;
+            font-family: 'Arial', sans-serif;
         }
 
         html,body{
-            background-color: rgb(2, 173, 150);
-        }
-
-        .musicSwitcherbody{
-            margin: 5px;
-            padding: 8px;
+            background-color: rgb(190, 190, 190);
+            width: 570px;
         }
 
         .button {
             text-transform: uppercase;
             letter-spacing: 1.3px;
             font-weight: 700;
-            color: #313133;
-            background: gold;
-            background: linear-gradient(
-              90deg,
-              rgb(240, 204, 3) 0%,
-              rgb(228, 205, 5) 100%
-            );
+            color: white;
+            background: #0d6686;
+         
             border: none;
-            border-radius: 20px;
-            box-shadow: 12px 12px 24px rgba(220, 224, 5, 0.199);
+            border-radius: 17px;
+            box-shadow: 12px 12px 24px rgba(236, 236, 236, 0.199);
             outline: none;
             position: relative;
             padding: 10px;
@@ -47,7 +39,6 @@
 
       
         p{
-            color: rgb(0, 0, 0);
             display: inline-block;
         }
         #hiddenpara{
@@ -58,33 +49,64 @@
             color: rgb(255, 222, 37);
             background-color: black;
         }
-        #musicProvider{
-            display: block;
-            margin-left: 40px;
-            margin-bottom: 10px;
-        }
+   
         .hidertext{
+            margin-right: 15px;
             display: block;
-            margin: 4px;
-            background-color: white;
+            background-color: rgb(0, 0, 0);
         }
-        .option{
+        .hidertext > a, .hidertext > p{
+            display: inline-block;
+            color: white;
+            text-decoration: none;
+        }
+     
+        .options  {
+        margin-right: 7px;
+        display: grid; 
+        grid-template-columns: 1fr 1fr; 
+        grid-template-rows: 1fr; 
+        gap: 0px 0px; 
+        grid-template-areas: 
+            "div1 div2"; 
+        }
+
+        .options >div{
+            padding: 5px;
+            margin-right: 5px;
             border: white solid 2px;
-            margin-right: 3px;
-            display: inline-block
         }
-       
+        .div1 { grid-area: div1; }
+        .div2 { grid-area: div2; 
+        }
+
+        select,option{
+        border: none;
+        border-radius: 15px;
+        width: 175px;
+           
+       }
+
+option {
+  background: #ffffff ;
+  color: #1882A8 ;
+}
+select {
+  background: #ffffff;
+  color: #1882A8 ;
+}
+
     </style>
 </head>
 
 <body>
 
-    <div class="musicSwitcherbody">
 
     
-    
-    <div class="option">
-        <p class="musicHeader" style="margin-bottom: 30px;">Choose Your preferred music provider</p>
+    <div class="options">
+
+    <div class="div1">
+        <p class="musicHeader" >Choose Your preferred music provider</p>
 
     <select name="music" id="musicProvider">
       <option value="Spotify">Spotify</option>
@@ -93,20 +115,23 @@
     </select>
 </div>
 
-    <div class="option">
+    <div class="div2">
 
     <p class="optionsLabel"  >Search for Playlist/Albums?</p>
     <input type="checkbox" name="playListbutton"  id="playListbutton">
     <p class="optionsLabel"  >If Unchecked I will just open the original Music provider</p>
 </div>
+
+</div>
+
+
 <div class="wrap">
     <button class="button" id="updaterbtn">Update Settings</button>
   </div>
 
     <p>Now I'll try to switch all music links you click on Twitter to this music provider</p>
-</div>
-<p id="hiddenpara"></p>
 
+<p id="hiddenpara"></p>
 
 <div class="hidertext">
     <p class="hidertext">Contact Dev: </h1>
