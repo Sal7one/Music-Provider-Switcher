@@ -1,4 +1,4 @@
 <resources>
     <string name="app_name">Music Switcher</string>
-    <string name="maintext">MainText</string>
+    <string name="Welcome">Welcome!\n\nPlease choose your favorite music provider from below</string>
 </resources>
