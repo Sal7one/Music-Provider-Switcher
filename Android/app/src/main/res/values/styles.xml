@@ -4,9 +4,16 @@
     <style name="header_text">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>
-        <item name="android:layout_marginTop">144dp</item>
         <item name="android:fontFamily">@font/abril_fatface</item>
         <item name="android:textColor">#FFFFFFFF</item>
         <item name="android:textSize">24sp</item>
+    </style>
+
+
+    <style name="sub_text">
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/abril_fatface</item>
+        <item name="android:textColor">#FF000000</item>
+        <item name="android:textSize">18sp</item>
     </style>
 </resources>

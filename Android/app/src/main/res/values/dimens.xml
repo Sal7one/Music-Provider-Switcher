@@ -2,5 +2,6 @@
 <resources>
     <dimen name="project_horizontal_constraint">24dp</dimen>
     <dimen name="card_radius">24dp</dimen>
+    <dimen name="custom_vertical_spacing">8dp</dimen>
 
 </resources>
