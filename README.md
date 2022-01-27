@@ -1,5 +1,12 @@
-# TwitterMusicSwitcher
+# Music Switcher | Readme coming soon
 
-# Installation
+# ( Global level )
 
-Download as Zip file, Open chrome Extensions and load the folder as unpacked
+# Current Available Release version
+
+
+Chrome: [Chrome Webstore](https://chrome.google.com/webstore/detail/twitter-music-provider/apkanldijkiplglkhjjajegljppgmgmj)
+
+# Contribute
+
+Branch into the platform you're gonna work on and this is the global scope of the project
