@@ -1,4 +1,4 @@
-function SetChrome(key, thingy) {
+function Set(key, thingy) {
     chrome.storage.local.set({ [key]: thingy });
   }
 
