@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Music Switcher</string>
+    <string name="Welcome">Welcome!\n\nPlease choose your favorite music provider from below</string>
+    <string name="your_music_provider">Choose your Music provider</string>
+    <string name="no_name" />
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+    <string name="todo">TODO</string>
+</resources>
