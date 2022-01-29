@@ -3,7 +3,7 @@
     <string name="Welcome">Welcome!\n\nPlease choose your favorite music provider from below</string>
     <string name="your_music_provider">Choose your Music provider</string>
     <string name="no_name" />
-    <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
-    <string name="todo">TODO</string>
+    <string name="spotify_btn">makes Spotify your main music provider </string>
+    <string name="applemusic_btn">makes Apple music your main music provider </string>
+    <string name="anghami_btn"> makes Anghami your main music provider </string>
 </resources>

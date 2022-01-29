@@ -57,7 +57,7 @@
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/todo"
+                android:contentDescription="@string/spotify_btn"
                 app:srcCompat="@drawable/spoti"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
@@ -67,9 +67,9 @@
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
+                android:contentDescription="@string/applemusic_btn"
                 app:srcCompat="@drawable/applem"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
                 android:id="@+id/anghamibtn"
@@ -77,9 +77,9 @@
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
+                android:contentDescription="@string/anghami_btn"
                 app:srcCompat="@drawable/anghami"
-                tools:ignore="SpeakableTextPresentCheck"
-                android:contentDescription="@string/todo" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
         </LinearLayout>
     </LinearLayout>
