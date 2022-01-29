@@ -52,7 +52,7 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/imageButton"
+                android:id="@+id/spotifybtn"
                 android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:layout_weight="1"
@@ -61,7 +61,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton6"
+                android:id="@+id/applemusicbtn"
                 android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:layout_weight="1"
@@ -70,7 +70,7 @@
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/imageButton7"
+                android:id="@+id/anghamibtn"
                 android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:layout_weight="1"
