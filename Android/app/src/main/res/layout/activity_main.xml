@@ -57,8 +57,9 @@
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
+                android:contentDescription="@string/todo"
                 app:srcCompat="@drawable/spoti"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
             <ImageButton
                 android:id="@+id/applemusicbtn"
@@ -67,7 +68,8 @@
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
                 app:srcCompat="@drawable/applem"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/todo" />
 
             <ImageButton
                 android:id="@+id/anghamibtn"
@@ -76,7 +78,8 @@
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
                 app:srcCompat="@drawable/anghami"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck"
+                android:contentDescription="@string/todo" />
 
         </LinearLayout>
     </LinearLayout>
