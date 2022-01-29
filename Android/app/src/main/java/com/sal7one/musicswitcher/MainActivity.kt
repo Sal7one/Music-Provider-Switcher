@@ -14,6 +14,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spotify_btn: ImageButton
     private lateinit var apple_btn: ImageButton
     private lateinit var anghami_btn: ImageButton
+    private lateinit var update_btn: Button
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,11 +24,13 @@ class MainActivity : AppCompatActivity() {
         spotify_btn =  binding.spotifybtn
         apple_btn = binding.applemusicbtn
         anghami_btn =  binding.anghamibtn
+        update_btn =  binding.updatebutton
 
 
-        spotify_btn.setOnClickListener{changeViewBackground(it)}
+        spotify_btn.setOnClickListener{changeViewBackground(it) }
         apple_btn.setOnClickListener{changeViewBackground(it)}
         anghami_btn.setOnClickListener{changeViewBackground(it)}
+        update_btn.setOnClickListener {}
     }
 
 

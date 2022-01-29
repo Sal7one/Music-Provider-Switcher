@@ -6,4 +6,6 @@
     <string name="spotify_btn">makes Spotify your main music provider </string>
     <string name="applemusic_btn">makes Apple music your main music provider </string>
     <string name="anghami_btn"> makes Anghami your main music provider </string>
+    <string name="i_will_try_to_redirect_all_links_to_the_perfered_music_provider">I will try to redirect all links to the perfered music provider</string>
+    <string name="update_choice">Update choice</string>
 </resources>
