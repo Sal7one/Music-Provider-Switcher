@@ -1,10 +1,9 @@
 package com.sal7one.musicswitcher
 
-import android.app.Application
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.View
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -30,12 +29,12 @@ class MainActivity : AppCompatActivity() {
 
         viewModel = ViewModelProvider(this, MyViewModelFactory(this.getApplication())).get(MainActvityViewModel::class.java)
 
-        Log.d("MainACTIVCITYVIEWMODE", "is " + currentProvider)
 
         spotify_btn =  binding.spotifybtn
         apple_btn = binding.applemusicbtn
         anghami_btn =  binding.anghamibtn
         update_btn =  binding.updatebutton
+
 
 
         viewModel.choosen_Provider.observe(this, Observer { it->
@@ -68,8 +67,6 @@ class MainActivity : AppCompatActivity() {
         spotify_btn.setBackgroundColor(getColor(R.color.white))
         apple_btn.setBackgroundColor(getColor(R.color.white))
         anghami_btn.setBackgroundColor(getColor(R.color.white))
-
-             Log.d("MainACTIVCITYVIEWMODE", "is " + currentProvider)
 
         when(currentProvider){
             "spotify" -> spotify_btn.setBackgroundColor(getColor(R.color.button_clicked))
