@@ -1,13 +1,15 @@
 package com.sal7one.musicswitcher
 
-import android.app.Application
+import DataStoreProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 
-class MyViewModelFactory(application : Application) : ViewModelProvider.Factory{
-        private var  mApplication = application;
+class MyViewModelFactory(private val dataStoreProvider: DataStoreProvider) :
+        ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                return MainActvityViewModel(mApplication) as T
+                if (modelClass.isAssignableFrom(MainActvityViewModel::class.java)) {
+                        return MainActvityViewModel(dataStoreProvider) as T
+                }
+                throw IllegalStateException()
         }
-
 }

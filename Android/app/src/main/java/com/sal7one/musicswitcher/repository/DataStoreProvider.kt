@@ -6,25 +6,36 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
 
-class DateStoreProvider(val context: Context) {
+class DataStoreProvider(val context: Context) {
 
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "music_preferences")
 
+
     companion object {
-
         val music_provider = stringPreferencesKey("music_provider")
-    }
 
+        private var INSTANCE: DataStoreProvider? = null
+
+        fun getInstance(context: Context): DataStoreProvider {
+            return INSTANCE ?: synchronized(this) {
+                INSTANCE?.let {
+                    return it
+                }
+                val instance = DataStoreProvider(context)
+                INSTANCE = instance
+                instance
+            }
+        }
+    }
 
     suspend fun savetoDataStore(WantedProvider: String) {
         context.dataStore.edit {
-
             it[music_provider] = WantedProvider
 
         }
     }
 
-    suspend fun getFromDataStore() = context.dataStore.data.map {
+     fun getFromDataStore() = context.dataStore.data.map {
             it[music_provider] ?: ""
     }
 }
