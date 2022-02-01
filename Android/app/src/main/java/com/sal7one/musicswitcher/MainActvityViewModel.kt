@@ -17,12 +17,16 @@ class MainActvityViewModel(
 
     var choosen_Provider  = MutableLiveData<String>()
     var Musicpackage  = MutableLiveData<String>()
+    var searchLink  = MutableLiveData<String>()
     var sameApp  = MutableLiveData<Boolean>()
+    var diffrentApp  = MutableLiveData<Boolean>()
 
     init {
         choosen_Provider.value = ""
         sameApp.value = false
+        diffrentApp.value = false
         Musicpackage.value = ""
+        searchLink.value = ""
         getData()
     }
 
@@ -46,36 +50,32 @@ class MainActvityViewModel(
 
 
     private fun handleMusicProvider(MusicProvider: String, data: Uri) {
-
         val link = data.toString()
-        Log.d("MUSICMEE", MusicProvider.toString())
-        Log.d("MUSICMEE", data.toString())
         if(link.contains(MusicProvider)){
             sameApp.postValue(true)
-            Log.d("MUSICMEE", "Your provider is the same as the link")
-
         }else{
-            Log.d("MUSICMEE", "diffrenet provider found")
-
-            // open song in wanted app
-
+            diffrentApp.postValue(true)
         }
-
     }
 
-
-
     fun UpdatePackage(savedmusicProvider: String) {
+        if(savedmusicProvider.contains( "open.spotify.com")){
+            Musicpackage.postValue(constants.SPOTIFY_PACKAGE.link)
+            searchLink.postValue(constants.SPOTIFY_SEARCH.link)
+        }
 
-        if(savedmusicProvider == "spotify")
-            Musicpackage.postValue("com.spotify.music")
-        else if(savedmusicProvider == "music.apple.com")
-            Musicpackage.postValue("com.apple.android.music")
-        else if(savedmusicProvider == "anghami")
-            Musicpackage.postValue("com.anghami")
-        else if(savedmusicProvider == "deezer")
-            Musicpackage.postValue("deezer.android.app")
+        else if(savedmusicProvider.contains( "music.apple.com")){
+            Musicpackage.postValue(constants.APPLE_MUSIC_PACKAGE.link)
+            searchLink.postValue(constants.APPLE_MUSIC_SEARCH.link)
+        }
 
+        else if(savedmusicProvider.contains( "play.anghami.com")){
+            Musicpackage.postValue(constants.ANGHAMI_PACKAGE.link)
+            searchLink.postValue(constants.ANGHAMI_SEARCH_Link.link)
+        }
+        else if(savedmusicProvider.contains( "deezer")){
+            Musicpackage.postValue(constants.DEEZER_PACKAGE.link)
+        }
 
     }
 }

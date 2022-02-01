@@ -1,10 +1,8 @@
 package com.sal7one.musicswitcher
 
 import DataStoreProvider
-import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -14,7 +12,7 @@ import com.sal7one.musicswitcher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-   private lateinit var viewModel: MainActvityViewModel
+    private lateinit var viewModel: MainActvityViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var spotify_btn: ImageButton
     private lateinit var apple_btn: ImageButton
@@ -46,7 +44,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         spotify_btn.setOnClickListener{
-            currentProvider = "spotify"
+            currentProvider = "open.spotify.com"
             changeViewBackground()
         }
         apple_btn.setOnClickListener{
@@ -54,7 +52,7 @@ class MainActivity : AppCompatActivity() {
             changeViewBackground()
         }
         anghami_btn.setOnClickListener{
-            currentProvider = "anghami"
+            currentProvider = "play.anghami.com"
             changeViewBackground()
         }
         update_btn.setOnClickListener {
@@ -72,9 +70,9 @@ class MainActivity : AppCompatActivity() {
         anghami_btn.setBackgroundColor(getColor(R.color.white))
 
         when(currentProvider){
-            "spotify" -> spotify_btn.setBackgroundColor(getColor(R.color.button_clicked))
+            "open.spotify.com" -> spotify_btn.setBackgroundColor(getColor(R.color.button_clicked))
             "music.apple.com" -> apple_btn.setBackgroundColor(getColor(R.color.button_clicked))
-            "anghami" -> anghami_btn.setBackgroundColor(getColor(R.color.button_clicked))
+            "play.anghami.com" -> anghami_btn.setBackgroundColor(getColor(R.color.button_clicked))
         }
     }
 

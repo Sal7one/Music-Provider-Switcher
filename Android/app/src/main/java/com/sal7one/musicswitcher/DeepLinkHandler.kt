@@ -8,8 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.ViewModelProvider
-
-
+import com.android.volley.Request
+import com.android.volley.toolbox.StringRequest
+import com.android.volley.toolbox.Volley
+import com.sal7one.musicswitcher.utils.songExtractor
 
 
 class DeepLinkHandler : AppCompatActivity() {
@@ -30,19 +32,85 @@ class DeepLinkHandler : AppCompatActivity() {
         var action = intent?.action // Action to play music TODO analyze
         viewModel.handleDeepLink(data)
 
-       viewModel.sameApp.observe(this, {
+        // Instantiate the RequestQueue.
+        val queue = Volley.newRequestQueue(this)
 
+       viewModel.sameApp.observe(this, {
            if(it){
-               Log.d("MUSICMEE",data.toString())
-               Log.d("MUSICMEE",viewModel.Musicpackage.value.toString())
                val i = Intent()
-               i.setPackage(viewModel.Musicpackage.value) // viewmodel based on prefrance
+               var appPackage =  sameAppPackage(data.toString())
+               Log.d("MMMM" , "Package: " + appPackage)
+               i.setPackage(appPackage)
                i.setAction(action)
                i.setData(data)
-              startActivity(i)
+               startActivity(i)
            }
+        })
 
+        viewModel.diffrentApp.observe(this, {
+            if(it){
+                var Songurl =data.toString()
+
+                Log.d("MUSICMEE","In url: " + Songurl)
+
+
+                val stringRequest = StringRequest(Request.Method.GET, Songurl,
+                    { response ->
+
+                        var songName = songExtractor.ExtractFromURL(Songurl, response)
+                        Log.d("MUSICMEE","Song Name: " + songName)
+
+                        var searchURL = viewModel.searchLink.value
+                        val query: String = Uri.encode(songName, "utf-8")
+                        SwitchToApp(searchURL + query, action)
+                    },
+                    {
+                        Log.d("MUSICMEE","Volley Error")
+
+                    }
+                )
+
+// Add the request to the RequestQueue.
+                queue.add(stringRequest)
+//
+//                val i = Intent()
+//                i.setPackage(viewModel.Musicpackage.value) // viewModel based on preference
+//                i.setAction(action)
+//                i.setData(data)
+//                startActivity(i)
+
+            }
         })
 
     }
+
+    private fun SwitchToApp(songName: String, action: String?) {
+
+        var uri = Uri.parse(songName)
+        val i = Intent()
+        i.setPackage(viewModel.Musicpackage.value)
+        i.setAction(action)
+        i.setData(uri)
+        startActivity(i)
+
+    }
+
+    private fun sameAppPackage(currentLink: String) : String {
+            if(currentLink.contains( "open.spotify.com")){
+                return constants.SPOTIFY_PACKAGE.link
+            }
+            else if(currentLink.contains( "music.apple.com")){
+                return constants.APPLE_MUSIC_PACKAGE.link
+            }
+
+            else if(currentLink.contains( "play.anghami.com")){
+                return constants.ANGHAMI_PACKAGE.link
+            }
+            else if(currentLink.contains( "deezer")){
+                return constants.DEEZER_PACKAGE.link
+            }
+        return constants.SPOTIFY_PACKAGE.link
+    }
+
+
 }
