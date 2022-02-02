@@ -4,9 +4,9 @@
     <uses-permission android:name="android.permission.INTERNET"></uses-permission>
     <application
         android:allowBackup="false"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/t_switcher_launcher_icon"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@mipmap/t_switcher_launcher_icon_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicSwitcher">
         <activity

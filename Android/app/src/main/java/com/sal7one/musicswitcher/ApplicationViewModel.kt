@@ -2,7 +2,6 @@ package com.sal7one.musicswitcher
 
 import DataStoreProvider
 import android.net.Uri
-import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -60,21 +59,21 @@ class ApplicationViewModel(
 
     fun UpdatePackage(savedmusicProvider: String) {
         if(savedmusicProvider.contains( "open.spotify.com")){
-            Musicpackage.postValue(constants.SPOTIFY_PACKAGE.link)
-            searchLink.postValue(constants.SPOTIFY_SEARCH.link)
+            Musicpackage.postValue(Constants.SPOTIFY_PACKAGE.link)
+            searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
         }
 
         else if(savedmusicProvider.contains( "music.apple.com")){
-            Musicpackage.postValue(constants.APPLE_MUSIC_PACKAGE.link)
-            searchLink.postValue(constants.APPLE_MUSIC_SEARCH.link)
+            Musicpackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
+            searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
         }
 
         else if(savedmusicProvider.contains( "play.anghami.com")){
-            Musicpackage.postValue(constants.ANGHAMI_PACKAGE.link)
-            searchLink.postValue(constants.ANGHAMI_SEARCH_Link.link)
+            Musicpackage.postValue(Constants.ANGHAMI_PACKAGE.link)
+            searchLink.postValue(Constants.ANGHAMI_SEARCH_Link.link)
         }
         else if(savedmusicProvider.contains( "deezer")){
-            Musicpackage.postValue(constants.DEEZER_PACKAGE.link)
+            Musicpackage.postValue(Constants.DEEZER_PACKAGE.link)
         }
 
     }

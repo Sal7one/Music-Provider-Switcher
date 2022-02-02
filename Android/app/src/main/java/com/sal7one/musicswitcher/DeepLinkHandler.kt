@@ -87,19 +87,19 @@ class DeepLinkHandler : AppCompatActivity() {
 
     private fun sameAppPackage(currentLink: String) : String {
             if(currentLink.contains( "open.spotify.com")){
-                return constants.SPOTIFY_PACKAGE.link
+                return Constants.SPOTIFY_PACKAGE.link
             }
             else if(currentLink.contains( "music.apple.com")){
-                return constants.APPLE_MUSIC_PACKAGE.link
+                return Constants.APPLE_MUSIC_PACKAGE.link
             }
 
             else if(currentLink.contains( "play.anghami.com")){
-                return constants.ANGHAMI_PACKAGE.link
+                return Constants.ANGHAMI_PACKAGE.link
             }
             else if(currentLink.contains( "deezer")){
-                return constants.DEEZER_PACKAGE.link
+                return Constants.DEEZER_PACKAGE.link
             }
-        return constants.SPOTIFY_PACKAGE.link
+        return Constants.SPOTIFY_PACKAGE.link
     }
 
 }
