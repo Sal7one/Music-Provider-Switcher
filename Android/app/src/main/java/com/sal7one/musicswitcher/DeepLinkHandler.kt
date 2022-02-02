@@ -16,8 +16,7 @@ import com.sal7one.musicswitcher.utils.songExtractor
 
 class DeepLinkHandler : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActvityViewModel
-    private var choosen_Provider = ""
+    private lateinit var viewModel: ApplicationViewModel
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
 
@@ -26,7 +25,7 @@ class DeepLinkHandler : AppCompatActivity() {
 
         dataStoreProvider = DataStoreProvider.getInstance(this)
 
-        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(MainActvityViewModel::class.java)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(ApplicationViewModel::class.java)
         data = intent?.data!!
 
         var action = intent?.action // Action to play music TODO analyze
@@ -39,7 +38,6 @@ class DeepLinkHandler : AppCompatActivity() {
            if(it){
                val i = Intent()
                var appPackage =  sameAppPackage(data.toString())
-               Log.d("MMMM" , "Package: " + appPackage)
                i.setPackage(appPackage)
                i.setAction(action)
                i.setData(data)
@@ -52,14 +50,12 @@ class DeepLinkHandler : AppCompatActivity() {
             if(it){
                 var Songurl =data.toString()
 
-                Log.d("MUSICMEE","In url: " + Songurl)
 
 
                 val stringRequest = StringRequest(Request.Method.GET, Songurl,
                     { response ->
 
                         var songName = songExtractor.ExtractFromURL(Songurl, response)
-                        Log.d("MUSICMEE","Song Name: " + songName)
 
                         var searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
@@ -86,7 +82,6 @@ class DeepLinkHandler : AppCompatActivity() {
         i.setData(uri)
         startActivity(i)
         finishAndRemoveTask();
-
 
     }
 

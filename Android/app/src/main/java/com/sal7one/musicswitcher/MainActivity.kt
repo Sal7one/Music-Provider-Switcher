@@ -12,7 +12,7 @@ import com.sal7one.musicswitcher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainActvityViewModel
+    private lateinit var viewModel: ApplicationViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var spotify_btn: ImageButton
     private lateinit var apple_btn: ImageButton
@@ -29,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
         dataStoreProvider = DataStoreProvider.getInstance(this)
 
-        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(MainActvityViewModel::class.java)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(ApplicationViewModel::class.java)
 
         spotify_btn =  binding.spotifybtn
         apple_btn = binding.applemusicbtn

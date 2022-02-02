@@ -10,7 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 
-class MainActvityViewModel(
+class ApplicationViewModel(
 
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
