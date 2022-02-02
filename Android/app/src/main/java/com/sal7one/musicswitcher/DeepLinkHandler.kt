@@ -44,6 +44,7 @@ class DeepLinkHandler : AppCompatActivity() {
                i.setAction(action)
                i.setData(data)
                startActivity(i)
+               finishAndRemoveTask();
            }
         })
 
@@ -69,15 +70,7 @@ class DeepLinkHandler : AppCompatActivity() {
 
                     }
                 )
-
-// Add the request to the RequestQueue.
                 queue.add(stringRequest)
-//
-//                val i = Intent()
-//                i.setPackage(viewModel.Musicpackage.value) // viewModel based on preference
-//                i.setAction(action)
-//                i.setData(data)
-//                startActivity(i)
 
             }
         })
@@ -92,6 +85,8 @@ class DeepLinkHandler : AppCompatActivity() {
         i.setAction(action)
         i.setData(uri)
         startActivity(i)
+        finishAndRemoveTask();
+
 
     }
 
@@ -111,6 +106,5 @@ class DeepLinkHandler : AppCompatActivity() {
             }
         return constants.SPOTIFY_PACKAGE.link
     }
-
 
 }
