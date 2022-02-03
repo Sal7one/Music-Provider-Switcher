@@ -80,8 +80,8 @@ class DeepLinkHandler : AppCompatActivity() {
         i.setPackage(viewModel.Musicpackage.value)
         i.setAction(action)
         i.setData(uri)
-        startActivity(i)
-        finishAndRemoveTask();
+        //startActivity(i)
+        //finishAndRemoveTask();
 
     }
 
@@ -92,12 +92,14 @@ class DeepLinkHandler : AppCompatActivity() {
             else if(currentLink.contains( "music.apple.com")){
                 return Constants.APPLE_MUSIC_PACKAGE.link
             }
-
             else if(currentLink.contains( "play.anghami.com")){
                 return Constants.ANGHAMI_PACKAGE.link
             }
-            else if(currentLink.contains( "deezer")){
+            else if(currentLink.contains( "deezer.com")){
                 return Constants.DEEZER_PACKAGE.link
+            }
+            else if(currentLink.contains( "music.youtube.com")){
+                return Constants.YT_MUSIC_PACKAGE.link
             }
         return Constants.SPOTIFY_PACKAGE.link
     }

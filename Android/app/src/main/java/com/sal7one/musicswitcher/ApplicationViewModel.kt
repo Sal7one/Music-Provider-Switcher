@@ -70,11 +70,15 @@ class ApplicationViewModel(
 
         else if(savedmusicProvider.contains( "play.anghami.com")){
             Musicpackage.postValue(Constants.ANGHAMI_PACKAGE.link)
-            searchLink.postValue(Constants.ANGHAMI_SEARCH_Link.link)
+            searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
         }
-        else if(savedmusicProvider.contains( "deezer")){
+        else if(savedmusicProvider.contains( "deezer.com")){
             Musicpackage.postValue(Constants.DEEZER_PACKAGE.link)
+            searchLink.postValue(Constants.DEEZER_SEARCH.link)
         }
-
+        else if(savedmusicProvider.contains( "music.youtube.com")){
+            Musicpackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
+            searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
+        }
     }
 }

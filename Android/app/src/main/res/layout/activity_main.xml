@@ -49,6 +49,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_weight="0"
             android:orientation="horizontal">
 
             <ImageButton
@@ -81,6 +82,32 @@
                 app:srcCompat="@drawable/anghami"
                 tools:ignore="SpeakableTextPresentCheck" />
 
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/deezerbtn"
+                android:layout_width="0dp"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:contentDescription="@string/anghami_btn"
+                app:srcCompat="@drawable/deezer"
+                tools:ignore="SpeakableTextPresentCheck" />
+
+            <ImageButton
+                android:id="@+id/ytmusicbtn"
+                android:layout_width="0dp"
+                android:layout_height="85dp"
+                android:layout_weight="1"
+                android:background="@android:drawable/screen_background_light_transparent"
+                android:contentDescription="@string/anghami_btn"
+                app:srcCompat="@drawable/ytmusic"
+                tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
         <Space

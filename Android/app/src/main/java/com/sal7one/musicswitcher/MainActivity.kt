@@ -17,6 +17,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var spotify_btn: ImageButton
     private lateinit var apple_btn: ImageButton
     private lateinit var anghami_btn: ImageButton
+    private lateinit var deezer_btn: ImageButton
+    private lateinit var yt_btn: ImageButton
     private lateinit var update_btn: Button
     private lateinit var dataStoreProvider: DataStoreProvider
 
@@ -34,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         spotify_btn =  binding.spotifybtn
         apple_btn = binding.applemusicbtn
         anghami_btn =  binding.anghamibtn
+        deezer_btn =  binding.deezerbtn
+        yt_btn =  binding.ytmusicbtn
         update_btn =  binding.updatebutton
-
-
 
         viewModel.choosen_Provider.observe(this, Observer { it->
             currentProvider = it
@@ -55,6 +57,14 @@ class MainActivity : AppCompatActivity() {
             currentProvider = "play.anghami.com"
             changeViewBackground()
         }
+        deezer_btn.setOnClickListener{
+            currentProvider = "deezer.com"
+            changeViewBackground()
+        }
+        yt_btn.setOnClickListener{
+            currentProvider =  "music.youtube.com"
+            changeViewBackground()
+        }
         update_btn.setOnClickListener {
             if(currentProvider.isNotBlank()){
               updateProvider()
@@ -68,11 +78,15 @@ class MainActivity : AppCompatActivity() {
         spotify_btn.setBackgroundColor(getColor(R.color.white))
         apple_btn.setBackgroundColor(getColor(R.color.white))
         anghami_btn.setBackgroundColor(getColor(R.color.white))
+        deezer_btn.setBackgroundColor(getColor(R.color.white))
+        yt_btn.setBackgroundColor(getColor(R.color.white))
 
         when(currentProvider){
             "open.spotify.com" -> spotify_btn.setBackgroundColor(getColor(R.color.button_clicked))
             "music.apple.com" -> apple_btn.setBackgroundColor(getColor(R.color.button_clicked))
             "play.anghami.com" -> anghami_btn.setBackgroundColor(getColor(R.color.button_clicked))
+            "deezer.com" -> deezer_btn.setBackgroundColor(getColor(R.color.button_clicked))
+            "music.youtube.com" -> yt_btn.setBackgroundColor(getColor(R.color.button_clicked))
         }
     }
 
