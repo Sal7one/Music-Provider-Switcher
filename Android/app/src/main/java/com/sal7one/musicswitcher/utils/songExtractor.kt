@@ -44,11 +44,16 @@ class songExtractor {
             reponseString = response.substring(response.indexOf("<title>")+begin, response.lastIndexOf("</title>")-end)
             reponseString = reponseString.replace("song by", " ")
 
+            if(url.contains("music.apple.com")) {
+                reponseString = reponseString.replace("لـ", " ")  // apple music problems
+                reponseString = reponseString.replace("ع", " ") // apple music problems
+                reponseString = reponseString.replace("\\s\\s+".toRegex(), " ") // remove extra white space
+            }
             return HtmlCompat.fromHtml(reponseString, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() // Escape speical characters in html ' == N&#039;
 
         }
 
-        //idk  why but it's here
+        // If we're adding the playlist -> go thier original app option
 //        fun typeofLink(url: String) : String{
 //            if(url.contains("/playlist/"))
 //                return "playlist"
