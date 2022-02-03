@@ -80,8 +80,8 @@ class DeepLinkHandler : AppCompatActivity() {
         i.setPackage(viewModel.Musicpackage.value)
         i.setAction(action)
         i.setData(uri)
-        //startActivity(i)
-        //finishAndRemoveTask();
+        startActivity(i)
+        finishAndRemoveTask();
 
     }
 
