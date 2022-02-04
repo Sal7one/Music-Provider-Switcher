@@ -11,10 +11,15 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.sal7one.musicswitcher.utils.songExtractor
+import com.sal7one.musicswitcher.utils.SongExtractor
+
+
+
 
 
 class DeepLinkHandler : AppCompatActivity() {
+
+
 
     private lateinit var viewModel: ApplicationViewModel
     private lateinit var data: Uri
@@ -41,8 +46,9 @@ class DeepLinkHandler : AppCompatActivity() {
                i.setPackage(appPackage)
                i.setAction(action)
                i.setData(data)
+               i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
                startActivity(i)
-               finishAndRemoveTask();
+               //finishAndRemoveTask();
            }
         })
 
@@ -55,7 +61,7 @@ class DeepLinkHandler : AppCompatActivity() {
                 val stringRequest = StringRequest(Request.Method.GET, Songurl,
                     { response ->
 
-                        var songName = songExtractor.ExtractFromURL(Songurl, response)
+                        var songName = SongExtractor.ExtractFromURL(Songurl, response)
 
                         var searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
@@ -81,7 +87,6 @@ class DeepLinkHandler : AppCompatActivity() {
         i.setAction(action)
         i.setData(uri)
         startActivity(i)
-        finishAndRemoveTask();
 
     }
 
@@ -103,5 +108,10 @@ class DeepLinkHandler : AppCompatActivity() {
             }
         return Constants.SPOTIFY_PACKAGE.link
     }
+    override fun onStop() {
+        super.onStop()
+        finishAndRemoveTask()
+    }
+
 
 }
