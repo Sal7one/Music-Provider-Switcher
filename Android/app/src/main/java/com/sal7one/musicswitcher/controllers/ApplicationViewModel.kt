@@ -15,33 +15,33 @@ class ApplicationViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
 
-    var choosen_Provider  = MutableLiveData<String>()
-    var Musicpackage  = MutableLiveData<String>()
+    var choosenProvider  = MutableLiveData<String>()
+    var musicPackage  = MutableLiveData<String>()
     var searchLink  = MutableLiveData<String>()
     var sameApp  = MutableLiveData<Boolean>()
     var diffrentApp  = MutableLiveData<Boolean>()
 
     init {
-        choosen_Provider.value = ""
+        choosenProvider.value = ""
         sameApp.value = false
         diffrentApp.value = false
-        Musicpackage.value = ""
+        musicPackage.value = ""
         searchLink.value = ""
         getData()
     }
 
-    fun SaveData(userchoice : String) = viewModelScope.launch(Dispatchers.IO) {
+    fun saveData(userchoice : String) = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.savetoDataStore(userchoice)
     }
 
-    fun getData() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            choosen_Provider.postValue(it)
-            UpdatePackage(it)
+            choosenProvider.postValue(it)
+            updatePackage(it)
         }
     }
 
-    fun handleDeepLink(data: Uri) = GlobalScope.launch(Dispatchers.IO) {
+    fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
             handleMusicProvider(it, data)
         }
@@ -58,27 +58,27 @@ class ApplicationViewModel(
         }
     }
 
-    fun UpdatePackage(savedmusicProvider: String) {
+    private fun updatePackage(savedmusicProvider: String) {
         if(savedmusicProvider.contains( "open.spotify.com")){
-            Musicpackage.postValue(Constants.SPOTIFY_PACKAGE.link)
+            musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
             searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
         }
 
         else if(savedmusicProvider.contains( "music.apple.com")){
-            Musicpackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
+            musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
             searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
         }
 
         else if(savedmusicProvider.contains( "play.anghami.com")){
-            Musicpackage.postValue(Constants.ANGHAMI_PACKAGE.link)
+            musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
             searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
         }
         else if(savedmusicProvider.contains( "deezer.com")){
-            Musicpackage.postValue(Constants.DEEZER_PACKAGE.link)
+            musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
             searchLink.postValue(Constants.DEEZER_SEARCH.link)
         }
         else if(savedmusicProvider.contains( "music.youtube.com")){
-            Musicpackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
+            musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
             searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
         }
     }

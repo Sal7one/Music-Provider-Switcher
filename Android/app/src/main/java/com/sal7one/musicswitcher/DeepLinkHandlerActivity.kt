@@ -31,13 +31,13 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        dataStoreProvider = DataStoreProvider.getInstance(this)
+        dataStoreProvider = DataStoreProvider.getInstance(applicationContext)
 
         viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
             ApplicationViewModel::class.java)
         data = intent?.data!!
 
-        var action = intent?.action // Action to play music TODO analyze
+        val action = intent?.action // Action to play music TODO analyze
         viewModel.handleDeepLink(data)
 
         // Instantiate the RequestQueue.
@@ -46,10 +46,10 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
        viewModel.sameApp.observe(this, {
            if(it){
                val i = Intent()
-               var appPackage =  sameAppPackage(data.toString())
+               val appPackage =  sameAppPackage(data.toString())
                i.setPackage(appPackage)
-               i.setAction(action)
-               i.setData(data)
+               i.action = action
+               i.data = data
                i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
                startActivity(i)
                //finishAndRemoveTask();
@@ -58,18 +58,18 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
         viewModel.diffrentApp.observe(this, {
             if(it){
-                var Songurl =data.toString()
+                val songURL =data.toString()
 
 
 
-                val stringRequest = StringRequest(Request.Method.GET, Songurl,
+                val stringRequest = StringRequest(Request.Method.GET, songURL,
                     { response ->
 
-                        var songName = SongExtractor.ExtractFromURL(Songurl, response)
+                        val songName = SongExtractor.extractFromURL(songURL, response)
 
-                        var searchURL = viewModel.searchLink.value
+                        val searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
-                        SwitchToApp(searchURL + query, action)
+                        switchToApp(searchURL + query, action)
                     },
                     {
                         Log.d("MUSICMEE","Volley Error")
@@ -83,34 +83,36 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
     }
 
-    private fun SwitchToApp(songName: String, action: String?) {
+    private fun switchToApp(songName: String, action: String?) {
 
-        var uri = Uri.parse(songName)
+        val uri = Uri.parse(songName)
         val i = Intent()
-        i.setPackage(viewModel.Musicpackage.value)
-        i.setAction(action)
-        i.setData(uri)
+        i.setPackage(viewModel.musicPackage.value)
+        i.action = action
+        i.data = uri
         startActivity(i)
 
     }
 
     private fun sameAppPackage(currentLink: String) : String {
-            if(currentLink.contains( "open.spotify.com")){
+        when {
+            currentLink.contains( "open.spotify.com") -> {
                 return Constants.SPOTIFY_PACKAGE.link
             }
-            else if(currentLink.contains( "music.apple.com")){
+            currentLink.contains( "music.apple.com") -> {
                 return Constants.APPLE_MUSIC_PACKAGE.link
             }
-            else if(currentLink.contains( "play.anghami.com")){
+            currentLink.contains( "play.anghami.com") -> {
                 return Constants.ANGHAMI_PACKAGE.link
             }
-            else if(currentLink.contains( "deezer.com")){
+            currentLink.contains( "deezer.com") -> {
                 return Constants.DEEZER_PACKAGE.link
             }
-            else if(currentLink.contains( "music.youtube.com")){
+            currentLink.contains( "music.youtube.com") -> {
                 return Constants.YT_MUSIC_PACKAGE.link
             }
-        return Constants.SPOTIFY_PACKAGE.link
+            else -> return Constants.SPOTIFY_PACKAGE.link
+        }
     }
     override fun onStop() {
         super.onStop()

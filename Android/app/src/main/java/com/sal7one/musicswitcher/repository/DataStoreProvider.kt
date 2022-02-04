@@ -1,3 +1,4 @@
+import android.annotation.SuppressLint
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -14,6 +15,7 @@ class DataStoreProvider(val context: Context) {
     companion object {
         val music_provider = stringPreferencesKey("music_provider")
 
+        @SuppressLint("StaticFieldLeak") // We're passing application context no memory leak is possible
         private var INSTANCE: DataStoreProvider? = null
 
         fun getInstance(context: Context): DataStoreProvider {
