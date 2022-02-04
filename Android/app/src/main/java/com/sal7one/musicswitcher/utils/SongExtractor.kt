@@ -23,7 +23,7 @@ class SongExtractor {
                 url.contains("play.anghami.com") -> {
                     end = 17
                 }
-                url.contains("deezer.com") -> {
+                url.contains("deezer.com") or url.contains("deezer.page.link")  -> {
                     end = 29
 
                     reponseString = response.substring(response.indexOf("<title>")+begin, response.lastIndexOf("</title>")-end)
@@ -50,6 +50,7 @@ class SongExtractor {
                 }
                 else -> {
                     Log.d("SONGEXTRACTOR","Link not handled value below..")
+                    Log.d("SONGEXTRACTOR", url)
                     Log.d("SONGEXTRACTOR", response.substring(response.indexOf("<title>")+begin, response.lastIndexOf("</title>")-end))
                 }
             }
@@ -64,7 +65,7 @@ class SongExtractor {
                 reponseString = reponseString.replace("ع", " ") // apple music problems
                 reponseString = reponseString.replace("\\s\\s+".toRegex(), " ") // remove extra white space
             }
-            return HtmlCompat.fromHtml(reponseString, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() // Escape speical characters in html ' == N&#039;
+            return reponseString// Escape speical characters in html ' == N&#039;
 
         }
 

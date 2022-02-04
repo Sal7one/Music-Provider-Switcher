@@ -45,14 +45,11 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
        viewModel.sameApp.observe(this, {
            if(it){
-               val i = Intent()
+               val i = Intent(action, data)
                val appPackage =  sameAppPackage(data.toString())
                i.setPackage(appPackage)
-               i.action = action
-               i.data = data
-               i.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK or Intent.FLAG_ACTIVITY_NO_ANIMATION or Intent.FLAG_ACTIVITY_EXCLUDE_FROM_RECENTS)
                startActivity(i)
-               //finishAndRemoveTask();
+
            }
         })
 
@@ -69,7 +66,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
                         val searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
-                        switchToApp(searchURL + query, action)
+                        switchToApp(searchURL + query)
                     },
                     {
                         Log.d("MUSICMEE","Volley Error")
@@ -83,13 +80,11 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
     }
 
-    private fun switchToApp(songName: String, action: String?) {
+    private fun switchToApp(songName: String) {
 
         val uri = Uri.parse(songName)
-        val i = Intent()
+        val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)
-        i.action = action
-        i.data = uri
         startActivity(i)
 
     }

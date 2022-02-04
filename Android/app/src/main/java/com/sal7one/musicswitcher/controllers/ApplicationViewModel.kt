@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.controllers
 
 import DataStoreProvider
 import android.net.Uri
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -59,27 +60,27 @@ class ApplicationViewModel(
     }
 
     private fun updatePackage(savedmusicProvider: String) {
-        if(savedmusicProvider.contains( "open.spotify.com")){
-            musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
-            searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
-        }
-
-        else if(savedmusicProvider.contains( "music.apple.com")){
-            musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
-            searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
-        }
-
-        else if(savedmusicProvider.contains( "play.anghami.com")){
-            musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
-            searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
-        }
-        else if(savedmusicProvider.contains( "deezer.com")){
-            musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
-            searchLink.postValue(Constants.DEEZER_SEARCH.link)
-        }
-        else if(savedmusicProvider.contains( "music.youtube.com")){
-            musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
-            searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
+        when {
+            savedmusicProvider.contains( "open.spotify.com") -> {
+                musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
+                searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
+            }
+            savedmusicProvider.contains( "music.apple.com") -> {
+                musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
+                searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
+            }
+            savedmusicProvider.contains( "play.anghami.com") -> {
+                musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
+                searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
+            }
+            savedmusicProvider.contains( "deezer.com") -> {
+                musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
+                searchLink.postValue(Constants.DEEZER_SEARCH.link)
+            }
+            savedmusicProvider.contains( "music.youtube.com") -> {
+                musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
+                searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
+            }
         }
     }
 }
