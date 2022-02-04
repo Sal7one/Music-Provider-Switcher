@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicSwitcher">
         <activity
-            android:name=".DeepLinkHandler"
+            android:name=".DeepLinkHandlerActivity"
             android:exported="true">
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />

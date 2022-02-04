@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher
+package com.sal7one.musicswitcher.controllers
 
 import DataStoreProvider
 import android.net.Uri
@@ -8,6 +8,7 @@ import kotlinx.coroutines.launch
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sal7one.musicswitcher.utils.Constants
 
 class ApplicationViewModel(
 

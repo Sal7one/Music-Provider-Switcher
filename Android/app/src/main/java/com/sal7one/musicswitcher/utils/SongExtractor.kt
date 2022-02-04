@@ -23,12 +23,9 @@ class SongExtractor {
                 end = 29
 
                 reponseString = response.substring(response.indexOf("<title>")+begin, response.lastIndexOf("</title>")-end)
-
                 val  songnamefirst = reponseString.substring(reponseString.lastIndexOf("-")+1) +" "+ reponseString.substring(0, reponseString.lastIndexOf("-"))
 
 
-                Log.d("SONGEXTRACTOR", songnamefirst)
-                Log.d("SONGEXTRACTOR", HtmlCompat.fromHtml(songnamefirst, HtmlCompat.FROM_HTML_MODE_LEGACY).toString())
                 return HtmlCompat.fromHtml(songnamefirst, HtmlCompat.FROM_HTML_MODE_LEGACY).toString() // Escape speical characters in html ' == N&#039;
 
             }else if(url.contains("music.youtube.com")){
@@ -37,7 +34,6 @@ class SongExtractor {
 
                 val artist = respo.substring(respo.lastIndexOf("·")+1, respo.lastIndexOf("℗"))
                 val songname = response.substring(response.lastIndexOf("<title>")+begin, response.lastIndexOf("</title>")-end)
-                Log.d("SONGEXTRACTOR", "$songname $artist")
 
                 return HtmlCompat.fromHtml("$songname $artist", HtmlCompat.FROM_HTML_MODE_LEGACY).toString() // Escape speical characters in html ' == N&#039;
             }else{

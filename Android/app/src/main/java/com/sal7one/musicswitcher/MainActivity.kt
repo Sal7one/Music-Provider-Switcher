@@ -9,6 +9,8 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.sal7one.musicswitcher.databinding.ActivityMainBinding
+import com.sal7one.musicswitcher.controllers.MyViewModelFactory
+import com.sal7one.musicswitcher.controllers.ApplicationViewModel
 
 class MainActivity : AppCompatActivity() {
 
@@ -31,7 +33,8 @@ class MainActivity : AppCompatActivity() {
 
         dataStoreProvider = DataStoreProvider.getInstance(this)
 
-        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(ApplicationViewModel::class.java)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
+            ApplicationViewModel::class.java)
 
         spotify_btn =  binding.spotifybtn
         apple_btn = binding.applemusicbtn

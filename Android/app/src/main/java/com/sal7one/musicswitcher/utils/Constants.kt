@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher
+package com.sal7one.musicswitcher.utils
 
 enum class Constants(val link : String) {
     SPOTIFY_SEARCH("https://open.spotify.com/search/"),

@@ -11,13 +11,16 @@ import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
+import com.sal7one.musicswitcher.controllers.MyViewModelFactory
+import com.sal7one.musicswitcher.controllers.ApplicationViewModel
+import com.sal7one.musicswitcher.utils.Constants
 import com.sal7one.musicswitcher.utils.SongExtractor
 
 
 
 
 
-class DeepLinkHandler : AppCompatActivity() {
+class DeepLinkHandlerActivity : AppCompatActivity() {
 
 
 
@@ -30,7 +33,8 @@ class DeepLinkHandler : AppCompatActivity() {
 
         dataStoreProvider = DataStoreProvider.getInstance(this)
 
-        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(ApplicationViewModel::class.java)
+        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
+            ApplicationViewModel::class.java)
         data = intent?.data!!
 
         var action = intent?.action // Action to play music TODO analyze
