@@ -15,28 +15,28 @@ class ApplicationViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
 
-    var choosenProvider  = MutableLiveData<String>()
-    var musicPackage  = MutableLiveData<String>()
-    var searchLink  = MutableLiveData<String>()
-    var sameApp  = MutableLiveData<Boolean>()
-    var diffrentApp  = MutableLiveData<Boolean>()
+    var chosenProvider = MutableLiveData<String>()
+    var musicPackage = MutableLiveData<String>()
+    var searchLink = MutableLiveData<String>()
+    var sameApp = MutableLiveData<Boolean>()
+    var differentApp = MutableLiveData<Boolean>()
 
     init {
-        choosenProvider.value = ""
+        chosenProvider.value = ""
         sameApp.value = false
-        diffrentApp.value = false
+        differentApp.value = false
         musicPackage.value = ""
         searchLink.value = ""
         getData()
     }
 
-    fun saveData(userchoice : String) = viewModelScope.launch(Dispatchers.IO) {
-        dataStoreManager.savetoDataStore(userchoice)
+    fun saveData(userChoice: String) = viewModelScope.launch(Dispatchers.IO) {
+        dataStoreManager.saveToDataStore(userChoice)
     }
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            choosenProvider.postValue(it)
+            chosenProvider.postValue(it)
             updatePackage(it)
         }
     }
@@ -48,39 +48,34 @@ class ApplicationViewModel(
     }
 
 
-
     private fun handleMusicProvider(MusicProvider: String, data: Uri) {
         val link = data.toString()
-        if(link.contains(MusicProvider)){
+        if (link.contains(MusicProvider)) {
             sameApp.postValue(true)
-        }else{
-            diffrentApp.postValue(true)
+        } else {
+            differentApp.postValue(true)
         }
     }
 
-    fun getDataStore(){
-
-    }
-
-    private fun updatePackage(savedmusicProvider: String) {
+    private fun updatePackage(savedMusicProvider: String) {
         when {
-            savedmusicProvider.contains( "open.spotify.com") -> {
+            savedMusicProvider.contains(Constants.SPOTIFY.link) -> {
                 musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
                 searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
             }
-            savedmusicProvider.contains( "music.apple.com") -> {
+            savedMusicProvider.contains(Constants.APPLE_MUSIC.link) -> {
                 musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
                 searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
             }
-            savedmusicProvider.contains( "play.anghami.com") -> {
+            savedMusicProvider.contains(Constants.ANGHAMI.link) -> {
                 musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
                 searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
             }
-            savedmusicProvider.contains( "deezer.com") -> {
+            savedMusicProvider.contains(Constants.DEEZER.link) -> {
                 musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
                 searchLink.postValue(Constants.DEEZER_SEARCH.link)
             }
-            savedmusicProvider.contains( "music.youtube.com") -> {
+            savedMusicProvider.contains(Constants.YT_MUSIC.link) -> {
                 musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
                 searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
             }

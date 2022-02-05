@@ -6,14 +6,17 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
+import com.sal7one.musicswitcher.utils.Constants
 import kotlinx.coroutines.flow.map
 
 class DataStoreProvider(private val context: Context) {
 
-    private val musicProvider = stringPreferencesKey("music_provider")
+    private val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
+
     companion object {
-        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "music_preferences")
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.MUSIC_PREFERENCES_DATASTORE.link)
     }
+
     // We're passing application context no memory leak is possible
     private var instance: DataStoreProvider? = null
 
@@ -28,7 +31,7 @@ class DataStoreProvider(private val context: Context) {
         }
     }
 
-    suspend fun savetoDataStore(WantedProvider: String) {
+    suspend fun saveToDataStore(WantedProvider: String) {
         context.dataStore.edit {
             it[musicProvider] = WantedProvider
 

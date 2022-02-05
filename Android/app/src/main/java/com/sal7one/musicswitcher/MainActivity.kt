@@ -10,19 +10,19 @@ import androidx.lifecycle.ViewModelProvider
 import com.sal7one.musicswitcher.databinding.ActivityMainBinding
 import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.controllers.ApplicationViewModel
+import com.sal7one.musicswitcher.utils.Constants
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ApplicationViewModel
     private lateinit var binding: ActivityMainBinding
     private lateinit var spotifyBtn: ImageButton
-    private lateinit var applebtn: ImageButton
+    private lateinit var appleBtn: ImageButton
     private lateinit var anghamiBtn: ImageButton
     private lateinit var deezerBtn: ImageButton
     private lateinit var ytBtn: ImageButton
     private lateinit var updateBtn: Button
     private lateinit var dataStoreProvider: DataStoreProvider
-
     private var currentProvider = ""
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,35 +37,35 @@ class MainActivity : AppCompatActivity() {
         )
 
         spotifyBtn = binding.spotifybtn
-        applebtn = binding.applemusicbtn
+        appleBtn = binding.applemusicbtn
         anghamiBtn = binding.anghamibtn
         deezerBtn = binding.deezerbtn
         ytBtn = binding.ytmusicbtn
         updateBtn = binding.updatebutton
 
-        viewModel.choosenProvider.observe(this, {
+        viewModel.chosenProvider.observe(this, {
             currentProvider = it
             changeViewBackground()
         })
 
         spotifyBtn.setOnClickListener {
-            currentProvider = "open.spotify.com"
+            currentProvider = Constants.SPOTIFY.link
             changeViewBackground()
         }
-        applebtn.setOnClickListener {
-            currentProvider = "music.apple.com"
+        appleBtn.setOnClickListener {
+            currentProvider = Constants.APPLE_MUSIC.link
             changeViewBackground()
         }
         anghamiBtn.setOnClickListener {
-            currentProvider = "play.anghami.com"
+            currentProvider = Constants.ANGHAMI.link
             changeViewBackground()
         }
         deezerBtn.setOnClickListener {
-            currentProvider = "deezer.com"
+            currentProvider = Constants.DEEZER.link
             changeViewBackground()
         }
         ytBtn.setOnClickListener {
-            currentProvider = "music.youtube.com"
+            currentProvider = Constants.YT_MUSIC.link
             changeViewBackground()
         }
         updateBtn.setOnClickListener {
@@ -77,22 +77,22 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeViewBackground() {
         spotifyBtn.setBackgroundColor(getColor(R.color.white))
-        applebtn.setBackgroundColor(getColor(R.color.white))
+        appleBtn.setBackgroundColor(getColor(R.color.white))
         anghamiBtn.setBackgroundColor(getColor(R.color.white))
         deezerBtn.setBackgroundColor(getColor(R.color.white))
         ytBtn.setBackgroundColor(getColor(R.color.white))
 
         when (currentProvider) {
-            "open.spotify.com" -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            "music.apple.com" -> applebtn.setBackgroundColor(getColor(R.color.button_clicked))
-            "play.anghami.com" -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            "deezer.com" -> deezerBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            "music.youtube.com" -> ytBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.button_clicked))
         }
     }
 
     private fun updateProvider() {
         viewModel.saveData(currentProvider)
-        Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Music provider Updated", Toast.LENGTH_SHORT).show()
     }
 }
