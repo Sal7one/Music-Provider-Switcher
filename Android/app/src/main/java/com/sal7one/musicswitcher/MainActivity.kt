@@ -93,6 +93,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateProvider() {
         viewModel.saveData(currentProvider)
-        Toast.makeText(this, "Music provider Updated", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Music provider updated", Toast.LENGTH_SHORT).show()
     }
 }
