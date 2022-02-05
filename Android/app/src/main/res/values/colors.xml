@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="color_primary">#FF3A9FC3</color>
+    <color name="color_primary">#FF240141</color>
     <color name="color_secondary">#FFFFFFFF</color>
     <color name="button_clicked">#FFDBDBDB</color>
     <color name="purple_200">#FFBB86FC</color>
@@ -10,4 +10,5 @@
     <color name="teal_700">#FF018786</color>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+    <color name="text_primary">#FFC4A6D8</color>
 </resources>

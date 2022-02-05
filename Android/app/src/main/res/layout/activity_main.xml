@@ -1,34 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/color_primary"
-    tools:context=".MainActivity">
-
-    <TextView
-        android:id="@+id/textView"
-        style="@style/header_text"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="44dp"
-        android:layout_marginEnd="8dp"
-        android:text="@string/Welcome"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/color_primary"
+        tools:context=".MainActivity"
         android:layout_marginTop="32dp"
-        android:background="@drawable/custom_cardshape"
         android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView">
+      >
+
+        <TextView
+            android:id="@+id/textView"
+            style="@style/header_text"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/Welcome" />
 
         <Space
             android:layout_width="match_parent"
@@ -48,39 +41,36 @@
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="0dp"
             android:layout_weight="0"
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/spotifybtn"
-                android:layout_width="0dp"
+                android:id="@+id/spotifyBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="85dp"
-                android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/spotify_btn"
-                app:srcCompat="@drawable/spoti"
+                android:contentDescription="@string/spotify_Btn"
+                app:srcCompat="@drawable/spotifyIcon"
                 tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
 
             <ImageButton
-                android:id="@+id/applemusicbtn"
-                android:layout_width="0dp"
+                android:id="@+id/applemusicBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="85dp"
-                android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/applemusic_btn"
-                app:srcCompat="@drawable/applem"
+                android:contentDescription="@string/appleMusic_Btn"
+                app:srcCompat="@drawable/appleMusicIcon"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/anghamibtn"
-                android:layout_width="0dp"
+                android:id="@+id/anghamiBtn"
+                android:layout_width="wrap_content"
                 android:layout_height="85dp"
-                android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/anghami_btn"
+                android:contentDescription="@string/anghami_Btn"
                 app:srcCompat="@drawable/anghami"
-                tools:ignore="SpeakableTextPresentCheck" />
+                tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
 
         </LinearLayout>
 
@@ -90,23 +80,23 @@
             android:orientation="horizontal">
 
             <ImageButton
-                android:id="@+id/deezerbtn"
+                android:id="@+id/deezerBtn"
                 android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/anghami_btn"
+                android:contentDescription="@string/deezer_Btn"
                 app:srcCompat="@drawable/deezer"
                 tools:ignore="SpeakableTextPresentCheck" />
 
             <ImageButton
-                android:id="@+id/ytmusicbtn"
+                android:id="@+id/ytmusicBtn"
                 android:layout_width="0dp"
                 android:layout_height="85dp"
                 android:layout_weight="1"
                 android:background="@android:drawable/screen_background_light_transparent"
-                android:contentDescription="@string/anghami_btn"
-                app:srcCompat="@drawable/ytmusic"
+                android:contentDescription="@string/ytMusic_Btn"
+                app:srcCompat="@drawable/ytMusicIcon"
                 tools:ignore="SpeakableTextPresentCheck" />
         </LinearLayout>
 
@@ -115,7 +105,7 @@
             android:layout_height="30dp" />
 
         <Button
-            android:id="@+id/updatebutton"
+            android:id="@+id/updateButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="#2C96BC"
@@ -139,10 +129,9 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="@string/i_will_try_to_redirect_all_links_to_the_perfered_music_provider" />
+                android:text="@string/i_will_try_to_redirect_all_links_to_the_preferred_music_provider" />
         </LinearLayout>
 
 
     </LinearLayout>
 
-</androidx.constraintlayout.widget.ConstraintLayout>

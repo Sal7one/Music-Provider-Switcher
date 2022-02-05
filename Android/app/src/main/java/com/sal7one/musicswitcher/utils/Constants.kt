@@ -12,7 +12,7 @@ enum class Constants(val link: String) {
     DEEZER_PACKAGE("deezer.android.app"),
     YT_MUSIC_PACKAGE("com.google.android.apps.youtube.music"),
     SPOTIFY("open.spotify.com"),
-    APPLE_MUSIC( "music.apple.com"),
+    APPLE_MUSIC("music.apple.com"),
     ANGHAMI("play.anghami.com"),
     DEEZER("deezer.com"),
     YT_MUSIC("music.youtube.com"),

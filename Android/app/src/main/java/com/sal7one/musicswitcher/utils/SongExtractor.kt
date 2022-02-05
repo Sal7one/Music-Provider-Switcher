@@ -22,7 +22,7 @@ class SongExtractor {
                 url.contains(Constants.ANGHAMI.link) -> {
                     end = 17
                 }
-                url.contains(Constants.DEEZER.link)-> {
+                url.contains(Constants.DEEZER.link) -> {
                     end = 29
                     responseString = response.substring(
                         response.indexOf("<title>") + begin,
