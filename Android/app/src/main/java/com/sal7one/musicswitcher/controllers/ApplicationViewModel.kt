@@ -1,8 +1,7 @@
 package com.sal7one.musicswitcher.controllers
 
-import DataStoreProvider
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
-import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -57,6 +56,10 @@ class ApplicationViewModel(
         }else{
             diffrentApp.postValue(true)
         }
+    }
+
+    fun getDataStore(){
+
     }
 
     private fun updatePackage(savedmusicProvider: String) {

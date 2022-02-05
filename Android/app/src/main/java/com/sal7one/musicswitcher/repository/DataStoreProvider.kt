@@ -1,4 +1,5 @@
-import android.annotation.SuppressLint
+package com.sal7one.musicswitcher.repository
+
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
@@ -7,37 +8,34 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.map
 
-class DataStoreProvider(val context: Context) {
+class DataStoreProvider(private val context: Context) {
 
-    private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "music_preferences")
-
-
+    private val musicProvider = stringPreferencesKey("music_provider")
     companion object {
-        val music_provider = stringPreferencesKey("music_provider")
+        private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = "music_preferences")
+    }
+    // We're passing application context no memory leak is possible
+    private var instance: DataStoreProvider? = null
 
-        @SuppressLint("StaticFieldLeak") // We're passing application context no memory leak is possible
-        private var INSTANCE: DataStoreProvider? = null
-
-        fun getInstance(context: Context): DataStoreProvider {
-            return INSTANCE ?: synchronized(this) {
-                INSTANCE?.let {
-                    return it
-                }
-                val instance = DataStoreProvider(context)
-                INSTANCE = instance
-                instance
+    fun getInstance(): DataStoreProvider {
+        return instance ?: synchronized(this) {
+            instance?.let {
+                return it
             }
+            val instance = DataStoreProvider(context)
+            this.instance = instance
+            instance
         }
     }
 
     suspend fun savetoDataStore(WantedProvider: String) {
         context.dataStore.edit {
-            it[music_provider] = WantedProvider
+            it[musicProvider] = WantedProvider
 
         }
     }
 
-     fun getFromDataStore() = context.dataStore.data.map {
-            it[music_provider] ?: ""
+    fun getFromDataStore() = context.dataStore.data.map {
+        it[musicProvider] ?: ""
     }
 }

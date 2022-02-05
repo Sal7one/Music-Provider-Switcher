@@ -1,6 +1,6 @@
 package com.sal7one.musicswitcher.controllers
 
-import DataStoreProvider
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 

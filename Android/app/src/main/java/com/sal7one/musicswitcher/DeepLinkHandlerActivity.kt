@@ -1,7 +1,6 @@
 package com.sal7one.musicswitcher
 
-
-import DataStoreProvider
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -17,12 +16,7 @@ import com.sal7one.musicswitcher.utils.Constants
 import com.sal7one.musicswitcher.utils.SongExtractor
 
 
-
-
-
 class DeepLinkHandlerActivity : AppCompatActivity() {
-
-
 
     private lateinit var viewModel: ApplicationViewModel
     private lateinit var data: Uri
@@ -31,10 +25,11 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        dataStoreProvider = DataStoreProvider.getInstance(applicationContext)
+        dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
 
         viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
-            ApplicationViewModel::class.java)
+            ApplicationViewModel::class.java
+        )
         data = intent?.data!!
 
         val action = intent?.action // Action to play music TODO analyze
@@ -43,21 +38,19 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
 
-       viewModel.sameApp.observe(this, {
-           if(it){
-               val i = Intent(action, data)
-               val appPackage =  sameAppPackage(data.toString())
-               i.setPackage(appPackage)
-               startActivity(i)
+        viewModel.sameApp.observe(this, {
+            if (it) {
+                val i = Intent(action, data)
+                val appPackage = sameAppPackage(data.toString())
+                i.setPackage(appPackage)
+                startActivity(i)
 
-           }
+            }
         })
 
         viewModel.diffrentApp.observe(this, {
-            if(it){
-                val songURL =data.toString()
-
-
+            if (it) {
+                val songURL = data.toString()
 
                 val stringRequest = StringRequest(Request.Method.GET, songURL,
                     { response ->
@@ -69,7 +62,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                         switchToApp(searchURL + query)
                     },
                     {
-                        Log.d("MUSICMEE","Volley Error")
+                        Log.d("MUSICMEE", "Volley Error")
 
                     }
                 )
@@ -86,33 +79,32 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)
         startActivity(i)
-
     }
 
-    private fun sameAppPackage(currentLink: String) : String {
+    private fun sameAppPackage(currentLink: String): String {
         when {
-            currentLink.contains( "open.spotify.com") -> {
+            currentLink.contains("open.spotify.com") -> {
                 return Constants.SPOTIFY_PACKAGE.link
             }
-            currentLink.contains( "music.apple.com") -> {
+            currentLink.contains("music.apple.com") -> {
                 return Constants.APPLE_MUSIC_PACKAGE.link
             }
-            currentLink.contains( "play.anghami.com") -> {
+            currentLink.contains("play.anghami.com") -> {
                 return Constants.ANGHAMI_PACKAGE.link
             }
-            currentLink.contains( "deezer.com") -> {
+            currentLink.contains("deezer.com") -> {
                 return Constants.DEEZER_PACKAGE.link
             }
-            currentLink.contains( "music.youtube.com") -> {
+            currentLink.contains("music.youtube.com") -> {
                 return Constants.YT_MUSIC_PACKAGE.link
             }
             else -> return Constants.SPOTIFY_PACKAGE.link
         }
     }
+
     override fun onStop() {
         super.onStop()
         finishAndRemoveTask()
     }
-
 
 }

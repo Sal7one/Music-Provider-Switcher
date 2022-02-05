@@ -1,6 +1,6 @@
 package com.sal7one.musicswitcher
 
-import DataStoreProvider
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
@@ -30,60 +30,59 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        dataStoreProvider = DataStoreProvider.getInstance(applicationContext)
+        dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
 
         viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
-            ApplicationViewModel::class.java)
+            ApplicationViewModel::class.java
+        )
 
-        spotifyBtn =  binding.spotifybtn
+        spotifyBtn = binding.spotifybtn
         applebtn = binding.applemusicbtn
-        anghamiBtn =  binding.anghamibtn
-        deezerBtn =  binding.deezerbtn
-        ytBtn =  binding.ytmusicbtn
-        updateBtn =  binding.updatebutton
+        anghamiBtn = binding.anghamibtn
+        deezerBtn = binding.deezerbtn
+        ytBtn = binding.ytmusicbtn
+        updateBtn = binding.updatebutton
 
-        viewModel.choosenProvider.observe(this,{
+        viewModel.choosenProvider.observe(this, {
             currentProvider = it
             changeViewBackground()
         })
 
-        spotifyBtn.setOnClickListener{
+        spotifyBtn.setOnClickListener {
             currentProvider = "open.spotify.com"
             changeViewBackground()
         }
-        applebtn.setOnClickListener{
+        applebtn.setOnClickListener {
             currentProvider = "music.apple.com"
             changeViewBackground()
         }
-        anghamiBtn.setOnClickListener{
+        anghamiBtn.setOnClickListener {
             currentProvider = "play.anghami.com"
             changeViewBackground()
         }
-        deezerBtn.setOnClickListener{
+        deezerBtn.setOnClickListener {
             currentProvider = "deezer.com"
             changeViewBackground()
         }
-        ytBtn.setOnClickListener{
-            currentProvider =  "music.youtube.com"
+        ytBtn.setOnClickListener {
+            currentProvider = "music.youtube.com"
             changeViewBackground()
         }
         updateBtn.setOnClickListener {
-            if(currentProvider.isNotBlank()){
-              updateProvider()
+            if (currentProvider.isNotBlank()) {
+                updateProvider()
             }
         }
-
     }
 
-
-    private fun changeViewBackground(){
+    private fun changeViewBackground() {
         spotifyBtn.setBackgroundColor(getColor(R.color.white))
         applebtn.setBackgroundColor(getColor(R.color.white))
         anghamiBtn.setBackgroundColor(getColor(R.color.white))
         deezerBtn.setBackgroundColor(getColor(R.color.white))
         ytBtn.setBackgroundColor(getColor(R.color.white))
 
-        when(currentProvider){
+        when (currentProvider) {
             "open.spotify.com" -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
             "music.apple.com" -> applebtn.setBackgroundColor(getColor(R.color.button_clicked))
             "play.anghami.com" -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
@@ -92,7 +91,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun updateProvider(){
+    private fun updateProvider() {
         viewModel.saveData(currentProvider)
         Toast.makeText(this, "Updated!", Toast.LENGTH_SHORT).show()
     }
