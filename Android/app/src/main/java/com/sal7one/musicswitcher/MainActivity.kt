@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var anghamiBtn: ImageButton
     private lateinit var deezerBtn: ImageButton
     private lateinit var ytBtn: ImageButton
-    private lateinit var updateBtn: Button
+ //   private lateinit var updateBtn: Button
     private lateinit var dataStoreProvider: DataStoreProvider
     private var currentProvider = ""
 
@@ -36,12 +36,12 @@ class MainActivity : AppCompatActivity() {
             ApplicationViewModel::class.java
         )
 
-        spotifyBtn = binding.spotifybtn
-        appleBtn = binding.applemusicbtn
-        anghamiBtn = binding.anghamibtn
-        deezerBtn = binding.deezerbtn
-        ytBtn = binding.ytmusicbtn
-        updateBtn = binding.updatebutton
+        spotifyBtn = binding.spotifyBtn
+        appleBtn = binding.appleMusicBtn
+        anghamiBtn = binding.anghamiBtn
+        deezerBtn = binding.deezerBtn
+        ytBtn = binding.ytMusicBtn
+        //updateBtn = binding.updateButton
 
         viewModel.chosenProvider.observe(this, {
             currentProvider = it
@@ -68,27 +68,23 @@ class MainActivity : AppCompatActivity() {
             currentProvider = Constants.YT_MUSIC.link
             changeViewBackground()
         }
-        updateBtn.setOnClickListener {
-            if (currentProvider.isNotBlank()) {
-                updateProvider()
-            }
-        }
+//        updateBtn.setOnClickListener {
+//            if (currentProvider.isNotBlank()) {
+//                updateProvider()
+//            }
+//        }
     }
 
     private fun changeViewBackground() {
-        spotifyBtn.setBackgroundColor(getColor(R.color.white))
-        appleBtn.setBackgroundColor(getColor(R.color.white))
-        anghamiBtn.setBackgroundColor(getColor(R.color.white))
-        deezerBtn.setBackgroundColor(getColor(R.color.white))
-        ytBtn.setBackgroundColor(getColor(R.color.white))
 
-        when (currentProvider) {
-            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.button_clicked))
-        }
+
+//        when (currentProvider) {
+//            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
+//            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.button_clicked))
+//            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
+//            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.button_clicked))
+//            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.button_clicked))
+//        }
     }
 
     private fun updateProvider() {

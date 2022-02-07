@@ -2,5 +2,8 @@
 <resources>
     <array name="preloaded_fonts" translatable="false">
         <item>@font/abril_fatface</item>
+        <item>@font/alike_angular</item>
+        <item>@font/roboto_slab_thin</item>
+        <item>@font/vidaloka</item>
     </array>
 </resources>
