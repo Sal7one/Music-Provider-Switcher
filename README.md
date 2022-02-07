@@ -11,6 +11,18 @@ Chrome: [Chrome Webstore](https://chrome.google.com/webstore/detail/twitter-musi
 
 Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter-music-provider/)
 
+# ScreenShots from all platfroms
+
+Android
+
+
+![](Assets/android.jpeg)
+
+ Web Extension (Chrome, FireFox)
+ 
+ 
+![](Assets/web_extension.png)
+
 
 # Contribute
 
