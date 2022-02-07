@@ -14,5 +14,10 @@
     <color name="card_color">#FF37175e</color>
     <color name="card_glow">#FF463269</color>
     <color name="card_button">#FF431d70</color>
+    <color name="apple_clicked">#FFF44336</color>
     <color name="button_clicked">#FFDBDBDB</color>
+    <color name="spotify_clicked">#0DD507</color>
+    <color name="anghami_clicked">#A10CB3</color>
+    <color name="ytMusic_clicked">#FF0000</color>
+    <color name="deezer_clicked">#1BD3E4</color>
 </resources>

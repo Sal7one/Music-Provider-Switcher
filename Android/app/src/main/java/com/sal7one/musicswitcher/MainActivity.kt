@@ -84,11 +84,11 @@ class MainActivity : AppCompatActivity() {
         ytBtn.setBackgroundColor(getColor(R.color.card_color))
 
         when (currentProvider) {
-            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.button_clicked))
-            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.button_clicked))
+            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.apple_clicked))
+            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.spotify_clicked))
+            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.anghami_clicked))
+            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.deezer_clicked))
+            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.ytMusic_clicked))
         }
     }
 
