@@ -87,6 +87,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/appleMusicCard"
         style="@style/card_style"
+        android:layout_marginStart="48dp"
         app:layout_constraintEnd_toStartOf="@+id/spotifyCard"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
@@ -106,9 +107,9 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/spotifyCard"
         style="@style/card_style"
-        android:layout_marginStart="16dp"
+        android:layout_marginStart="12dp"
         android:layout_marginTop="16dp"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="12dp"
         app:layout_constraintEnd_toStartOf="@+id/anghamiCard"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/appleMusicCard"
@@ -129,6 +130,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/anghamiCard"
         style="@style/card_style"
+        android:layout_marginEnd="48dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toEndOf="@+id/spotifyCard"
