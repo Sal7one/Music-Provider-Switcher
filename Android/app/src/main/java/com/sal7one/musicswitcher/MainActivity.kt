@@ -77,18 +77,18 @@ class MainActivity : AppCompatActivity() {
 
     private fun changeViewBackground() {
 
-        spotifyBtn.setBackgroundColor(getColor(R.color.card_color))
-        appleBtn.setBackgroundColor(getColor(R.color.card_color))
-        anghamiBtn.setBackgroundColor(getColor(R.color.card_color))
-        deezerBtn.setBackgroundColor(getColor(R.color.card_color))
-        ytBtn.setBackgroundColor(getColor(R.color.card_color))
+        binding.appleMusicCard.setCardBackgroundColor(getColor(R.color.card_color))
+        binding.spotifyCard.setCardBackgroundColor(getColor(R.color.card_color))
+        binding.anghamiCard.setCardBackgroundColor(getColor(R.color.card_color))
+        binding.deezerCard.setCardBackgroundColor(getColor(R.color.card_color))
+        binding.ytMusicCard.setCardBackgroundColor(getColor(R.color.card_color))
 
         when (currentProvider) {
-            Constants.APPLE_MUSIC.link -> appleBtn.setBackgroundColor(getColor(R.color.apple_clicked))
-            Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.spotify_clicked))
-            Constants.ANGHAMI.link -> anghamiBtn.setBackgroundColor(getColor(R.color.anghami_clicked))
-            Constants.DEEZER.link -> deezerBtn.setBackgroundColor(getColor(R.color.deezer_clicked))
-            Constants.YT_MUSIC.link -> ytBtn.setBackgroundColor(getColor(R.color.ytMusic_clicked))
+            Constants.APPLE_MUSIC.link -> binding.appleMusicCard.setCardBackgroundColor(getColor(R.color.apple_clicked))
+            Constants.SPOTIFY.link -> binding.spotifyCard.setCardBackgroundColor(getColor(R.color.spotify_clicked))
+            Constants.ANGHAMI.link -> binding.anghamiCard.setCardBackgroundColor(getColor(R.color.anghami_clicked))
+            Constants.DEEZER.link -> binding.deezerCard.setCardBackgroundColor(getColor(R.color.deezer_clicked))
+            Constants.YT_MUSIC.link -> binding.ytMusicCard.setCardBackgroundColor(getColor(R.color.ytMusic_clicked))
         }
     }
 
