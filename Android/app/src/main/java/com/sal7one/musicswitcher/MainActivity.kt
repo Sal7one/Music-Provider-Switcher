@@ -41,7 +41,7 @@ class MainActivity : AppCompatActivity() {
         anghamiBtn = binding.anghamiBtn
         deezerBtn = binding.deezerBtn
         ytBtn = binding.ytMusicBtn
-        //updateBtn = binding.updateButton
+        updateBtn = binding.updateBtn
 
         viewModel.chosenProvider.observe(this, {
             currentProvider = it
@@ -76,6 +76,12 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeViewBackground() {
+
+        spotifyBtn.setBackgroundColor(getColor(R.color.card_color))
+        appleBtn.setBackgroundColor(getColor(R.color.card_color))
+        anghamiBtn.setBackgroundColor(getColor(R.color.card_color))
+        deezerBtn.setBackgroundColor(getColor(R.color.card_color))
+        ytBtn.setBackgroundColor(getColor(R.color.card_color))
 
         when (currentProvider) {
             Constants.SPOTIFY.link -> spotifyBtn.setBackgroundColor(getColor(R.color.button_clicked))
