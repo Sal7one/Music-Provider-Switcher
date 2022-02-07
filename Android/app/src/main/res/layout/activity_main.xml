@@ -13,6 +13,27 @@
     app:layout_constraintStart_toStartOf="parent"
     tools:context=".MainActivity">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/updateCard"
+        style="@style/card_button"
+        android:layout_width="195dp"
+        android:layout_height="42dp"
+        android:layout_marginTop="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/deezerCard"
+        app:layout_constraintStart_toEndOf="@+id/ytMusicCard"
+        app:layout_constraintTop_toBottomOf="@+id/ytMusicCard">
+
+        <Button
+            android:id="@+id/updateBtn"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:contentDescription="@string/update_choice"
+            android:text="@string/update_choice"
+            android:textSize="16sp"
+            tools:ignore="TouchTargetSizeCheck" />
+    </androidx.cardview.widget.CardView>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/deezerCard"
@@ -27,8 +48,8 @@
         <ImageButton
             android:id="@+id/deezerBtn"
             style="@style/card_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/deezer_Btn"
             android:padding="@dimen/card_size"
@@ -51,8 +72,8 @@
         <ImageButton
             android:id="@+id/ytMusicBtn"
             style="@style/card_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
 
             android:layout_weight="1"
             android:contentDescription="@string/ytMusic_Btn"
@@ -72,8 +93,8 @@
 
         <ImageButton
             android:id="@+id/appleMusicBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:contentDescription="@string/appleMusic_Btn"
@@ -95,8 +116,8 @@
         <ImageButton
             android:id="@+id/spotifyBtn"
             style="@style/card_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:contentDescription="@string/spotify_Btn"
             android:padding="@dimen/card_size"
             android:visibility="visible"
@@ -115,8 +136,8 @@
         <ImageButton
             android:id="@+id/anghamiBtn"
             style="@style/card_item"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_weight="1"
             android:contentDescription="@string/anghami_Btn"
             android:padding="@dimen/card_size"
