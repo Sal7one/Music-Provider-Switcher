@@ -16,13 +16,14 @@ Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter
 Android
 
 
-![](Assets/android.jpeg | width=100)
+<img src="Assets/android.jpeg" alt="drawing" width="320"/>
+
 
  Web Extension (Chrome, FireFox)
  
- 
-![](Assets/web_extension.png | width=100))
+<img src="Assets/web_extension.png" alt="drawing" width="320"/>
 
+ 
 
 # Contribute
 
