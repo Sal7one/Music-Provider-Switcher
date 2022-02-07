@@ -2,7 +2,7 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
 
     <style name="header_text">
-        <item name="android:fontFamily">@font/vidaloka</item>
+        <item name="android:fontFamily">@font/alike_angular</item>
         <item name="android:textColor">#FFe9d6e9</item>
         <item name="android:textSize">24sp</item>
         <item name="android:textStyle">bold</item>
@@ -11,7 +11,7 @@
 
 
     <style name="sub_text">
-        <item name="android:fontFamily">@font/vidaloka</item>
+        <item name="android:fontFamily">@font/alike_angular</item>
         <item name="android:textColor">#FFe9d6e9</item>
         <item name="android:textSize">20sp</item>
     </style>

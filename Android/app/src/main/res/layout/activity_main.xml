@@ -54,6 +54,9 @@
             android:layout_weight="1"
             android:contentDescription="@string/deezer_Btn"
             android:padding="@dimen/card_size"
+            android:scaleType="centerCrop"
+            android:scaleX="-.8"
+            android:scaleY="-.8"
             android:visibility="visible"
             app:srcCompat="@drawable/deezer_white"
             tools:ignore="SpeakableTextPresentCheck" />
@@ -79,8 +82,11 @@
             android:layout_weight="1"
             android:contentDescription="@string/ytMusic_Btn"
             android:padding="@dimen/card_size"
+            android:scaleType="centerInside"
+            android:scaleX="-0.7"
+            android:scaleY="0.7"
             android:visibility="visible"
-            app:srcCompat="@drawable/yt_music_icon_white"
+            app:srcCompat="@drawable/yt_music_white"
             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck" />
     </androidx.cardview.widget.CardView>
 
@@ -100,6 +106,9 @@
             android:layout_gravity="center"
             android:background="@android:color/transparent"
             android:contentDescription="@string/appleMusic_Btn"
+            android:scaleType="centerInside"
+            android:scaleX="0.7"
+            android:scaleY="0.7"
             android:visibility="visible"
             app:srcCompat="@drawable/apple_music_white" />
     </androidx.cardview.widget.CardView>
@@ -122,6 +131,9 @@
             android:layout_height="match_parent"
             android:contentDescription="@string/spotify_Btn"
             android:padding="@dimen/card_size"
+            android:scaleType="centerInside"
+            android:scaleX="-0.7"
+            android:scaleY="-0.7"
             android:visibility="visible"
             app:srcCompat="@drawable/spotify_white"
             tools:ignore="SpeakableTextPresentCheck,ImageContrastCheck,DuplicateSpeakableTextCheck" />
@@ -144,6 +156,9 @@
             android:layout_weight="1"
             android:contentDescription="@string/anghami_Btn"
             android:padding="@dimen/card_size"
+            android:scaleType="centerInside"
+            android:scaleX="-0.8"
+            android:scaleY="0.8"
             android:visibility="visible"
             app:srcCompat="@drawable/anghami_white"
             tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
