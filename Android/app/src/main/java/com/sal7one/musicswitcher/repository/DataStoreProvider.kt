@@ -3,6 +3,7 @@ package com.sal7one.musicswitcher.repository
 import android.content.Context
 import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
@@ -11,7 +12,11 @@ import kotlinx.coroutines.flow.map
 
 class DataStoreProvider(private val context: Context) {
 
+    // Data types and (place) in datastore we're making.
     private val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
+    private val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
+    private val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
+
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.MUSIC_PREFERENCES_DATASTORE.link)
@@ -31,14 +36,21 @@ class DataStoreProvider(private val context: Context) {
         }
     }
 
-    suspend fun saveToDataStore(WantedProvider: String) {
+    suspend fun saveToDataStore(
+        userMusicProvider: String,
+        userPlaylist: Boolean,
+        userAlbum: Boolean
+    ) {
         context.dataStore.edit {
-            it[musicProvider] = WantedProvider
-
+            it[musicProvider] = userMusicProvider
+            it[playlistChoice] = userPlaylist
+            it[albumChoice] = userAlbum
         }
     }
 
     fun getFromDataStore() = context.dataStore.data.map {
-        it[musicProvider] ?: ""
+        val provider = it[musicProvider] ?: ""
+        val playtlist = it[playlistChoice] ?: false
+        val albumChoice = it[playlistChoice] ?: false
     }
 }
