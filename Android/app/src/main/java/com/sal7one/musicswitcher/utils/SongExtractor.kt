@@ -83,18 +83,15 @@ class SongExtractor {
         }
     }
 }
-// If we're adding the playlist -> go their original app option
-//        fun typeofLink(url: String) : String{
-//            if(url.contains("/playlist/"))
-//                return "playlist"
-//
-//            else if(url.contains("/album/")){
-//                if(url.contains("?i="))
-//                    return "song"
-//                else
-//                    return "album"
-//            }
-//            else
-//                return "song"
-//
-//        }
+        fun typeofLink(url: String) : String{
+            return when {
+                url.contains("/playlist/") -> "playlist"
+                url.contains("/album/") -> {
+                    if(url.contains("?i=")) // apple music song
+                        "song"
+                    else
+                        "album"
+                }
+                else -> "song"
+            }
+        }

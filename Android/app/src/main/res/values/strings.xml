@@ -10,4 +10,7 @@
     <string name="ytMusic_Btn"> makes Youtube Music your main music provider </string>
     <string name="i_will_try_to_redirect_all_links_to_the_preferred_music_provider">I will try to redirect all links to the preferred music provider</string>
     <string name="update_choice">Update choice</string>
+    <string name="optional_methods">Search for Albums or Playlist\n(If off I will open the original App)</string>
+    <string name="playlist">Playlist</string>
+    <string name="album">Album</string>
 </resources>

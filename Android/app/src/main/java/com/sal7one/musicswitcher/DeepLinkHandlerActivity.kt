@@ -22,6 +22,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
     private val activityTAG = "DeepLinkHandlerActivity"
+    private var action : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,11 +32,13 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
             ApplicationViewModel::class.java
         )
+
         data = intent?.data!!
+        intent?.action.also { action = it }
 
-        val action = intent?.action // Action to play music TODO analyze
+        //viewModel.
+
         viewModel.handleDeepLink(data)
-
         // Instantiate the RequestQueue.
         val queue = Volley.newRequestQueue(this)
 

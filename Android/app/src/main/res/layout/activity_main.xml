@@ -18,10 +18,12 @@
         style="@style/card_button"
         android:layout_width="195dp"
         android:layout_height="42dp"
-        android:layout_marginTop="80dp"
+        android:layout_marginBottom="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/deezerCard"
         app:layout_constraintStart_toEndOf="@+id/ytMusicCard"
-        app:layout_constraintTop_toBottomOf="@+id/ytMusicCard">
+        app:layout_constraintTop_toBottomOf="@+id/playlistCheckBox"
+        app:layout_constraintVertical_bias="0.32999998">
 
         <Button
             android:id="@+id/updateBtn"
@@ -52,10 +54,10 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/deezer_Btn"
             android:padding="@dimen/card_size"
             android:scaleType="centerCrop"
-            android:background="@android:color/transparent"
             android:scaleX="-.8"
             android:scaleY="-.8"
             android:visibility="visible"
@@ -130,10 +132,10 @@
             style="@style/card_item"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/spotify_Btn"
             android:padding="@dimen/card_size"
             android:scaleType="centerInside"
-            android:background="@android:color/transparent"
             android:scaleX="-0.7"
             android:scaleY="-0.7"
             android:visibility="visible"
@@ -156,14 +158,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:background="@android:color/transparent"
             android:contentDescription="@string/anghami_Btn"
-            android:padding="@dimen/card_size"
-            android:scaleType="centerInside"
             android:cropToPadding="true"
+            android:padding="@dimen/card_size"
             android:paddingBottom="15dp"
+            android:scaleType="centerInside"
             android:scaleX="-0.8"
             android:scaleY="0.8"
-            android:background="@android:color/transparent"
             android:visibility="visible"
             app:srcCompat="@drawable/anghami_white"
             tools:ignore="SpeakableTextPresentCheck,DuplicateSpeakableTextCheck" />
@@ -174,7 +176,7 @@
         style="@style/sub_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="16dp"
         android:layout_marginTop="54dp"
         android:fontFamily="@font/alike_angular"
         android:text="@string/your_music_provider"
@@ -192,6 +194,44 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/chooseText2"
+        style="@style/sub_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="38dp"
+        android:fontFamily="@font/alike_angular"
+        android:text="@string/optional_methods"
+        android:textSize="18sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ytMusicCard" />
+
+    <CheckBox
+        android:id="@+id/playlistCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/playlist"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toStartOf="@+id/albumCheckBox"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/albumCheckBox" />
+
+    <CheckBox
+        android:id="@+id/albumCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/album"
+        android:textColor="#FFFFFF"
+        android:textSize="16sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/playlistCheckBox"
+        app:layout_constraintTop_toBottomOf="@+id/chooseText2" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
