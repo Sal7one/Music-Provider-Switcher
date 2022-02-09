@@ -40,8 +40,12 @@ class SongExtractor {
                     end = 16
 
                     if (typeofLink(url) == "playlist") {
-                        var songName = response.substring(response.indexOf("name=\"twitter:title\""))
-                        songName = songName.substring(songName.indexOf("content=")+9, songName.indexOf("\"><meta name=\"twitter:description\" "))
+                        var songName =
+                            response.substring(response.indexOf("name=\"twitter:title\""))
+                        songName = songName.substring(
+                            songName.indexOf("content=") + 9,
+                            songName.indexOf("\"><meta name=\"twitter:description\" ")
+                        )
 
                         return HtmlCompat.fromHtml(
                             songName,

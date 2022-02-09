@@ -80,7 +80,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         val uri = Uri.parse(songName)
         val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)
-     //   startActivity(i)
+        startActivity(i)
     }
 
     private fun sameAppPackage(currentLink: String): String {
