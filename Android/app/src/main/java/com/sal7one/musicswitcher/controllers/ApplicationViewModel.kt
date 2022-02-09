@@ -74,6 +74,10 @@ class ApplicationViewModel(
                     isAlbum = true
                     isPlaylist = false
                 }
+                else->{
+                    isAlbum = false
+                    isPlaylist = false
+                }
             }
             if (isPlaylist && (playlistChoice.value == false))
                 sameApp.postValue(true)
