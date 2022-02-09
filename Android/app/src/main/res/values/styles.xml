@@ -16,6 +16,13 @@
         <item name="android:textSize">20sp</item>
     </style>
 
+
+    <style name="dialog_text">
+        <item name="android:fontFamily">@font/alike_angular</item>
+        <item name="android:textColor">#FFFFFFFF</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+
     <style name="card_item">
         <item name="android:background">@color/card_color</item>
     </style>
@@ -34,6 +41,16 @@
         <item name="android:layout_width">@dimen/card_size</item>
         <item name="android:layout_height">@dimen/card_size</item>
         <item name="cardBackgroundColor">@color/card_button</item>
+        <item name="cardCornerRadius">30dp</item>
+        <item name="cardElevation">80dp</item>
+        <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/white</item>
+        <item name="android:outlineAmbientShadowColor" tools:targetApi="p">@color/white</item>
+    </style>
+
+    <style name="card_explain">
+        <item name="android:layout_width">@dimen/card_explain_size</item>
+        <item name="android:layout_height">@dimen/card_explain_size</item>
+        <item name="cardBackgroundColor">@color/card_explain_color</item>
         <item name="cardCornerRadius">30dp</item>
         <item name="cardElevation">80dp</item>
         <item name="android:outlineSpotShadowColor" tools:targetApi="p">@color/white</item>
