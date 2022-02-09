@@ -36,20 +36,23 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         data = intent?.data!!
         intent?.action.also { action = it }
 
-        viewModel.handleDeepLink(data)
+        // data comes from datastore
+        viewModel.chosenProvider.observe(this) {
+            viewModel.handleDeepLink(data) // start opening app
+        }
 
         // Instantiate the RequestQueue.
 
-        viewModel.sameApp.observe(this, {
+        viewModel.sameApp.observe(this) {
             if (it) {
                 val i = Intent(action, data)
                 val appPackage = sameAppPackage(data.toString())
                 i.setPackage(appPackage)
-           //     startActivity(i)
+                startActivity(i)
             }
-        })
+        }
 
-        viewModel.differentApp.observe(this, {
+        viewModel.differentApp.observe(this) {
             val queue = Volley.newRequestQueue(this)
 
             if (it) {
@@ -69,7 +72,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                 )
                 queue.add(stringRequest)
             }
-        })
+        }
     }
 
     private fun switchToApp(songName: String) {
@@ -77,7 +80,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         val uri = Uri.parse(songName)
         val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)
-   //     startActivity(i)
+     //   startActivity(i)
     }
 
     private fun sameAppPackage(currentLink: String): String {

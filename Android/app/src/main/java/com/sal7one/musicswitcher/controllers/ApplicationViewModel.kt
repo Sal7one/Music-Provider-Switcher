@@ -25,12 +25,10 @@ class ApplicationViewModel(
     var differentApp = MutableLiveData<Boolean>()
     private var isAlbum = true
     private var isPlaylist = true
+
     init {
-        chosenProvider.value = ""
         sameApp.value = false
         differentApp.value = false
-        playlistChoice.value = true
-        albumChoice.value = true
         musicPackage.value = ""
         searchLink.value = ""
         getData()
@@ -53,6 +51,7 @@ class ApplicationViewModel(
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
             val album = it[DataStoreProvider.StoredKeys.albumChoice] ?: false
+
             chosenProvider.postValue(provider)
             playlistChoice.postValue(playList)
             albumChoice.postValue(album)
@@ -66,35 +65,22 @@ class ApplicationViewModel(
         if (link.contains(chosenProvider.value.toString())) {
             sameApp.postValue(true)
         } else {
-            Log.d("MUSICMEE", "IN HERE")
-
-            when(typeofLink(link)){
-                "playlist" -> isPlaylist = true
-                "album" -> isAlbum = true
+            when (typeofLink(link)) {
+                "playlist" -> {
+                    isPlaylist = true
+                    isAlbum = false
+                }
+                "album" -> {
+                    isAlbum = true
+                    isPlaylist = false
+                }
             }
-
-            Log.d("MUSICMEE", "Incoming: isPlaylist?: $isPlaylist || isAlbum?: $isAlbum")
-            Log.d("MUSICMEE","|Playlist - Saved: ${
-                when(playlistChoice.value){
-                    false -> "yup"
-                    true -> "nope"
-                    else -> "--"
-                }
-            } <- is it off?")
-
-            Log.d("MUSICMEE","|ALBUM - Saved: ${
-                when(albumChoice.value){
-                    false -> "yup"
-                    true -> "nope"
-                    else -> "--"
-                }
-            } <- is it off?")
-            if(isPlaylist && playlistChoice.value == false)
+            if (isPlaylist && (playlistChoice.value == false))
                 sameApp.postValue(true)
-            else if(isAlbum && albumChoice.value == false)
+            else if (isAlbum && (albumChoice.value == false))
                 sameApp.postValue(true)
             else
-            differentApp.postValue(true)
+                differentApp.postValue(true)
         }
     }
 
