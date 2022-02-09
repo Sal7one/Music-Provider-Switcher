@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             if (currentProvider.isNotBlank()) {
                 updateProvider()
             }else{
-                Toast.makeText(this, "Please choose a music provider first.. (Also change APP URLS) -> Checkout explain button!", Toast.LENGTH_LONG).show()
+                Toast.makeText(this, "Please choose a music provider first Also change (APP URLS) -> Checkout explain button!", Toast.LENGTH_LONG).show()
             }
         }
        binding.playlistCheckBox.setOnClickListener {
