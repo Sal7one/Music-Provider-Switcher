@@ -16,7 +16,7 @@ Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter
 Android
 
 
-<img src="Assets/android.jpeg" alt="drawing" width="320"/>
+<img src="Assets/android.png" alt="drawing" width="320"/>
 
 
  Web Extension (Chrome, FireFox)
