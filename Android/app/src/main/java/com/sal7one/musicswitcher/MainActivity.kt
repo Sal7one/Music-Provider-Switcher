@@ -95,7 +95,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Please choose a music provider first Also change (APP URLS) -> Checkout explain button!",
+                    "Please choose a music provider first Also change (APP URLS) -> Checkout Setup Steps button!",
                     Toast.LENGTH_LONG
                 ).show()
             }
