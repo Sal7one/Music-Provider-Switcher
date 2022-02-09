@@ -18,8 +18,6 @@ import android.content.DialogInterface
 import android.text.Html
 
 
-
-
 class MainActivity : AppCompatActivity() {
 
     private lateinit var viewModel: ApplicationViewModel
@@ -94,14 +92,18 @@ class MainActivity : AppCompatActivity() {
         updateBtn.setOnClickListener {
             if (currentProvider.isNotBlank()) {
                 updateProvider()
-            }else{
-                Toast.makeText(this, "Please choose a music provider first Also change (APP URLS) -> Checkout explain button!", Toast.LENGTH_LONG).show()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Please choose a music provider first Also change (APP URLS) -> Checkout explain button!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
-       binding.playlistCheckBox.setOnClickListener {
-           playlistChoice = binding.playlistCheckBox.isChecked
+        binding.playlistCheckBox.setOnClickListener {
+            playlistChoice = binding.playlistCheckBox.isChecked
             Log.d("TAGMANINE", "I will send  $playlistChoice")
-       }
+        }
         binding.albumCheckBox.setOnClickListener {
             albumChoice = binding.albumCheckBox.isChecked
             Log.d("TAGMANINE", "I will send  $albumChoice")
@@ -135,7 +137,7 @@ class MainActivity : AppCompatActivity() {
         Toast.makeText(this, "Music provider updated", Toast.LENGTH_SHORT).show()
     }
 
-    private fun alertDialogMaker(){
+    private fun alertDialogMaker() {
         AlertDialog.Builder(this)
             .setTitle("What to do")
             .setView(R.layout.explain_page)

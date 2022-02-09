@@ -6,7 +6,6 @@ import androidx.core.text.HtmlCompat
 class SongExtractor {
     companion object {
         fun extractFromURL(url: String, response: String): String {
-
             var responseString: String
             val begin = 7
             var end = 0
@@ -83,15 +82,16 @@ class SongExtractor {
         }
     }
 }
-        fun typeofLink(url: String) : String{
-            return when {
-                url.contains("/playlist/") -> "playlist"
-                url.contains("/album/") -> {
-                    if(url.contains("?i=")) // apple music song
-                        "song"
-                    else
-                        "album"
-                }
-                else -> "song"
-            }
+
+fun typeofLink(url: String): String {
+    return when {
+        url.contains("/playlist/") -> "playlist"
+        url.contains("/album/") -> {
+            if (url.contains("?i=")) // apple music song
+                "song"
+            else
+                "album"
         }
+        else -> "song"
+    }
+}

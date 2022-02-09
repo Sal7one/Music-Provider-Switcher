@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.controllers
 
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -9,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.typeofLink
 
 class ApplicationViewModel(
 
@@ -21,11 +23,14 @@ class ApplicationViewModel(
     var searchLink = MutableLiveData<String>()
     var sameApp = MutableLiveData<Boolean>()
     var differentApp = MutableLiveData<Boolean>()
-
+    private var isAlbum = true
+    private var isPlaylist = true
     init {
         chosenProvider.value = ""
         sameApp.value = false
         differentApp.value = false
+        playlistChoice.value = true
+        albumChoice.value = true
         musicPackage.value = ""
         searchLink.value = ""
         getData()
@@ -57,9 +62,38 @@ class ApplicationViewModel(
 
     fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
         val link = data.toString()
+
         if (link.contains(chosenProvider.value.toString())) {
             sameApp.postValue(true)
         } else {
+            Log.d("MUSICMEE", "IN HERE")
+
+            when(typeofLink(link)){
+                "playlist" -> isPlaylist = true
+                "album" -> isAlbum = true
+            }
+
+            Log.d("MUSICMEE", "Incoming: isPlaylist?: $isPlaylist || isAlbum?: $isAlbum")
+            Log.d("MUSICMEE","|Playlist - Saved: ${
+                when(playlistChoice.value){
+                    false -> "yup"
+                    true -> "nope"
+                    else -> "--"
+                }
+            } <- is it off?")
+
+            Log.d("MUSICMEE","|ALBUM - Saved: ${
+                when(albumChoice.value){
+                    false -> "yup"
+                    true -> "nope"
+                    else -> "--"
+                }
+            } <- is it off?")
+            if(isPlaylist && playlistChoice.value == false)
+                sameApp.postValue(true)
+            else if(isAlbum && albumChoice.value == false)
+                sameApp.postValue(true)
+            else
             differentApp.postValue(true)
         }
     }
