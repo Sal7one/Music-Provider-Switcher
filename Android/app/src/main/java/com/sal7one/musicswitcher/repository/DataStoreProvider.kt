@@ -12,14 +12,16 @@ import kotlinx.coroutines.flow.map
 
 class DataStoreProvider(private val context: Context) {
 
-    // Data types and (place) in datastore we're making.
-    private val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
-    private val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
-    private val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
+
 
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.MUSIC_PREFERENCES_DATASTORE.link)
+
+        // Data types and (place) in datastore we're making.
+        private val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
+        private val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
+        private val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
     }
 
     // We're passing application context no memory leak is possible
