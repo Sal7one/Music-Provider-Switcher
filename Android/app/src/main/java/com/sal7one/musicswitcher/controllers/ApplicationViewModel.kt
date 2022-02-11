@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.controllers
 
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -9,20 +10,23 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.typeofLink
 
 class ApplicationViewModel(
 
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
-
     var chosenProvider = MutableLiveData<String>()
+    var playlistChoice = MutableLiveData<Boolean>()
+    var albumChoice = MutableLiveData<Boolean>()
     var musicPackage = MutableLiveData<String>()
     var searchLink = MutableLiveData<String>()
     var sameApp = MutableLiveData<Boolean>()
     var differentApp = MutableLiveData<Boolean>()
+    private var isAlbum = true
+    private var isPlaylist = true
 
     init {
-        chosenProvider.value = ""
         sameApp.value = false
         differentApp.value = false
         musicPackage.value = ""
@@ -30,30 +34,53 @@ class ApplicationViewModel(
         getData()
     }
 
-    fun saveData(userChoice: String) = viewModelScope.launch(Dispatchers.IO) {
-        dataStoreManager.saveToDataStore(userChoice)
+    fun saveData(
+        userChoice: String,
+        userPlaylist: Boolean,
+        userAlbum: Boolean
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        dataStoreManager.saveToDataStore(
+            userMusicProvider = userChoice,
+            userPlaylist = userPlaylist,
+            userAlbum = userAlbum
+        )
     }
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            chosenProvider.postValue(it)
-            updatePackage(it)
+            val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
+            val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
+            val album = it[DataStoreProvider.StoredKeys.albumChoice] ?: false
+
+            chosenProvider.postValue(provider)
+            playlistChoice.postValue(playList)
+            albumChoice.postValue(album)
+            updatePackage(provider)
         }
     }
 
     fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
-        dataStoreManager.getFromDataStore().collect {
-            handleMusicProvider(it, data)
-        }
-    }
-
-
-    private fun handleMusicProvider(MusicProvider: String, data: Uri) {
         val link = data.toString()
-        if (link.contains(MusicProvider)) {
+
+        if (link.contains(chosenProvider.value.toString())) {
             sameApp.postValue(true)
         } else {
-            differentApp.postValue(true)
+            when (typeofLink(link)) {
+                "playlist" -> {
+                    isPlaylist = true
+                    isAlbum = false
+                }
+                "album" -> {
+                    isAlbum = true
+                    isPlaylist = false
+                }
+            }
+            if (isPlaylist && (playlistChoice.value == false))
+                sameApp.postValue(true)
+            else if (isAlbum && (albumChoice.value == false))
+                sameApp.postValue(true)
+            else
+                differentApp.postValue(true)
         }
     }
 

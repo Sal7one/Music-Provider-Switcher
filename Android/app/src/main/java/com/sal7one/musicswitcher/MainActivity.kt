@@ -1,8 +1,10 @@
 package com.sal7one.musicswitcher
 
+import android.app.AlertDialog
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -11,6 +13,10 @@ import com.sal7one.musicswitcher.databinding.ActivityMainBinding
 import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.controllers.ApplicationViewModel
 import com.sal7one.musicswitcher.utils.Constants
+import android.content.DialogInterface
+
+import android.text.Html
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -24,6 +30,8 @@ class MainActivity : AppCompatActivity() {
     private lateinit var updateBtn: Button
     private lateinit var dataStoreProvider: DataStoreProvider
     private var currentProvider = ""
+    private var playlistChoice = false
+    private var albumChoice = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +56,19 @@ class MainActivity : AppCompatActivity() {
             changeViewBackground()
         })
 
+        viewModel.playlistChoice.observe(this, {
+            playlistChoice = it
+        })
+
+        viewModel.albumChoice.observe(this, {
+            albumChoice = it
+            changeCheckboxState()
+        })
+
+        binding.explainButton.setOnClickListener {
+            alertDialogMaker()
+        }
+
         spotifyBtn.setOnClickListener {
             currentProvider = Constants.SPOTIFY.link
             changeViewBackground()
@@ -71,8 +92,27 @@ class MainActivity : AppCompatActivity() {
         updateBtn.setOnClickListener {
             if (currentProvider.isNotBlank()) {
                 updateProvider()
+            } else {
+                Toast.makeText(
+                    this,
+                    "Please choose a music provider first Also change (APP URLS) -> Checkout Setup Steps button!",
+                    Toast.LENGTH_LONG
+                ).show()
             }
         }
+        binding.playlistCheckBox.setOnClickListener {
+            playlistChoice = binding.playlistCheckBox.isChecked
+            Log.d("TAGMANINE", "I will send  $playlistChoice")
+        }
+        binding.albumCheckBox.setOnClickListener {
+            albumChoice = binding.albumCheckBox.isChecked
+            Log.d("TAGMANINE", "I will send  $albumChoice")
+        }
+    }
+
+    private fun changeCheckboxState() {
+        binding.playlistCheckBox.isChecked = playlistChoice
+        binding.albumCheckBox.isChecked = albumChoice
     }
 
     private fun changeViewBackground() {
@@ -93,7 +133,17 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateProvider() {
-        viewModel.saveData(currentProvider)
+        viewModel.saveData(currentProvider, playlistChoice, albumChoice)
         Toast.makeText(this, "Music provider updated", Toast.LENGTH_SHORT).show()
+    }
+
+    private fun alertDialogMaker() {
+        AlertDialog.Builder(this)
+            .setTitle("What to do")
+            .setView(R.layout.explain_page)
+            .setPositiveButton("Done", DialogInterface.OnClickListener { dialog, _ ->
+                dialog.dismiss()
+            })
+            .show()
     }
 }

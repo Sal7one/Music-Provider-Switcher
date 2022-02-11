@@ -20,4 +20,5 @@
     <color name="anghami_clicked">#A10CB3</color>
     <color name="ytMusic_clicked">#FF0000</color>
     <color name="deezer_clicked">#1BD3E4</color>
+    <color name="card_explain_color">#FF5b5080</color>
 </resources>

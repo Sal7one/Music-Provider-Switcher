@@ -22,7 +22,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
     private val activityTAG = "DeepLinkHandlerActivity"
-    private var action : String? = null
+    private var action: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,22 +36,25 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         data = intent?.data!!
         intent?.action.also { action = it }
 
-        //viewModel.
+        // data comes from datastore
+        viewModel.chosenProvider.observe(this) {
+            viewModel.handleDeepLink(data) // start opening app
+        }
 
-        viewModel.handleDeepLink(data)
         // Instantiate the RequestQueue.
-        val queue = Volley.newRequestQueue(this)
 
-        viewModel.sameApp.observe(this, {
+        viewModel.sameApp.observe(this) {
             if (it) {
                 val i = Intent(action, data)
                 val appPackage = sameAppPackage(data.toString())
                 i.setPackage(appPackage)
                 startActivity(i)
             }
-        })
+        }
 
-        viewModel.differentApp.observe(this, {
+        viewModel.differentApp.observe(this) {
+            val queue = Volley.newRequestQueue(this)
+
             if (it) {
                 val songURL = data.toString()
                 val stringRequest = StringRequest(Request.Method.GET, songURL,
@@ -69,7 +72,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                 )
                 queue.add(stringRequest)
             }
-        })
+        }
     }
 
     private fun switchToApp(songName: String) {

@@ -8,20 +8,18 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.sal7one.musicswitcher.utils.Constants
-import kotlinx.coroutines.flow.map
 
 class DataStoreProvider(private val context: Context) {
-
-
+    
+    object StoredKeys {
+        val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
+        val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
+        val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
+    }
 
 
     companion object {
         private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(name = Constants.MUSIC_PREFERENCES_DATASTORE.link)
-
-        // Data types and (place) in datastore we're making.
-        private val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
-        private val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
-        private val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
     }
 
     // We're passing application context no memory leak is possible
@@ -43,16 +41,12 @@ class DataStoreProvider(private val context: Context) {
         userPlaylist: Boolean,
         userAlbum: Boolean
     ) {
-        context.dataStore.edit {
-            it[musicProvider] = userMusicProvider
-            it[playlistChoice] = userPlaylist
-            it[albumChoice] = userAlbum
+        context.dataStore.edit { preference ->
+            preference[StoredKeys.musicProvider] = userMusicProvider
+            preference[StoredKeys.playlistChoice] = userPlaylist
+            preference[StoredKeys.albumChoice] = userAlbum
         }
     }
 
-    fun getFromDataStore() = context.dataStore.data.map {
-        val provider = it[musicProvider] ?: ""
-        val playtlist = it[playlistChoice] ?: false
-        val albumChoice = it[playlistChoice] ?: false
-    }
+    fun getFromDataStore() = context.dataStore.data
 }

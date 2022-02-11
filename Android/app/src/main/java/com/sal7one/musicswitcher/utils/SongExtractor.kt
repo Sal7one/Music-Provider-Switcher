@@ -6,7 +6,6 @@ import androidx.core.text.HtmlCompat
 class SongExtractor {
     companion object {
         fun extractFromURL(url: String, response: String): String {
-
             var responseString: String
             val begin = 7
             var end = 0
@@ -40,19 +39,34 @@ class SongExtractor {
                 url.contains(Constants.YT_MUSIC.link) -> {
                     end = 16
 
-                    val artist = response.substring(
-                        response.lastIndexOf("·") + 1,
-                        response.lastIndexOf("℗")
-                    )
-                    val songName = response.substring(
-                        response.lastIndexOf("<title>") + begin,
-                        response.lastIndexOf("</title>") - end
-                    )
+                    if (typeofLink(url) == "playlist") {
+                        var songName =
+                            response.substring(response.indexOf("name=\"twitter:title\""))
+                        songName = songName.substring(
+                            songName.indexOf("content=") + 9,
+                            songName.indexOf("\"><meta name=\"twitter:description\" ")
+                        )
 
-                    return HtmlCompat.fromHtml(
-                        "$songName $artist",
-                        HtmlCompat.FROM_HTML_MODE_LEGACY
-                    ).toString() // Escape special characters in html ' == N&#039;
+                        return HtmlCompat.fromHtml(
+                            songName,
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
+                        ).toString()
+                    } else {
+
+                        val songName = response.substring(
+                            response.lastIndexOf("<title>") + begin,
+                            response.lastIndexOf("</title>") - end
+                        )
+
+                        val artist = response.substring(
+                            response.lastIndexOf("·") + 1,
+                            response.lastIndexOf("℗")
+                        )
+                        return HtmlCompat.fromHtml(
+                            "$songName $artist",
+                            HtmlCompat.FROM_HTML_MODE_LEGACY
+                        ).toString() // Escape special characters in html ' == N&#039;
+                    }
                 }
                 else -> {
                     Log.d("SONG_EXTRACTOR", "Link not handled value below..")
@@ -83,15 +97,16 @@ class SongExtractor {
         }
     }
 }
-        fun typeofLink(url: String) : String{
-            return when {
-                url.contains("/playlist/") -> "playlist"
-                url.contains("/album/") -> {
-                    if(url.contains("?i=")) // apple music song
-                        "song"
-                    else
-                        "album"
-                }
-                else -> "song"
-            }
+
+fun typeofLink(url: String): String {
+    return when {
+        url.contains("/playlist/") or url.contains("playlist?") -> "playlist"
+        url.contains("/album/") -> {
+            if (url.contains("?i=")) // apple music song
+                "song"
+            else
+                "album"
         }
+        else -> "song"
+    }
+}
