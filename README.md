@@ -1,9 +1,6 @@
-# Music Switcher | Readme coming soon
-
-# ( Global level )
+# Music Switcher
 
 # Current Available Release version
-
 
 Android: Check Github release for APK
 
