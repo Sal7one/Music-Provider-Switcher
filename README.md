@@ -2,6 +2,9 @@
 
 # Current Available Release version
 
+
+The Android version works outside of Twitter as well. 
+
 Android: Check Github release for APK
 
 Chrome: [Chrome Webstore](https://chrome.google.com/webstore/detail/twitter-music-provider/apkanldijkiplglkhjjajegljppgmgmj)
