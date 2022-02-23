@@ -28,7 +28,6 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-
         viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
             ApplicationViewModel::class.java
         )
@@ -76,7 +75,6 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
     }
 
     private fun switchToApp(songName: String) {
-
         val uri = Uri.parse(songName)
         val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)

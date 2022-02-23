@@ -4,7 +4,6 @@ import android.app.AlertDialog
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
@@ -109,7 +108,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     fun buildClickListeners(musicButton: View) {
-        clickedMusicProvider = resources.getResourceEntryName(musicButton.id);
+        clickedMusicProvider = resources.getResourceEntryName(musicButton.id)
             when (musicButton.id) {
                 R.id.spotifyBtn -> currentProvider = Constants.SPOTIFY.link
                 R.id.appleMusicBtn -> currentProvider = Constants.APPLE_MUSIC.link
