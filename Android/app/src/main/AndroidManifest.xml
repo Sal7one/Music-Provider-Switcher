@@ -11,7 +11,8 @@
         android:theme="@style/Theme.MusicSwitcher">
         <activity
             android:name=".DeepLinkHandlerActivity"
-            android:exported="true">
+            android:exported="true"
+            android:theme="@style/Theme.deepLinker">
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
