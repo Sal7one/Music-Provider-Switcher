@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
             } else {
                 Toast.makeText(
                     this,
-                    "Please choose a music provider first Also change (APP URLS) -> Checkout Setup Steps button!",
+                    getString(R.string.chose_first_toast),
                     Toast.LENGTH_LONG
                 ).show()
             }
@@ -69,7 +69,6 @@ class MainActivity : AppCompatActivity() {
             albumChoice = binding.albumCheckBox.isChecked
         }
     }
-
 
     private fun changeCheckboxState() {
         binding.playlistCheckBox.isChecked = playlistChoice
@@ -95,27 +94,27 @@ class MainActivity : AppCompatActivity() {
 
     private fun updateProvider() {
         viewModel.saveData(currentProvider, playlistChoice, albumChoice)
-        Toast.makeText(this, "Music provider updated", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, getString(R.string.data_updated_toast), Toast.LENGTH_SHORT).show()
     }
 
     private fun alertDialogMaker() {
         AlertDialog.Builder(this)
-            .setTitle("What to do")
+            .setTitle(getString(R.string.explain_dialog_title))
             .setView(R.layout.explain_page)
-            .setPositiveButton("Done") { dialog, _ ->
+            .setPositiveButton(getString(R.string.explain_positive_btn)) { dialog, _ ->
                 dialog.dismiss()
             }.show()
     }
 
     fun buildClickListeners(musicButton: View) {
         clickedMusicProvider = resources.getResourceEntryName(musicButton.id)
-            when (musicButton.id) {
-                R.id.spotifyBtn -> currentProvider = Constants.SPOTIFY.link
-                R.id.appleMusicBtn -> currentProvider = Constants.APPLE_MUSIC.link
-                R.id.anghamiBtn -> currentProvider = Constants.ANGHAMI.link
-                R.id.deezerBtn -> currentProvider = Constants.DEEZER.link
-                R.id.ytMusicBtn -> currentProvider = Constants.YT_MUSIC.link
-            }
-            changeViewBackground()
+        when (musicButton.id) {
+            R.id.spotifyBtn -> currentProvider = Constants.SPOTIFY.link
+            R.id.appleMusicBtn -> currentProvider = Constants.APPLE_MUSIC.link
+            R.id.anghamiBtn -> currentProvider = Constants.ANGHAMI.link
+            R.id.deezerBtn -> currentProvider = Constants.DEEZER.link
+            R.id.ytMusicBtn -> currentProvider = Constants.YT_MUSIC.link
+        }
+        changeViewBackground()
     }
 }

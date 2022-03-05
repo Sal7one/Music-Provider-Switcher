@@ -2,7 +2,6 @@ package com.sal7one.musicswitcher.controllers
 
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
-import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -74,7 +73,7 @@ class ApplicationViewModel(
                     isAlbum = true
                     isPlaylist = false
                 }
-                else->{
+                else -> {
                     isAlbum = false
                     isPlaylist = false
                 }

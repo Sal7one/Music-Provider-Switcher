@@ -10,7 +10,7 @@ import androidx.datastore.preferences.preferencesDataStore
 import com.sal7one.musicswitcher.utils.Constants
 
 class DataStoreProvider(private val context: Context) {
-    
+
     object StoredKeys {
         val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
         val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
