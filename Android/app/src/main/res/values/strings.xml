@@ -22,4 +22,5 @@
     <string name="chose_first_toast"><![CDATA[Please choose a music provider first Also change (APP URLS) -> Checkout Setup Steps button!]]></string>
     <string name="ACTIVITY_TAG_DEEP_LINK_HANDLER">DEEPLINKACT</string>
     <string name="ACTIVITY_TAG_MAIN">MAINACT</string>
+    <string name="title_activity_main_ui">MainUi</string>
 </resources>
