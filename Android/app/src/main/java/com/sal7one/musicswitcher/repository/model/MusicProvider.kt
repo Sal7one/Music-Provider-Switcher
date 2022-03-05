@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.model
+package com.sal7one.musicswitcher.repository.model
 
 data class MusicProvider(
     val name: String,
