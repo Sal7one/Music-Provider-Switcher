@@ -18,7 +18,6 @@ import com.sal7one.musicswitcher.utils.SongExtractor
 
 class DeepLinkHandlerActivity : AppCompatActivity() {
 
-    private val activityTAG = getString(R.string.ACTIVITY_TAG_DEEP_LINK_HANDLER)
     private lateinit var viewModel: ApplicationViewModel
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
@@ -66,7 +65,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                         switchToApp(searchURL + query)
                     },
                     {
-                        Log.d(activityTAG, "Volley Error")
+                        Log.e("DEEP_LINK", "Volley Error")
                     }
                 )
                 queue.add(stringRequest)

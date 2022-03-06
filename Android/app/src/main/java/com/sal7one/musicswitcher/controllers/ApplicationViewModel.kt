@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.controllers
 
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
+import android.util.Log
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -106,11 +107,12 @@ class ApplicationViewModel(
                     isPlaylist = false
                 }
             }
+
             // Ignores the chosen music provider
             // When the data is got from the datastore this gets updated in relation to the music provider
             if (overrulesPreference) {
-                // Open original app
-                differentApp.postValue(true)
+                // Open same/original app
+                sameApp.postValue(true)
             } else {
                 // Check if It should search in the chosen music provider and open it (sameAPP)
                 if (isPlaylist && (playlistChoice.value == false)) {
