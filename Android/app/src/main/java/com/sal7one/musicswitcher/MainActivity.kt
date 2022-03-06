@@ -22,6 +22,11 @@ class MainActivity : AppCompatActivity() {
     private var clickedMusicProvider = ""
     private var albumChoice = false
     private var playlistChoice = false
+    private var appleMusicChoice = false
+    private var spotifyChoice = false
+    private var anghamiChoice = false
+    private var ytMusicChoice = false
+    private var deezerChoice = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -93,7 +98,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateProvider() {
-        viewModel.saveData(currentProvider, playlistChoice, albumChoice)
+        viewModel.saveData(
+            currentProvider,
+            playlistChoice,
+            albumChoice,
+            appleMusic = appleMusicChoice,
+            spotify = spotifyChoice,
+            anghami = anghamiChoice,
+            ytMusic = ytMusicChoice,
+            deezer = deezerChoice
+        )
         Toast.makeText(this, getString(R.string.data_updated_toast), Toast.LENGTH_SHORT).show()
     }
 

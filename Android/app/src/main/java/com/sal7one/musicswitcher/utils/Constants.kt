@@ -19,5 +19,10 @@ enum class Constants(val link: String) {
     MUSIC_PREFERENCES_KEY("music_provider"),
     PLAYLIST_PREFERENCES_KEY("playlist_choice"),
     ALBUM_PREFERENCES_KEY("album_choice"),
+    APPLE_M_PREFERENCES_KEY("apple_music_choice"),
+    SPOTIFY_PREFERENCES_KEY("spotify_choice"),
+    ANGHAMI_PREFERENCES_KEY("anghami_choice"),
+    YT_MUSIC_PREFERENCES_KEY("yt_music_choice"),
+    DEEZER_PREFERENCES_KEY("deezer_choice"),
     MUSIC_PREFERENCES_DATASTORE("music_preferences")
 }
