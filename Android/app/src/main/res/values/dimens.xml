@@ -8,8 +8,7 @@
     <dimen name="card_height">142dp</dimen>
     <dimen name="frame_width">142dp</dimen>
     <dimen name="frame_height">140dp</dimen>
-    <dimen name="card_size">108dp</dimen>
+    <dimen name="card_size">95dp</dimen>
     <dimen name="card_explain_size">25dp</dimen>
     <dimen name="custom_vertical_spacing">8dp</dimen>
-
 </resources>

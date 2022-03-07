@@ -212,7 +212,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="54dp"
-        android:fontFamily="@font/alike_angular"
         android:text="@string/your_music_provider"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/welcomeMessage" />
@@ -223,7 +222,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="40dp"
-        android:fontFamily="@font/alike_angular"
         android:text="@string/Welcome"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -236,7 +234,6 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginTop="38dp"
-        android:fontFamily="@font/alike_angular"
         android:text="@string/optional_methods"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
