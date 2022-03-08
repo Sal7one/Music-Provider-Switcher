@@ -23,4 +23,10 @@
     <string name="ACTIVITY_TAG_DEEP_LINK_HANDLER">DEEPLINKACT</string>
     <string name="ACTIVITY_TAG_MAIN">MAINACT</string>
     <string name="title_activity_main_ui">MainUi</string>
+
+<!--Compose Screens Navigation -->
+    <string name="nav_main">Main Screen</string>
+    <string name="nav_options">Options</string>
+    <string name="nav_about">About</string>
+
 </resources>
