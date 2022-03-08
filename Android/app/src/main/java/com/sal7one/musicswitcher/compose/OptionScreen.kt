@@ -17,15 +17,16 @@ import androidx.compose.ui.unit.sp
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 
-private var appleMusicChoice = false
-private var spotifyChoice = false
-private var anghamiChoice = false
-private var ytMusicChoice = false
-private var deezerChoice = false
+
 
 @Composable
 fun OptionScreen() {
     val context = LocalContext.current
+    var appleMusicChoice = false
+    var spotifyChoice = false
+    var anghamiChoice = false
+    var ytMusicChoice = false
+    var deezerChoice = false
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
