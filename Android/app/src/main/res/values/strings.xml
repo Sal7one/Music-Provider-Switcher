@@ -24,9 +24,15 @@
     <string name="ACTIVITY_TAG_MAIN">MAINACT</string>
     <string name="title_activity_main_ui">MainUi</string>
 
-<!--Compose Screens Navigation -->
+    <!--Compose Screens Navigation -->
     <string name="nav_main">Main Screen</string>
     <string name="nav_options">Options</string>
     <string name="nav_about">About</string>
+    <!--Compose Screens Navigation end -->
 
+    <string name="about_app_heading">About this App</string>
+    <string name="about_this_app">This app searches songs for you from other music providers links, in your favorite music provider, So If you see a link of other music providers just click it and the app will try to search for it.</string>
+    <string name="dev_name">Saleh Alanazi</string>
+    <string name="about_developer">I\'m a Software Engineer from Saudi Arabia. I\'ve been developing Android applications since 2013 and professionally since 2015.\n\nClick the image to see my public projects on Github</string>
+    <string name="about_dev_heading">About the Developer</string>
 </resources>

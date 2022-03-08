@@ -32,6 +32,7 @@ fun ApplicationScreen() {
                         selectedContentColor = BottomNav_selected_color,
                         unselectedContentColor = BottomNav_unselected_color,
                         modifier = Modifier.background(BottomNav_background_color),
+                        //label = {}, Text with screen Name If needed
                         icon = { Icon(screen.icon, contentDescription = null) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
