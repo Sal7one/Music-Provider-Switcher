@@ -7,7 +7,7 @@ import androidx.navigation.compose.composable
 
 @Composable
 fun BottomNavGraph(navController: NavHostController){
-        NavHost(navController = navController, startDestination = "home" ){
+        NavHost(navController = navController, startDestination = "options" ){
         composable("home") { MainScreen() }
         composable("options") { OptionScreen() }
         composable("about") { AboutScreen() }
