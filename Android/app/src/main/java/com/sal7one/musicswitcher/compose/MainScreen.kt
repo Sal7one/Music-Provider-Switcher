@@ -29,7 +29,6 @@ import com.sal7one.musicswitcher.compose.ui.theme.*
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
-
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -44,8 +43,6 @@ fun MainScreen() {
                 )
             )
     ) {
-        val textColor = TextSecondary_color
-
         Spacer(modifier = Modifier.height(20.dp))
         Row() {
             Spacer(modifier = Modifier.width(20.dp))
@@ -58,7 +55,7 @@ fun MainScreen() {
                     .clip(CircleShape) // clip to the circle shape
                     .border(
                         2.dp,
-                        textColor,
+                        TextSecondary_color,
                         CircleShape
                     )
                     .pointerInput(Unit) {
@@ -80,7 +77,7 @@ fun MainScreen() {
                 style = TextStyle(color = Color.White, fontSize = 24.sp),
             )
         }
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(48.dp))
         Text(
             text = context.getString(R.string.your_music_provider),
             modifier = Modifier.padding(start = 10.dp),
@@ -143,7 +140,9 @@ fun MainScreen() {
                 }
             }
         }
-        Spacer(modifier = Modifier.height(51.dp))
-        UpdateButton()
+        Spacer(modifier = Modifier.height(25.dp))
+        Box(modifier = Modifier.padding( start = 15.dp)) {
+            UpdateButton()
+        }
     }
 }
