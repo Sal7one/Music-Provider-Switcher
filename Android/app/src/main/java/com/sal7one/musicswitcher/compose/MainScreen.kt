@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.compose
 
 import android.content.Intent
 import android.net.Uri
+import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -11,6 +12,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
 import androidx.compose.runtime.*
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -25,14 +27,27 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.compose.ui.theme.*
+import com.sal7one.musicswitcher.controllers.ApplicationViewModel
+import com.sal7one.musicswitcher.controllers.MyViewModelFactory
+import com.sal7one.musicswitcher.repository.DataStoreProvider
+import com.sal7one.musicswitcher.repository.musicProviders
+import com.sal7one.musicswitcher.utils.Constants
 
 
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
     val showExplainDialog = remember { mutableStateOf(false) }
+    val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
+    val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
+
+    val albumChoice by viewModel.albumChoice.observeAsState();
+    val playlistChoice by viewModel.playlistChoice.observeAsState();
+    val currentProvider by viewModel.chosenProvider.observeAsState();
+
 
     Column(
         modifier = Modifier
@@ -91,7 +106,7 @@ fun MainScreen() {
 
             Image(
                 painter = painterResource(R.drawable.infoicon),
-                contentDescription = "How to use the app",
+                contentDescription = stringResource(R.string.main_screen_info_icon),
                 modifier = Modifier
                     .scale(1.8f)
                     .padding(start = 30.dp, top = 2.dp)
@@ -109,18 +124,19 @@ fun MainScreen() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
         ) {
-            MusicProviderCard(R.drawable.apple_music_white)
-            MusicProviderCard(R.drawable.spotify_white)
-            MusicProviderCard(R.drawable.yt_music_white)
+
+            MusicProviderCard(musicProviders[0], currentProvider.toString())
+            MusicProviderCard(musicProviders[1], currentProvider.toString())
+            MusicProviderCard(musicProviders[2], currentProvider.toString())
         }
         Spacer(modifier = Modifier.height(25.dp))
         Row(
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            MusicProviderCard(R.drawable.anghami_white)
+            MusicProviderCard(musicProviders[3], currentProvider.toString())
             Spacer(modifier = Modifier.width(50.dp))
-            MusicProviderCard(R.drawable.deezer_white)
+            MusicProviderCard(musicProviders[4], currentProvider.toString())
         }
         Spacer(modifier = Modifier.height(25.dp))
         Box(modifier = Modifier.padding(start = 11.dp)) {
@@ -142,7 +158,7 @@ fun MainScreen() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Box(modifier = Modifier.padding(5.dp)) {
-                    Switch(false)
+                    Switch(albumChoice!!)
                 }
             }
             Spacer(modifier = Modifier.width(50.dp))
@@ -153,13 +169,36 @@ fun MainScreen() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Box(modifier = Modifier.padding(5.dp)) {
-                    Switch(false)
+                    Switch(playlistChoice!!)
                 }
             }
         }
-        Spacer(modifier = Modifier.height(25.dp))
+        Spacer(
+            modifier = Modifier.height(
+                25.dp
+            )
+        )
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            UpdateButton(stringResource(R.string.mainscreen_update_pref_btn))
+            Box(
+                Modifier.clickable {
+                    if (currentProvider!!.isNotBlank()) {
+                        viewModel.saveData(
+                            currentProvider!!,
+                            playlistChoice!!,
+                            albumChoice!!,
+                        )
+                        Toast.makeText(context, "Preference Updated!", Toast.LENGTH_SHORT).show()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Chose an option to update",
+                            Toast.LENGTH_LONG
+                        ).show()
+                    }
+                }
+            ) {
+                UpdateButton(stringResource(R.string.mainscreen_update_pref_btn))
+            }
         }
     }
 }

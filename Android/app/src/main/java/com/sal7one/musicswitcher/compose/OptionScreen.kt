@@ -1,6 +1,7 @@
 package com.sal7one.musicswitcher.compose
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -21,11 +22,7 @@ import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 import com.sal7one.musicswitcher.repository.model.MusicProvider
 import com.sal7one.musicswitcher.repository.musicProviders
 
-private var appleMusicChoice = false
-private var spotifyChoice = false
-private var anghamiChoice = false
-private var ytMusicChoice = false
-private var deezerChoice = false
+
 
 @Composable
 fun OptionScreen() {
@@ -63,6 +60,13 @@ fun OptionScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         OptionList(musicProviders)
         Spacer(modifier = Modifier.height(40.dp))
+        Box(modifier = Modifier.clickable {
+
+//            saveExceptions()
+        }) {
+
+
+        }
         UpdateButton(stringResource(R.string.optionScreen_update_Exceptions))
     }
 }

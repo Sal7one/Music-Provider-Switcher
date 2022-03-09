@@ -21,8 +21,9 @@ val BottomNav_selected_color = Color(0xFF700AC2)
 val BottomNav_unselected_color = Color(0xFFFFFFFF)
 val dialog_background_color = Color(0xC6C256DA)
 
-val apple_clicked_color = Color(0xFFF44336)
 val button_clicked_color = Color(0xFFDBDBDB)
+
+val apple_clicked_color = Color(0xFFF44336)
 val spotify_clicked_color = Color(0xFF0DD507)
 val anghami_clicked_color = Color(0xFFA10CB3)
 val ytMusic_clicked_color = Color(0xFFFF0000)

@@ -13,19 +13,27 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.R
-import com.sal7one.musicswitcher.compose.ui.theme.CardGlow_color
-import com.sal7one.musicswitcher.compose.ui.theme.Card_color
+import com.sal7one.musicswitcher.compose.ui.theme.*
+import com.sal7one.musicswitcher.repository.model.MusicProvider
+import com.sal7one.musicswitcher.utils.Constants
 
 @Composable
-fun MusicProviderCard(musicIcon: Int) {
+fun MusicProviderCard(MusicProvider: MusicProvider, chosenProvider: String) {
     val cardSize = dimensionResource(R.dimen.card_size)
-    val cardColor = Card_color
     val shadowColor = CardGlow_color
-
+    val cardColor: Color = when (chosenProvider) {
+        Constants.APPLE_MUSIC.link -> apple_clicked_color
+        Constants.SPOTIFY.link -> spotify_clicked_color
+        Constants.ANGHAMI.link -> anghami_clicked_color
+        Constants.YT_MUSIC.link -> ytMusic_clicked_color
+        Constants.DEEZER.link -> deezer_clicked_color
+        else -> Card_color
+    }
     Box(
         modifier = Modifier
             .height(cardSize + 6.dp)
@@ -50,7 +58,7 @@ fun MusicProviderCard(musicIcon: Int) {
                 contentAlignment = Alignment.Center
             ) {
                 Image(
-                    painter = painterResource(musicIcon), "content description",
+                    painter = painterResource(MusicProvider.icon), "content description",
                     modifier = Modifier
                         .fillMaxSize(0.8f),
                 )

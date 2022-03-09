@@ -41,4 +41,5 @@
     <string name="musicprovider_text">Music Provider</string>
     <string name="exception_status">Current Status</string>
     <string name="optionsScreen_heading">Options and Exceptions</string>
+    <string name="main_screen_info_icon">How to use the app</string>
 </resources>

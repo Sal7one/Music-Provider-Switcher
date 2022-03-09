@@ -33,6 +33,15 @@ class ApplicationViewModel(
     private var overrulesPreference = false
 
     init {
+        appleMusicChoice.value = false
+        spotifyChoice.value = false
+        anghamiChoice.value = false
+        ytMusicChoice.value = false
+        deezerChoice.value = false
+
+        chosenProvider.value = ""
+        playlistChoice.value = false
+        albumChoice.value = false
         sameApp.value = false
         differentApp.value = false
         musicPackage.value = ""
@@ -44,16 +53,22 @@ class ApplicationViewModel(
         userChoice: String,
         userPlaylist: Boolean,
         userAlbum: Boolean,
+    ) = viewModelScope.launch(Dispatchers.IO) {
+        dataStoreManager.saveToDataStore(
+            userMusicProvider = userChoice,
+            userPlaylist = userPlaylist,
+            userAlbum = userAlbum,
+            )
+    }
+
+    fun saveExceptions(
         appleMusic: Boolean,
         spotify: Boolean,
         anghami: Boolean,
         ytMusic: Boolean,
         deezer: Boolean
     ) = viewModelScope.launch(Dispatchers.IO) {
-        dataStoreManager.saveToDataStore(
-            userMusicProvider = userChoice,
-            userPlaylist = userPlaylist,
-            userAlbum = userAlbum,
+        dataStoreManager.saveExceptions(
             appleMusic = appleMusic,
             spotify = spotify,
             anghami = anghami,

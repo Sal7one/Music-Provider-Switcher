@@ -45,10 +45,7 @@ class DataStoreProvider(private val context: Context) {
         }
     }
 
-    suspend fun saveToDataStore(
-        userMusicProvider: String,
-        userPlaylist: Boolean,
-        userAlbum: Boolean,
+    suspend fun saveExceptions(
         appleMusic: Boolean,
         spotify: Boolean,
         anghami: Boolean,
@@ -56,14 +53,23 @@ class DataStoreProvider(private val context: Context) {
         deezer: Boolean
     ) {
         context.dataStore.edit { preference ->
-            preference[StoredKeys.musicProvider] = userMusicProvider
-            preference[StoredKeys.playlistChoice] = userPlaylist
-            preference[StoredKeys.albumChoice] = userAlbum
             preference[StoredKeys.appleMusicException] = appleMusic
             preference[StoredKeys.spotifyException] = spotify
             preference[StoredKeys.anghamiException] = anghami
             preference[StoredKeys.ytMusicException] = ytMusic
             preference[StoredKeys.deezerException] = deezer
+        }
+    }
+
+    suspend fun saveToDataStore(
+        userMusicProvider: String,
+        userPlaylist: Boolean,
+        userAlbum: Boolean,
+    ) {
+        context.dataStore.edit { preference ->
+            preference[StoredKeys.musicProvider] = userMusicProvider
+            preference[StoredKeys.playlistChoice] = userPlaylist
+            preference[StoredKeys.albumChoice] = userAlbum
         }
     }
 
