@@ -33,4 +33,6 @@
     <string name="dev_name">Saleh Alanazi</string>
     <string name="about_developer">I\'m a Software Engineer from Saudi Arabia. I\'ve been developing Android applications since 2013 and professionally since 2015.\n\nClick the image to see my public projects on Github</string>
     <string name="about_dev_heading">About the Developer</string>
+    <string name="mainscreen_album_playlist_text">Search for albums and playlists</string>
+    <string name="mainscreen_heading">Enjoy Music ;)</string>
 </resources>

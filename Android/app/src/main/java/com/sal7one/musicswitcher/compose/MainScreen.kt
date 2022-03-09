@@ -19,6 +19,7 @@ import androidx.compose.ui.input.pointer.pointerInput
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -41,14 +42,17 @@ fun MainScreen() {
                         primary_gradient_color
                     )
                 )
-            )
+            ), horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Spacer(modifier = Modifier.height(20.dp))
-        Row() {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start
+        ) {
             Spacer(modifier = Modifier.width(20.dp))
             Image(
                 painter = painterResource(R.mipmap.ic_launcher_clean_foreground),
-                contentDescription = "avatar",
+                contentDescription = "app icon",
                 contentScale = ContentScale.Crop,  // crop the image if it's not a square
                 modifier = Modifier
                     .size(75.dp)
@@ -72,7 +76,7 @@ fun MainScreen() {
                     }   // add a border (optional)
             )
             Text(
-                text = "Enjoy Music ;)",
+                text = stringResource(R.string.mainscreen_heading),
                 modifier = Modifier.padding(start = 15.dp, top = 25.dp),
                 style = TextStyle(color = Color.White, fontSize = 24.sp),
             )
@@ -85,30 +89,26 @@ fun MainScreen() {
         )
         Spacer(modifier = Modifier.height(20.dp))
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top
+            horizontalArrangement = Arrangement.SpaceEvenly,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.width(10.dp))
             MusicProviderCard(R.drawable.apple_music_white)
-            Spacer(modifier = Modifier.width(10.dp))
             MusicProviderCard(R.drawable.spotify_white)
-            Spacer(modifier = Modifier.width(10.dp))
             MusicProviderCard(R.drawable.yt_music_white)
         }
         Spacer(modifier = Modifier.height(25.dp))
         Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.Top
+            horizontalArrangement = Arrangement.Center,
+            modifier = Modifier.fillMaxWidth()
         ) {
-            Spacer(modifier = Modifier.width(55.dp))
             MusicProviderCard(R.drawable.anghami_white)
-            Spacer(modifier = Modifier.width(48.dp))
+            Spacer(modifier = Modifier.width(50.dp))
             MusicProviderCard(R.drawable.deezer_white)
         }
         Spacer(modifier = Modifier.height(25.dp))
         Box(modifier = Modifier.padding(start = 11.dp)) {
             Text(
-                text = "Search for albums and playlists",
+                text = stringResource(R.string.mainscreen_album_playlist_text),
                 style = MaterialTheme.typography.h2
             )
         }
@@ -120,7 +120,7 @@ fun MainScreen() {
         ) {
             Column() {
                 Text(
-                    "Album",
+                    stringResource(R.string.album),
                     style = TextStyle(fontSize = 18.sp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -128,10 +128,10 @@ fun MainScreen() {
                     Switch(false)
                 }
             }
-            Spacer(modifier = Modifier.width(48.dp))
+            Spacer(modifier = Modifier.width(50.dp))
             Column() {
                 Text(
-                    "Playlist",
+                    stringResource(R.string.playlist),
                     style = TextStyle(fontSize = 18.sp)
                 )
                 Spacer(modifier = Modifier.height(8.dp))
@@ -141,7 +141,7 @@ fun MainScreen() {
             }
         }
         Spacer(modifier = Modifier.height(25.dp))
-        Box(modifier = Modifier.padding( start = 15.dp)) {
+        Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
             UpdateButton()
         }
     }

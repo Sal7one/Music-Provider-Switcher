@@ -20,10 +20,8 @@ import com.sal7one.musicswitcher.compose.ui.theme.BtnUpdate_color
 @Composable
 fun UpdateButton() {
     val shadowColor = Color.White
-
     Box(
         modifier = Modifier
-            .padding(start = 85.dp)
             .coloredShadow(
                 shadowColor, alpha = 0.8f,
                 shadowRadius = 11.dp,
