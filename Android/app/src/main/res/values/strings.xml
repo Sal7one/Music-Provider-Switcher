@@ -11,7 +11,7 @@
     <string name="i_will_try_to_redirect_all_links_to_the_preferred_music_provider">I will try to redirect all links to the preferred music provider</string>
     <string name="update_choice">Update choice</string>
     <string name="explain_choice">Setup steps!</string>
-    <string name="explain_urls">\1 - Go to the settings and find this app and enable all the links (EXCEPT the music app you use daily)\n\nSo If you use Spotify. do not enable Spotify link of this app\n(This is to prevent this app opening if you click Spotify link)\n\n\n2 - If you have other music APPS in your phone. Go to their settings and turn off their links.\nEX:\nSo If you have both Apple Music app and Spotify. and you use Spotify for your music\n\nTurn off apple music links from the phone settings.\nOr delete the app that works too :)
+    <string name="explain_steps">\1 - Go to the settings and find this app and enable all the links (EXCEPT the music app you use daily)\n\nSo If you use Spotify. do not enable Spotify link of this app\n(This is to prevent this app opening if you click Spotify link)\n\n\n2 - If you have other music APPS in your phone. Go to their settings and turn off their links.\nEX:\nSo If you have both Apple Music app and Spotify. and you use Spotify for your music\n\nTurn off apple music links from the phone settings.\nOr delete the app that works too :)
     </string>
     <string name="optional_methods">Search for Albums or Playlist\n(If off I will open the original App)</string>
     <string name="playlist">Playlist</string>

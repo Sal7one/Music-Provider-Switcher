@@ -19,6 +19,7 @@ val BtnUpdate_color = Color(0xFF19132b)
 val BottomNav_background_color = Color(0xFF19132B)
 val BottomNav_selected_color = Color(0xFF700AC2)
 val BottomNav_unselected_color = Color(0xFFFFFFFF)
+val dialog_background_color = Color(0xC6C256DA)
 
 val apple_clicked_color = Color(0xFFF44336)
 val button_clicked_color = Color(0xFFDBDBDB)

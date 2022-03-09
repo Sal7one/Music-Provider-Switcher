@@ -5,14 +5,16 @@ import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.*
-import androidx.compose.runtime.Composable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.draw.scale
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.pointer.pointerInput
@@ -30,6 +32,8 @@ import com.sal7one.musicswitcher.compose.ui.theme.*
 @Composable
 fun MainScreen() {
     val context = LocalContext.current
+    val showExplainDialog = remember { mutableStateOf(false) }
+
     Column(
         modifier = Modifier
             .fillMaxSize()
@@ -47,7 +51,8 @@ fun MainScreen() {
         Spacer(modifier = Modifier.height(20.dp))
         Row(
             modifier = Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Start
+            horizontalArrangement = Arrangement.Start,
+            verticalAlignment = Alignment.CenterVertically
         ) {
             Spacer(modifier = Modifier.width(20.dp))
             Image(
@@ -75,10 +80,22 @@ fun MainScreen() {
                         )
                     }   // add a border (optional)
             )
+            if (showExplainDialog.value) {
+                CustomDialog(openDialogCustom = showExplainDialog)
+            }
             Text(
                 text = stringResource(R.string.mainscreen_heading),
-                modifier = Modifier.padding(start = 15.dp, top = 25.dp),
+                modifier = Modifier.padding(start = 15.dp),
                 style = TextStyle(color = Color.White, fontSize = 24.sp),
+            )
+
+            Image(
+                painter = painterResource(R.drawable.infoicon),
+                contentDescription = "How to use the app",
+                modifier = Modifier
+                    .scale(1.8f)
+                    .padding(start = 55.dp)
+                    .clickable { showExplainDialog.value = true }
             )
         }
         Spacer(modifier = Modifier.height(48.dp))
@@ -118,7 +135,7 @@ fun MainScreen() {
             verticalAlignment = Alignment.Top,
             modifier = Modifier.fillMaxWidth()
         ) {
-            Column() {
+            Column {
                 Text(
                     stringResource(R.string.album),
                     style = TextStyle(fontSize = 18.sp)
@@ -129,7 +146,7 @@ fun MainScreen() {
                 }
             }
             Spacer(modifier = Modifier.width(50.dp))
-            Column() {
+            Column {
                 Text(
                     stringResource(R.string.playlist),
                     style = TextStyle(fontSize = 18.sp)

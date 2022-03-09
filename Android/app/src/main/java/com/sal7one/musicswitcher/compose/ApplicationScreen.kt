@@ -34,7 +34,7 @@ fun ApplicationScreen() {
                         unselectedContentColor = BottomNav_unselected_color,
                         modifier = Modifier.background(BottomNav_background_color),
                         //label = {}, Text with screen Name If needed
-                        icon = { Icon(screen.icon, contentDescription = null) },
+                        icon = { Icon(screen.icon, contentDescription = screen.iconDescription) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
                             navController.navigate(screen.route) {
@@ -49,8 +49,8 @@ fun ApplicationScreen() {
             }
         }
     ) { innerPadding ->
-        Box(modifier = Modifier.padding(innerPadding)){
-        BottomNavGraph(navController = navController) // Nav host Graph
+        Box(modifier = Modifier.padding(innerPadding)) {
+            BottomNavGraph(navController = navController) // Nav host Graph
         }
     }
 }
