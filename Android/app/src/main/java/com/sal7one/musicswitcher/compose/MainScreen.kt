@@ -94,7 +94,7 @@ fun MainScreen() {
                 contentDescription = "How to use the app",
                 modifier = Modifier
                     .scale(1.8f)
-                    .padding(start = 55.dp)
+                    .padding(start = 30.dp, top = 2.dp)
                     .clickable { showExplainDialog.value = true }
             )
         }
