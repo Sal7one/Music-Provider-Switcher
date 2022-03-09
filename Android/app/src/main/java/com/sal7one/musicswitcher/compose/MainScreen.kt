@@ -159,7 +159,7 @@ fun MainScreen() {
         }
         Spacer(modifier = Modifier.height(25.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
-            UpdateButton()
+            UpdateButton(stringResource(R.string.mainscreen_update_pref_btn))
         }
     }
 }

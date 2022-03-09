@@ -18,7 +18,7 @@ import com.sal7one.musicswitcher.compose.ui.theme.BtnUpdate_color
 
 
 @Composable
-fun UpdateButton() {
+fun UpdateButton(btnText: String) {
     val shadowColor = Color.White
     Box(
         modifier = Modifier
@@ -37,7 +37,7 @@ fun UpdateButton() {
                 .width(178.dp),
             onClick = { /*TODO*/ })
         {
-            Text(text = "Update Preferences", style = MaterialTheme.typography.button)
+            Text(text = btnText , style = MaterialTheme.typography.button)
         }
     }
 }
