@@ -21,18 +21,18 @@ val musicProviders = listOf(
         R.drawable.spotify_white,
     ),
     MusicProvider(
-        "Youtube Music",
-        Constants.YT_MUSIC_SEARCH.link,
-        Constants.YT_MUSIC_PACKAGE.link,
-        false,
-        R.drawable.yt_music_white,
-    ),
-    MusicProvider(
         "Anghami",
         Constants.ANGHAMI_SEARCH.link,
         Constants.ANGHAMI_PACKAGE.link,
         false,
         R.drawable.anghami_white,
+    ),
+    MusicProvider(
+        "Youtube Music",
+        Constants.YT_MUSIC_SEARCH.link,
+        Constants.YT_MUSIC_PACKAGE.link,
+        false,
+        R.drawable.yt_music_white,
     ),
     MusicProvider(
         "Deezer",

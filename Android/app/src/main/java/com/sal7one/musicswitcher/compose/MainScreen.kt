@@ -34,7 +34,6 @@ import com.sal7one.musicswitcher.controllers.ApplicationViewModel
 import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.musicProviders
-import com.sal7one.musicswitcher.utils.Constants
 
 
 @Composable
@@ -44,10 +43,9 @@ fun MainScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
 
-    val albumChoice by viewModel.albumChoice.observeAsState();
-    val playlistChoice by viewModel.playlistChoice.observeAsState();
-    val currentProvider by viewModel.chosenProvider.observeAsState();
-
+    val albumChoice by viewModel.albumChoice.observeAsState()
+    val playlistChoice by viewModel.playlistChoice.observeAsState()
+    val currentProvider by viewModel.chosenProvider.observeAsState()
 
     Column(
         modifier = Modifier
@@ -197,7 +195,10 @@ fun MainScreen() {
                     }
                 }
             ) {
-                UpdateButton(stringResource(R.string.mainscreen_update_pref_btn))
+                UpdateButton(
+                    stringResource(R.string.mainscreen_update_pref_btn)) {
+
+                    }
             }
         }
     }

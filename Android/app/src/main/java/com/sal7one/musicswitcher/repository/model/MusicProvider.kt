@@ -4,6 +4,6 @@ data class MusicProvider(
     val name: String,
     val searchLink: String,
     val packageReference: String,
-    val overrulesPreference: Boolean = false,
+    var overrulesPreference: Boolean = false,
     val icon : Int,
 )

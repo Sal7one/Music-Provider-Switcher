@@ -15,10 +15,11 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.compose.ui.theme.BtnUpdate_color
+import kotlinx.coroutines.Job
 
 
 @Composable
-fun UpdateButton(btnText: String) {
+fun UpdateButton(btnText: String, onClickMethod: () -> Unit) {
     val shadowColor = Color.White
     Box(
         modifier = Modifier
@@ -35,9 +36,9 @@ fun UpdateButton(btnText: String) {
             modifier = Modifier
                 .clip(shape = RoundedCornerShape(7.dp))
                 .width(178.dp),
-            onClick = { /*TODO*/ })
+            onClick = { onClickMethod() })
         {
-            Text(text = btnText , style = MaterialTheme.typography.button)
+            Text(text = btnText, style = MaterialTheme.typography.button)
         }
     }
 }
