@@ -2,11 +2,11 @@ package com.sal7one.musicswitcher.controllers
 
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
-import androidx.lifecycle.LiveData
+import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.utils.Constants
@@ -16,50 +16,24 @@ class ApplicationViewModel(
 
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
-    // Source data
-    private val _chosenProvider: MutableLiveData<String> = MutableLiveData()
-    private val _playlistChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _albumChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _appleMusicChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _spotifyChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _anghamiChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _ytMusicChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _deezerChoice: MutableLiveData<Boolean> = MutableLiveData()
-    private val _musicPackage: MutableLiveData<String> = MutableLiveData()
-    private val _searchLink: MutableLiveData<String> = MutableLiveData()
-    private val _sameApp: MutableLiveData<Boolean> = MutableLiveData()
-    private val _differentApp: MutableLiveData<Boolean> = MutableLiveData()
+    val chosenProvider: MutableState<String> = mutableStateOf("")
+    val musicPackage: MutableState<String> = mutableStateOf("")
+    val searchLink: MutableState<String> = mutableStateOf("")
+    val playlistChoice: MutableState<Boolean> = mutableStateOf(false)
+    val albumChoice: MutableState<Boolean> = mutableStateOf(false)
+    val appleMusicChoice: MutableState<Boolean> = mutableStateOf(false)
+    val spotifyChoice: MutableState<Boolean> = mutableStateOf(false)
+    val anghamiChoice: MutableState<Boolean> = mutableStateOf(false)
+    val ytMusicChoice: MutableState<Boolean> = mutableStateOf(false)
+    val deezerChoice: MutableState<Boolean> = mutableStateOf(false)
+    val sameApp: MutableState<Boolean> = mutableStateOf(false)
+    val differentApp: MutableState<Boolean> = mutableStateOf(false)
+
     private var isAlbum = true
     private var isPlaylist = true
     private var overrulesPreference = false
 
-    // Exposed data
-    val chosenProvider: LiveData<String> get() = _chosenProvider
-    val playlistChoice: LiveData<Boolean> get() = _playlistChoice
-    val albumChoice: LiveData<Boolean> get() = _albumChoice
-    val appleMusicChoice: LiveData<Boolean> get() = _appleMusicChoice
-    val spotifyChoice: LiveData<Boolean> get() = _spotifyChoice
-    val anghamiChoice: LiveData<Boolean> get() = _anghamiChoice
-    val ytMusicChoice: LiveData<Boolean> get() = _ytMusicChoice
-    val deezerChoice: LiveData<Boolean> get() = _deezerChoice
-    val musicPackage: LiveData<String> get() = _musicPackage
-    val searchLink: LiveData<String> get() = _searchLink
-    val sameApp: LiveData<Boolean> get() = _sameApp
-    val differentApp: LiveData<Boolean> get() = _differentApp
-
     init {
-        _appleMusicChoice.value = false
-        _spotifyChoice.value = false
-        _anghamiChoice.value = false
-        _ytMusicChoice.value = false
-        _deezerChoice.value = false
-        _chosenProvider.value = ""
-        _playlistChoice.value = false
-        _albumChoice.value = false
-        _sameApp.value = false
-        _differentApp.value = false
-        _musicPackage.value = ""
-        _searchLink.value = ""
         getData()
     }
 
@@ -102,22 +76,22 @@ class ApplicationViewModel(
             val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
             val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
 
-            _chosenProvider.postValue(provider)
-            _playlistChoice.postValue(playList)
-            _albumChoice.postValue(album)
-            _appleMusicChoice.postValue(appleMusic)
-            _spotifyChoice.postValue(spotify)
-            _anghamiChoice.postValue(anghami)
-            _ytMusicChoice.postValue(ytMusic)
-            _deezerChoice.postValue(deezer)
+            chosenProvider.value = (provider)
+            playlistChoice.value = (playList)
+            albumChoice.value = (album)
+            appleMusicChoice.value = (appleMusic)
+            spotifyChoice.value = (spotify)
+            anghamiChoice.value = (anghami)
+            ytMusicChoice.value = (ytMusic)
+            deezerChoice.value = (deezer)
             updatePackage(provider)
         }
     }
 
     fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
         val link = data.toString()
-        if (link.contains(_chosenProvider.value.toString())) {
-            _sameApp.postValue(true)
+        if (link.contains(chosenProvider.value)) {
+            sameApp.value = (true)
         } else {
             // To ignore deep linking by request of user
             updateMusicExceptions(link)
@@ -141,15 +115,15 @@ class ApplicationViewModel(
             // When the data is got from the datastore this gets updated in relation to the music provider
             if (overrulesPreference) {
                 // Open same/original app
-                _sameApp.postValue(true)
+                sameApp.value = (true)
             } else {
                 // Check if It should search in the chosen music provider and open it (sameAPP)
-                if (isPlaylist && (_playlistChoice.value == false)) {
-                    _sameApp.postValue(true)
-                } else if (isAlbum && (_albumChoice.value == false)) {
-                    _sameApp.postValue(true)
+                if (isPlaylist && !playlistChoice.value) {
+                    sameApp.value = (true)
+                } else if (isAlbum && !albumChoice.value) {
+                    sameApp.value = (true)
                 } else {
-                    _differentApp.postValue(true)
+                    differentApp.value = (true)
                 }
             }
         }
@@ -158,24 +132,24 @@ class ApplicationViewModel(
     private fun updatePackage(savedMusicProvider: String) {
         when {
             savedMusicProvider.contains(Constants.APPLE_MUSIC.link) -> {
-                _musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
-                _searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
+                musicPackage.value = Constants.APPLE_MUSIC_PACKAGE.link
+                searchLink.value = Constants.APPLE_MUSIC_SEARCH.link
             }
             savedMusicProvider.contains(Constants.SPOTIFY.link) -> {
-                _musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
-                _searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
+                musicPackage.value = Constants.SPOTIFY_PACKAGE.link
+                searchLink.value = Constants.SPOTIFY_SEARCH.link
             }
             savedMusicProvider.contains(Constants.ANGHAMI.link) -> {
-                _musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
-                _searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
+                musicPackage.value = Constants.ANGHAMI_PACKAGE.link
+                searchLink.value = Constants.ANGHAMI_SEARCH.link
             }
             savedMusicProvider.contains(Constants.YT_MUSIC.link) -> {
-                _musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
-                _searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
+                musicPackage.value = Constants.YT_MUSIC_PACKAGE.link
+                searchLink.value = Constants.YT_MUSIC_SEARCH.link
             }
             savedMusicProvider.contains(Constants.DEEZER.link) -> {
-                _musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
-                _searchLink.postValue(Constants.DEEZER_SEARCH.link)
+                musicPackage.value = Constants.DEEZER_PACKAGE.link
+                searchLink.value = Constants.DEEZER_SEARCH.link
             }
         }
     }
@@ -183,19 +157,19 @@ class ApplicationViewModel(
     private fun updateMusicExceptions(musicProvider: String) {
         when {
             musicProvider.contains(Constants.APPLE_MUSIC.link) -> {
-                overrulesPreference = _appleMusicChoice.value!!
+                overrulesPreference = appleMusicChoice.value
             }
             musicProvider.contains(Constants.SPOTIFY.link) -> {
-                overrulesPreference = _spotifyChoice.value!!
+                overrulesPreference = spotifyChoice.value
             }
             musicProvider.contains(Constants.ANGHAMI.link) -> {
-                overrulesPreference = _anghamiChoice.value!!
+                overrulesPreference = anghamiChoice.value
             }
             musicProvider.contains(Constants.YT_MUSIC.link) -> {
-                overrulesPreference = _ytMusicChoice.value!!
+                overrulesPreference = ytMusicChoice.value
             }
             musicProvider.contains(Constants.DEEZER.link) -> {
-                overrulesPreference = _deezerChoice.value!!
+                overrulesPreference = deezerChoice.value
             }
         }
     }
