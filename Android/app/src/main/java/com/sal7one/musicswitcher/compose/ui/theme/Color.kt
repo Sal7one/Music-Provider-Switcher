@@ -22,10 +22,10 @@ val BottomNav_unselected_color = Color(0xFFFFFFFF)
 val dialog_background_color = Color(0xC6C256DA)
 
 val button_clicked_color = Color(0xFFDBDBDB)
+val card_explain_color = Color(0xFF5b5080)
 
-val apple_clicked_color = Color(0xFFF44336)
+val apple_clicked_color = Color(0xFFfb526a)
 val spotify_clicked_color = Color(0xFF0DD507)
 val anghami_clicked_color = Color(0xFFA10CB3)
 val ytMusic_clicked_color = Color(0xFFFF0000)
 val deezer_clicked_color = Color(0xFF1BD3E4)
-val card_explain_color = Color(0xFF5b5080)

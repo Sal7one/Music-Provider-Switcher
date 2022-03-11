@@ -8,6 +8,7 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -36,11 +37,13 @@ fun OptionScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
 
-    val appleMusicChoice = remember { viewModel.appleMusicChoice}
-    val spotifyChoice = remember { viewModel.spotifyChoice}
-    val anghamiChoice = remember { viewModel.anghamiChoice}
-    val ytMusicChoice = remember { viewModel.ytMusicChoice}
-    val deezerChoice = remember { viewModel.deezerChoice}
+    val appleMusicChoice = remember { viewModel.appleMusicChoice }
+    val spotifyChoice = remember { viewModel.spotifyChoice }
+    val anghamiChoice = remember { viewModel.anghamiChoice }
+    val ytMusicChoice = remember { viewModel.ytMusicChoice }
+    val deezerChoice = remember { viewModel.deezerChoice }
+
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -74,7 +77,14 @@ fun OptionScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        OptionList(musicProviders)
+        OptionList(
+            musicProviders,
+            appleMusicChoice,
+            spotifyChoice,
+            anghamiChoice,
+            ytMusicChoice,
+            deezerChoice
+        )
         Spacer(modifier = Modifier.height(40.dp))
         Box(modifier = Modifier.clickable {
 
@@ -96,7 +106,21 @@ fun OptionScreen() {
 }
 
 @Composable
-fun  OptionList(musicProviders: List<MusicProvider>) {
+fun OptionList(
+    musicProviders: List<MusicProvider>,
+    appleMusicChoice: MutableState<Boolean>,
+    spotifyChoice: MutableState<Boolean>,
+    anghamiChoice: MutableState<Boolean>,
+    ytMusicChoice: MutableState<Boolean>,
+    deezerChoice: MutableState<Boolean>
+) {
+
+    musicProviders[0].overrulesPreference = appleMusicChoice
+    musicProviders[1].overrulesPreference = spotifyChoice
+    musicProviders[2].overrulesPreference = anghamiChoice
+    musicProviders[3].overrulesPreference = ytMusicChoice
+    musicProviders[4].overrulesPreference = deezerChoice
+
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -135,8 +159,8 @@ fun  OptionList(musicProviders: List<MusicProvider>) {
                     )
                 }
                 Box(modifier = Modifier.padding(end = 65.dp)) {
-                    Switch(musicProviderOption.overrulesPreference){
-                        musicProviderOption.overrulesPreference = it
+                    Switch(musicProviderOption.overrulesPreference.value) {
+                        musicProviderOption.overrulesPreference.value = it
                     }
                 }
             }
