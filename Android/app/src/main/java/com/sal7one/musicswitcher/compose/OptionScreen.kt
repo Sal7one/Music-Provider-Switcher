@@ -8,8 +8,8 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.scale
@@ -37,19 +37,14 @@ fun OptionScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
 
-    val appleMusicChoice by viewModel.appleMusicChoice.observeAsState()
-    val spotifyChoice by viewModel.spotifyChoice.observeAsState()
-    val anghamiChoice by viewModel.anghamiChoice.observeAsState()
-    val ytMusicChoice by viewModel.ytMusicChoice.observeAsState()
-    val deezerChoice by viewModel.deezerChoice.observeAsState()
 
-    val musicProvidersWithState = musicProviders
 
-    musicProvidersWithState[0].overrulesPreference = appleMusicChoice!!
-    musicProvidersWithState[1].overrulesPreference = spotifyChoice!!
-    musicProvidersWithState[2].overrulesPreference = anghamiChoice!!
-    musicProvidersWithState[3].overrulesPreference = ytMusicChoice!!
-    musicProvidersWithState[4].overrulesPreference = deezerChoice!!
+    val appleMusicChoice = remember { mutableStateOf(viewModel.appleMusicChoice.value) }
+    val spotifyChoice = remember { mutableStateOf(viewModel.spotifyChoice.value) }
+    val anghamiChoice = remember { mutableStateOf(viewModel.anghamiChoice.value) }
+    val ytMusicChoice = remember { mutableStateOf(viewModel.ytMusicChoice.value) }
+    val deezerChoice = remember { mutableStateOf(viewModel.deezerChoice.value) }
+
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -83,7 +78,7 @@ fun OptionScreen() {
             )
         }
         Spacer(modifier = Modifier.height(20.dp))
-        OptionList(musicProvidersWithState)
+        OptionList(musicProviders)
         Spacer(modifier = Modifier.height(40.dp))
         Box(modifier = Modifier.clickable {
 
@@ -92,11 +87,11 @@ fun OptionScreen() {
                 stringResource(R.string.optionScreen_update_Exceptions)
             ) {
                 viewModel.saveExceptions(
-                    appleMusic = appleMusicChoice!!,
-                    spotify = spotifyChoice!!,
-                    anghami = anghamiChoice!!,
-                    ytMusic = ytMusicChoice!!,
-                    deezer = deezerChoice!!
+                    appleMusic = appleMusicChoice.value,
+                    spotify = spotifyChoice.value,
+                    anghami = anghamiChoice.value,
+                    ytMusic = ytMusicChoice.value,
+                    deezer = deezerChoice.value
                 )
                 Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
             }
@@ -105,7 +100,7 @@ fun OptionScreen() {
 }
 
 @Composable
-fun OptionList(musicProviders: List<MusicProvider>) {
+fun  OptionList(musicProviders: List<MusicProvider>) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -144,7 +139,9 @@ fun OptionList(musicProviders: List<MusicProvider>) {
                     )
                 }
                 Box(modifier = Modifier.padding(end = 65.dp)) {
-                    Switch(musicProviderOption.overrulesPreference)
+                    Switch(musicProviderOption.overrulesPreference){
+                        musicProviderOption.overrulesPreference = it
+                    }
                 }
             }
             Spacer(modifier = Modifier.height(5.dp))

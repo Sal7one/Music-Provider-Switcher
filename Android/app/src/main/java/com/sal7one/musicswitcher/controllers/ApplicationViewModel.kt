@@ -4,6 +4,7 @@ import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
+import androidx.lifecycle.MutableLiveData
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -26,14 +27,17 @@ class ApplicationViewModel(
     val anghamiChoice: MutableState<Boolean> = mutableStateOf(false)
     val ytMusicChoice: MutableState<Boolean> = mutableStateOf(false)
     val deezerChoice: MutableState<Boolean> = mutableStateOf(false)
-    val sameApp: MutableState<Boolean> = mutableStateOf(false)
-    val differentApp: MutableState<Boolean> = mutableStateOf(false)
+
+    val sameApp = MutableLiveData<Boolean>()
+    val differentApp =  MutableLiveData<Boolean>()
 
     private var isAlbum = true
     private var isPlaylist = true
     private var overrulesPreference = false
 
     init {
+        sameApp.value = false
+        differentApp.value = false
         getData()
     }
 
@@ -65,7 +69,7 @@ class ApplicationViewModel(
         )
     }
 
-    private fun getData() = viewModelScope.launch(Dispatchers.IO) {
+    private fun getData() = viewModelScope.launch(Dispatchers.Main) {
         dataStoreManager.getFromDataStore().collect {
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
@@ -84,14 +88,13 @@ class ApplicationViewModel(
             anghamiChoice.value = (anghami)
             ytMusicChoice.value = (ytMusic)
             deezerChoice.value = (deezer)
-            updatePackage(provider)
         }
     }
 
     fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
         val link = data.toString()
         if (link.contains(chosenProvider.value)) {
-            sameApp.value = (true)
+            sameApp.postValue(true)
         } else {
             // To ignore deep linking by request of user
             updateMusicExceptions(link)
@@ -115,15 +118,15 @@ class ApplicationViewModel(
             // When the data is got from the datastore this gets updated in relation to the music provider
             if (overrulesPreference) {
                 // Open same/original app
-                sameApp.value = (true)
+                sameApp.postValue(true)
             } else {
                 // Check if It should search in the chosen music provider and open it (sameAPP)
                 if (isPlaylist && !playlistChoice.value) {
-                    sameApp.value = (true)
+                    sameApp.postValue(true)
                 } else if (isAlbum && !albumChoice.value) {
-                    sameApp.value = (true)
+                    sameApp.postValue(true)
                 } else {
-                    differentApp.value = (true)
+                    differentApp.postValue(true)
                 }
             }
         }

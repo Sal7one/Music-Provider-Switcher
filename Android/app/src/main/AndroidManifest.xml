@@ -62,9 +62,5 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-        <activity
-            android:name=".MainActivity"
-            android:exported="false">
-        </activity>
     </application>
 </manifest>

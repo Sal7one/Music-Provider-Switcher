@@ -35,12 +35,9 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         intent?.action.also { action = it }
 
         // data comes from datastore
-        viewModel.chosenProvider.observe(this) {
-            viewModel.handleDeepLink(data) // start opening app
-        }
+        viewModel.handleDeepLink(data) // start opening app
 
         // Instantiate the RequestQueue.
-
         viewModel.sameApp.observe(this) {
             if (it) {
                 val i = Intent(action, data)
