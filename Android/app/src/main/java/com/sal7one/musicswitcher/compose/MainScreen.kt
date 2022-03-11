@@ -33,7 +33,6 @@ import com.sal7one.musicswitcher.controllers.ApplicationViewModel
 import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.musicProviders
-import com.sal7one.musicswitcher.utils.Constants
 
 
 @ExperimentalMaterialApi
@@ -44,9 +43,9 @@ fun MainScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
 
-    var albumChoice = remember { mutableStateOf(viewModel.albumChoice.value) }
-    var playlistChoice = remember { mutableStateOf(viewModel.playlistChoice.value) }
-    var currentProvider = remember { mutableStateOf(viewModel.chosenProvider.value) }
+    val albumChoice = remember { viewModel.albumChoice }
+    val playlistChoice = remember { viewModel.playlistChoice }
+    val currentProvider = remember { viewModel.chosenProvider }
 
     Column(
         modifier = Modifier
@@ -123,13 +122,13 @@ fun MainScreen() {
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
         ) {
-            MusicProviderCard(musicProviders[0], currentProvider.value){
+            MusicProviderCard(musicProviders[0], currentProvider.value) {
                 currentProvider.value = it
             }
-            MusicProviderCard(musicProviders[1], currentProvider.value){
+            MusicProviderCard(musicProviders[1], currentProvider.value) {
                 currentProvider.value = it
             }
-            MusicProviderCard(musicProviders[2], currentProvider.value){
+            MusicProviderCard(musicProviders[2], currentProvider.value) {
                 currentProvider.value = it
             }
         }
@@ -138,12 +137,12 @@ fun MainScreen() {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-           MusicProviderCard(musicProviders[3], currentProvider.value){
-               currentProvider.value = it
-           }
+            MusicProviderCard(musicProviders[3], currentProvider.value) {
+                currentProvider.value = it
+            }
             Spacer(modifier = Modifier.width(50.dp))
 
-            MusicProviderCard(musicProviders[4], currentProvider.value){
+            MusicProviderCard(musicProviders[4], currentProvider.value) {
                 currentProvider.value = it
             }
         }
@@ -186,11 +185,7 @@ fun MainScreen() {
                 }
             }
         }
-        Spacer(
-            modifier = Modifier.height(
-                25.dp
-            )
-        )
+
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
 
             UpdateButton(

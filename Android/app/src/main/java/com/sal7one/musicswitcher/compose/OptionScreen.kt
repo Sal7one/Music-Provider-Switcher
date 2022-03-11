@@ -8,7 +8,6 @@ import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -37,14 +36,11 @@ fun OptionScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
 
-
-
-    val appleMusicChoice = remember { mutableStateOf(viewModel.appleMusicChoice.value) }
-    val spotifyChoice = remember { mutableStateOf(viewModel.spotifyChoice.value) }
-    val anghamiChoice = remember { mutableStateOf(viewModel.anghamiChoice.value) }
-    val ytMusicChoice = remember { mutableStateOf(viewModel.ytMusicChoice.value) }
-    val deezerChoice = remember { mutableStateOf(viewModel.deezerChoice.value) }
-
+    val appleMusicChoice = remember { viewModel.appleMusicChoice}
+    val spotifyChoice = remember { viewModel.spotifyChoice}
+    val anghamiChoice = remember { viewModel.anghamiChoice}
+    val ytMusicChoice = remember { viewModel.ytMusicChoice}
+    val deezerChoice = remember { viewModel.deezerChoice}
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

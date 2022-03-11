@@ -17,6 +17,7 @@ class ApplicationViewModel(
 
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
+
     val chosenProvider: MutableState<String> = mutableStateOf("")
     val musicPackage: MutableState<String> = mutableStateOf("")
     val searchLink: MutableState<String> = mutableStateOf("")
@@ -29,7 +30,7 @@ class ApplicationViewModel(
     val deezerChoice: MutableState<Boolean> = mutableStateOf(false)
 
     val sameApp = MutableLiveData<Boolean>()
-    val differentApp =  MutableLiveData<Boolean>()
+    val differentApp = MutableLiveData<Boolean>()
 
     private var isAlbum = true
     private var isPlaylist = true
@@ -69,7 +70,7 @@ class ApplicationViewModel(
         )
     }
 
-    private fun getData() = viewModelScope.launch(Dispatchers.Main) {
+    private fun getData() = viewModelScope.launch(Dispatchers.Main) { // TODO Find Solution to this
         dataStoreManager.getFromDataStore().collect {
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
@@ -88,6 +89,7 @@ class ApplicationViewModel(
             anghamiChoice.value = (anghami)
             ytMusicChoice.value = (ytMusic)
             deezerChoice.value = (deezer)
+            updatePackage(provider)
         }
     }
 

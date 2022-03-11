@@ -40,7 +40,7 @@ fun CustomDialogUI(
             Text(
                 text = stringResource(R.string.explain_steps),
                 style = MaterialTheme.typography.body2,
-                modifier = Modifier.padding(5.dp)
+                modifier = Modifier.padding(16.dp)
             )
             Row(
                 Modifier
