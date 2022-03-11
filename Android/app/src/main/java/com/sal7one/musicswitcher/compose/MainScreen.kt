@@ -185,6 +185,7 @@ fun MainScreen() {
                 }
             }
         }
+        Spacer(modifier = Modifier.height(36.dp))
 
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
 
