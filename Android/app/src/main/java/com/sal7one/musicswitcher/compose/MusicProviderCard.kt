@@ -1,5 +1,6 @@
 package com.sal7one.musicswitcher.compose
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -30,6 +31,8 @@ fun MusicProviderCard(
     val cardSize = dimensionResource(R.dimen.card_size)
     val shadowColor = CardGlow_color
     var cardColor by remember { mutableStateOf(Card_color) }
+
+    Log.d("test0000","MusicProviderCard = $chosenProvider")
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {

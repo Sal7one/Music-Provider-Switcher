@@ -2,6 +2,7 @@ package com.sal7one.musicswitcher.compose
 
 import android.content.Intent
 import android.net.Uri
+import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -10,8 +11,13 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.*
-import androidx.compose.runtime.*
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -28,8 +34,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
-import com.sal7one.musicswitcher.compose.ui.theme.*
-import com.sal7one.musicswitcher.controllers.ApplicationViewModel
+import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
+import com.sal7one.musicswitcher.compose.ui.theme.TextSecondary_color
+import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
+import com.sal7one.musicswitcher.controllers.MainScreenViewModel
+import com.sal7one.musicswitcher.controllers.MainScreenViewModelFactory
 import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.musicProviders
@@ -41,11 +50,12 @@ fun MainScreen() {
     val context = LocalContext.current
     val showExplainDialog = remember { mutableStateOf(false) }
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
-    val viewModel: ApplicationViewModel = viewModel(factory = MyViewModelFactory(dataStoreProvider))
+    val viewModel: MainScreenViewModel = viewModel(factory = MainScreenViewModelFactory(dataStoreProvider))
+    val theScreenUiState = viewModel.mainScreenUiState.collectAsState()
 
-    val albumChoice = remember { viewModel.albumChoice }
-    val playlistChoice = remember { viewModel.playlistChoice }
-    val currentProvider = remember { viewModel.chosenProvider }
+    val currentProvider = theScreenUiState.value.provider
+    val playlistChoice = theScreenUiState.value.playList
+    val albumChoice = theScreenUiState.value.albums
 
     Column(
         modifier = Modifier
@@ -118,18 +128,23 @@ fun MainScreen() {
             style = MaterialTheme.typography.h2
         )
         Spacer(modifier = Modifier.height(20.dp))
+
+        Log.d("test0000", "currentProvider = $currentProvider")
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
         ) {
-            MusicProviderCard(musicProviders[0], currentProvider.value) {
-                currentProvider.value = it
+            MusicProviderCard(musicProviders[0], currentProvider) {
+                viewModel.changeValue(provider = it)
+                //     currentProvider = it
             }
-            MusicProviderCard(musicProviders[1], currentProvider.value) {
-                currentProvider.value = it
+            MusicProviderCard(musicProviders[1], currentProvider) {
+                viewModel.changeValue(provider = it)
+                // currentProvider = it
             }
-            MusicProviderCard(musicProviders[2], currentProvider.value) {
-                currentProvider.value = it
+            MusicProviderCard(musicProviders[2], currentProvider) {
+                viewModel.changeValue(provider = it)
+                //    currentProvider = it
             }
         }
         Spacer(modifier = Modifier.height(25.dp))
@@ -137,13 +152,15 @@ fun MainScreen() {
             horizontalArrangement = Arrangement.Center,
             modifier = Modifier.fillMaxWidth()
         ) {
-            MusicProviderCard(musicProviders[3], currentProvider.value) {
-                currentProvider.value = it
+            MusicProviderCard(musicProviders[3], currentProvider) {
+                viewModel.changeValue(provider = it)
+                //     currentProvider = it
             }
             Spacer(modifier = Modifier.width(50.dp))
 
-            MusicProviderCard(musicProviders[4], currentProvider.value) {
-                currentProvider.value = it
+            MusicProviderCard(musicProviders[4], currentProvider) {
+                viewModel.changeValue(provider = it)
+                //   currentProvider = it
             }
         }
         Spacer(modifier = Modifier.height(25.dp))
@@ -166,8 +183,8 @@ fun MainScreen() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Box(modifier = Modifier.padding(5.dp)) {
-                    Switch(albumChoice.value) {
-                        albumChoice.value = it
+                    Switch(albumChoice) {
+                        viewModel.changeValue(albums = albumChoice)
                     }
                 }
             }
@@ -179,8 +196,8 @@ fun MainScreen() {
                 )
                 Spacer(modifier = Modifier.height(8.dp))
                 Box(modifier = Modifier.padding(5.dp)) {
-                    Switch(playlistChoice.value) {
-                        playlistChoice.value = it
+                    Switch(playlistChoice) {
+                        viewModel.changeValue(playList = playlistChoice)
                     }
                 }
             }
@@ -192,11 +209,11 @@ fun MainScreen() {
             UpdateButton(
                 stringResource(R.string.mainscreen_update_pref_btn)
             ) {
-                if (currentProvider.value.isNotBlank()) {
+                if (currentProvider.isNotBlank()) {
                     viewModel.saveData(
-                        currentProvider.value,
-                        playlistChoice.value,
-                        albumChoice.value,
+                        currentProvider,
+                        playlistChoice,
+                        albumChoice,
                     )
                     Toast.makeText(context, "Preference Updated!", Toast.LENGTH_SHORT).show()
                 } else {

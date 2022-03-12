@@ -7,6 +7,6 @@ data class MusicProvider(
     val nameReference : String,
     val searchLink: String,
     val packageReference: String,
-    var overrulesPreference: MutableState<Boolean>,
+    var overrulesPreference: Boolean,
     val icon : Int,
 )

@@ -1,24 +1,38 @@
 package com.sal7one.musicswitcher.controllers
 
-import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.MutableLiveData
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.utils.Constants
 import com.sal7one.musicswitcher.utils.typeofLink
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.launch
+
+data class TheScreenUiData(
+    val provider: String = "",
+    val playList: Boolean = false,
+    val albums: Boolean = false,
+    val appleMusic: Boolean = false,
+    val spotify: Boolean = false,
+    val anghami: Boolean = false,
+    val ytMusic: Boolean = false,
+    val deezer: Boolean = false
+)
 
 class ApplicationViewModel(
 
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
 
-    val chosenProvider: MutableState<String> = mutableStateOf("")
+    //  val chosenProvider: MutableState<String> = mutableStateOf("")
     val musicPackage: MutableState<String> = mutableStateOf("")
     val searchLink: MutableState<String> = mutableStateOf("")
     val playlistChoice: MutableState<Boolean> = mutableStateOf(false)
@@ -31,6 +45,9 @@ class ApplicationViewModel(
 
     val sameApp = MutableLiveData<Boolean>()
     val differentApp = MutableLiveData<Boolean>()
+
+    private val _myUiState = MutableStateFlow(TheScreenUiData())
+    val myUiState: StateFlow<TheScreenUiData> = _myUiState
 
     private var isAlbum = true
     private var isPlaylist = true
@@ -70,7 +87,25 @@ class ApplicationViewModel(
         )
     }
 
-    private fun getData() = viewModelScope.launch(Dispatchers.Main) { // TODO Find Solution to this
+    fun changeValue(
+        provider: String? = null, playList: Boolean? = null, albums: Boolean? = null,
+        appleMusic: Boolean? = null,
+        spotify: Boolean? = null,
+        anghami: Boolean? = null,
+        ytMusic: Boolean? = null,
+        deezer: Boolean? = null
+    ) {
+        _myUiState.update {
+            when {
+                provider != null -> it.copy(provider = provider)
+                playList != null -> it.copy(playList = !playList)
+                albums != null -> it.copy(albums = !albums)
+                else -> it.copy()
+            }
+        }
+    }
+
+    private fun getData() = viewModelScope.launch(Dispatchers.IO) { // TODO Find Solution to this
         dataStoreManager.getFromDataStore().collect {
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
@@ -81,21 +116,18 @@ class ApplicationViewModel(
             val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
             val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
 
-            chosenProvider.value = (provider)
-            playlistChoice.value = (playList)
-            albumChoice.value = (album)
-            appleMusicChoice.value = (appleMusic)
-            spotifyChoice.value = (spotify)
-            anghamiChoice.value = (anghami)
-            ytMusicChoice.value = (ytMusic)
-            deezerChoice.value = (deezer)
+            _myUiState.value = TheScreenUiData(
+                provider = provider,
+                playList = playList,
+                albums = album,
+            )
             updatePackage(provider)
         }
     }
 
     fun handleDeepLink(data: Uri) = viewModelScope.launch(Dispatchers.IO) {
         val link = data.toString()
-        if (link.contains(chosenProvider.value)) {
+        if (link.contains(_myUiState.value.provider)) {
             sameApp.postValue(true)
         } else {
             // To ignore deep linking by request of user
@@ -178,4 +210,5 @@ class ApplicationViewModel(
             }
         }
     }
+
 }

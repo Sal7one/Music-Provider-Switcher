@@ -24,7 +24,6 @@ class DataStoreProvider(private val context: Context) {
         val deezerException = booleanPreferencesKey(Constants.DEEZER_PREFERENCES_KEY.link)
     }
 
-
     companion object {
         // One instance of this to avoid leaks
         private val Context.dataStore: DataStore<Preferences> by
