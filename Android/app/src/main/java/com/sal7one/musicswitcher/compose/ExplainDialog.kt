@@ -3,7 +3,10 @@ package com.sal7one.musicswitcher.compose
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.*
+import androidx.compose.material.Card
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
+import androidx.compose.material.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
 import androidx.compose.ui.Modifier
@@ -17,10 +20,11 @@ import com.sal7one.musicswitcher.compose.ui.theme.dialog_background_color
 
 @Composable
 fun CustomDialog(openDialogCustom: MutableState<Boolean>) {
-    Dialog(onDismissRequest = { openDialogCustom.value = false}) {
+    Dialog(onDismissRequest = { openDialogCustom.value = false }) {
         CustomDialogUI(showExplainDialog = openDialogCustom)
     }
 }
+
 //Layout
 @Composable
 fun CustomDialogUI(

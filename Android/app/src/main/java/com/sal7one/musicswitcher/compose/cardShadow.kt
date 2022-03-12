@@ -21,7 +21,7 @@ fun Modifier.coloredShadow(
 ) = composed {
 
     val shadowColor = color.copy(alpha = alpha).toArgb()
-    val transparent = color.copy(alpha= 0f).toArgb()
+    val transparent = color.copy(alpha = 0f).toArgb()
 
     this.drawBehind {
 

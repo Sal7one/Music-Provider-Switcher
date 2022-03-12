@@ -23,11 +23,11 @@ import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
-import com.sal7one.musicswitcher.controllers.OptionsViewModel
-import com.sal7one.musicswitcher.controllers.OptionsViewModelFactory
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.model.MusicProvider
 import com.sal7one.musicswitcher.repository.musicProviders
+import com.sal7one.musicswitcher.viewmodels.OptionsViewModel
+import com.sal7one.musicswitcher.viewmodels.OptionsViewModelFactory
 
 
 @Composable

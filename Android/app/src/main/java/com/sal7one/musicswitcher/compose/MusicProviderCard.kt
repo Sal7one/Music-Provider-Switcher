@@ -32,7 +32,7 @@ fun MusicProviderCard(
     val shadowColor = CardGlow_color
     var cardColor by remember { mutableStateOf(Card_color) }
 
-    Log.d("test0000","MusicProviderCard = $chosenProvider")
+    Log.d("test0000", "MusicProviderCard = $chosenProvider")
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {

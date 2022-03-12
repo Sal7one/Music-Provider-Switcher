@@ -1,8 +1,8 @@
-package com.sal7one.musicswitcher.controllers
+package com.sal7one.musicswitcher.viewmodels
 
-import com.sal7one.musicswitcher.repository.DataStoreProvider
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 
 class OptionsViewModelFactory(private val dataStoreProvider: DataStoreProvider) :
     ViewModelProvider.Factory {

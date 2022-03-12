@@ -1,18 +1,17 @@
-package com.sal7one.musicswitcher.controllers
+package com.sal7one.musicswitcher.viewmodels
 
-import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.net.Uri
-import android.util.Log
-import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.utils.Constants
 import com.sal7one.musicswitcher.utils.typeofLink
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.collect
+import kotlinx.coroutines.launch
 
-class ApplicationViewModel(
+class DeepLinkHandlerViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
     var chosenProvider = MutableLiveData<String>()

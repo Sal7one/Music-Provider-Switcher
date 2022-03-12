@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.controllers
+package com.sal7one.musicswitcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

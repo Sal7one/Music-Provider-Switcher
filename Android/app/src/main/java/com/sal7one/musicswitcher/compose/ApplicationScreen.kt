@@ -1,10 +1,12 @@
 package com.sal7one.musicswitcher.compose
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.gestures.draggable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.*
+import androidx.compose.material.BottomNavigation
+import androidx.compose.material.BottomNavigationItem
+import androidx.compose.material.Icon
+import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
@@ -12,7 +14,9 @@ import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
-import com.sal7one.musicswitcher.compose.ui.theme.*
+import com.sal7one.musicswitcher.compose.ui.theme.BottomNav_background_color
+import com.sal7one.musicswitcher.compose.ui.theme.BottomNav_selected_color
+import com.sal7one.musicswitcher.compose.ui.theme.BottomNav_unselected_color
 
 @Composable
 fun ApplicationScreen() {

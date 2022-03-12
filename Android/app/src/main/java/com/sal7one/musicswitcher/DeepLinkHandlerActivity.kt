@@ -1,24 +1,24 @@
 package com.sal7one.musicswitcher
 
-import com.sal7one.musicswitcher.repository.DataStoreProvider
 import android.content.Intent
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
-import com.sal7one.musicswitcher.controllers.MyViewModelFactory
-import com.sal7one.musicswitcher.controllers.ApplicationViewModel
+import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.utils.Constants
 import com.sal7one.musicswitcher.utils.SongExtractor
+import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModel
+import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModelFactory
 
 
 class DeepLinkHandlerActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: ApplicationViewModel
+    private lateinit var viewModel: DeepLinkHandlerViewModel
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
     private var action: String? = null
@@ -27,8 +27,8 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-        viewModel = ViewModelProvider(this, MyViewModelFactory(dataStoreProvider)).get(
-            ApplicationViewModel::class.java
+        viewModel = ViewModelProvider(this, DeepLinkHandlerViewModelFactory(dataStoreProvider)).get(
+            DeepLinkHandlerViewModel::class.java
         )
 
         data = intent?.data!!

@@ -37,11 +37,10 @@ import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.TextSecondary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
-import com.sal7one.musicswitcher.controllers.MainScreenViewModel
-import com.sal7one.musicswitcher.controllers.MainScreenViewModelFactory
-import com.sal7one.musicswitcher.controllers.MyViewModelFactory
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.musicProviders
+import com.sal7one.musicswitcher.viewmodels.MainScreenViewModel
+import com.sal7one.musicswitcher.viewmodels.MainScreenViewModelFactory
 
 
 @ExperimentalMaterialApi
@@ -50,7 +49,8 @@ fun MainScreen() {
     val context = LocalContext.current
     val showExplainDialog = remember { mutableStateOf(false) }
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
-    val viewModel: MainScreenViewModel = viewModel(factory = MainScreenViewModelFactory(dataStoreProvider))
+    val viewModel: MainScreenViewModel =
+        viewModel(factory = MainScreenViewModelFactory(dataStoreProvider))
     val theScreenUiState = viewModel.mainScreenUiState.collectAsState()
 
     val currentProvider = theScreenUiState.value.provider

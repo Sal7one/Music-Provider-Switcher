@@ -1,14 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="project_horizontal_constraint">24dp</dimen>
-    <dimen name="card_radius">17dp</dimen>
-    <dimen name="card_margin_vertical">68dp</dimen>
-    <dimen name="text_margin_vertical">28dp</dimen>
-    <dimen name="card_width">142dp</dimen>
-    <dimen name="card_height">142dp</dimen>
-    <dimen name="frame_width">142dp</dimen>
-    <dimen name="frame_height">140dp</dimen>
     <dimen name="card_size">95dp</dimen>
-    <dimen name="card_explain_size">25dp</dimen>
-    <dimen name="custom_vertical_spacing">8dp</dimen>
 </resources>

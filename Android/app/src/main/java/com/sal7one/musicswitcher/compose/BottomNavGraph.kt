@@ -8,8 +8,8 @@ import androidx.navigation.compose.composable
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun BottomNavGraph(navController: NavHostController){
-        NavHost(navController = navController, startDestination = "home" ){
+fun BottomNavGraph(navController: NavHostController) {
+    NavHost(navController = navController, startDestination = "home") {
         composable("home") { MainScreen() }
         composable("options") { OptionScreen() }
         composable("about") { AboutScreen() }

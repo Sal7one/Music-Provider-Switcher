@@ -1,7 +1,6 @@
 package com.sal7one.musicswitcher.compose
 
 import androidx.compose.foundation.layout.Box
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.Button
@@ -15,7 +14,6 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.compose.ui.theme.BtnUpdate_color
-import kotlinx.coroutines.Job
 
 
 @Composable
