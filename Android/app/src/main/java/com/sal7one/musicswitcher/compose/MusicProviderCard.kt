@@ -29,21 +29,37 @@ fun MusicProviderCard(
     changeProvider: (String) -> Unit
 ) {
     val cardSize = dimensionResource(R.dimen.card_size)
-    val shadowColor = CardGlow_color
+    var shadowColor by remember { mutableStateOf(CardGlow_color) }
     var cardColor by remember { mutableStateOf(Card_color) }
 
     Log.d("test0000", "MusicProviderCard = $chosenProvider")
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {
-            Constants.APPLE_MUSIC.link -> cardColor = apple_clicked_color
-            Constants.SPOTIFY.link -> cardColor = spotify_clicked_color
-            Constants.ANGHAMI.link -> cardColor = anghami_clicked_color
-            Constants.YT_MUSIC.link -> cardColor = ytMusic_clicked_color
-            Constants.DEEZER.link -> cardColor = deezer_clicked_color
+            Constants.APPLE_MUSIC.link -> {
+                cardColor = apple_clicked_color
+                shadowColor = apple_clicked_color
+            }
+            Constants.SPOTIFY.link -> {
+                cardColor = spotify_clicked_color
+                shadowColor = spotify_clicked_color
+            }
+            Constants.ANGHAMI.link -> {
+                cardColor = anghami_clicked_color
+                shadowColor = anghami_clicked_color
+            }
+            Constants.YT_MUSIC.link -> {
+                cardColor = ytMusic_clicked_color
+                shadowColor = ytMusic_clicked_color
+            }
+            Constants.DEEZER.link -> {
+                cardColor = deezer_clicked_color
+                shadowColor = deezer_clicked_color
+            }
         }
     } else {
         cardColor = Card_color
+        shadowColor = CardGlow_color
     }
     Box(
         modifier = Modifier
