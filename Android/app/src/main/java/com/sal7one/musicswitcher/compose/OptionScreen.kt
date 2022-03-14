@@ -2,7 +2,6 @@ package com.sal7one.musicswitcher.compose
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
@@ -36,7 +35,7 @@ fun OptionScreen() {
     val dataStoreProvider = DataStoreProvider(context.applicationContext).getInstance()
     val viewModel: OptionsViewModel =
         viewModel(factory = OptionsViewModelFactory(dataStoreProvider))
-    val theScreenUiState = viewModel.OptionScreenState.collectAsState()
+    val theScreenUiState = viewModel.optionScreenState.collectAsState()
 
     val appleMusicChoice = theScreenUiState.value.appleMusic
     val spotifyChoice = theScreenUiState.value.spotify
@@ -98,42 +97,30 @@ fun OptionScreen() {
         }
         Spacer(modifier = Modifier.height(10.dp))
         Divider()
-        Spacer(modifier = Modifier.height(5.dp))
         OptionList(musicProviders[0], appleMusicChoice) {
             viewModel.changeValue(appleMusic = appleMusicChoice)
+            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
         }
         OptionList(musicProviders[1], spotifyChoice) {
             viewModel.changeValue(spotify = spotifyChoice)
+            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
         }
         OptionList(musicProviders[2], anghamiChoice) {
             viewModel.changeValue(anghami = anghamiChoice)
+            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
         }
         OptionList(musicProviders[3], ytMusicChoice) {
             viewModel.changeValue(ytMusic = ytMusicChoice)
+            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
         }
         OptionList(musicProviders[4], deezerChoice) {
             viewModel.changeValue(deezer = deezerChoice)
+            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
         }
-
-        Spacer(modifier = Modifier.height(10.dp))
+        Spacer(modifier = Modifier.height(5.dp))
         Divider()
         Spacer(modifier = Modifier.height(40.dp))
-        Box(modifier = Modifier.clickable {
 
-        }) {
-            UpdateButton(
-                stringResource(R.string.optionScreen_update_Exceptions)
-            ) {
-                viewModel.saveExceptions(
-                    appleMusic = appleMusicChoice,
-                    spotify = spotifyChoice,
-                    anghami = anghamiChoice,
-                    ytMusic = ytMusicChoice,
-                    deezer = deezerChoice
-                )
-                Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
-            }
-        }
     }
 }
 
