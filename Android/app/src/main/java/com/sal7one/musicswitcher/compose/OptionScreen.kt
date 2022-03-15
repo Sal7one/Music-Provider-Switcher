@@ -119,8 +119,6 @@ fun OptionScreen() {
         }
         Spacer(modifier = Modifier.height(5.dp))
         Divider()
-        Spacer(modifier = Modifier.height(40.dp))
-
     }
 }
 
@@ -132,9 +130,6 @@ fun OptionList(
         verticalArrangement = Arrangement.SpaceBetween,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Spacer(modifier = Modifier.height(10.dp))
-        Spacer(modifier = Modifier.height(5.dp))
         Row(
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
