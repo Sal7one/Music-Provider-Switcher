@@ -24,7 +24,7 @@ class OptionsViewModel(
         getData()
     }
 
-    fun saveExceptions(
+    private fun saveExceptions(
         appleMusic: Boolean,
         spotify: Boolean,
         anghami: Boolean,

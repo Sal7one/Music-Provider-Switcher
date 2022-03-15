@@ -2,13 +2,6 @@ package com.sal7one.musicswitcher.compose.ui.theme
 
 import androidx.compose.ui.graphics.Color
 
-val White = Color(0xFFFFFFFF)
-
-val Purple200 = Color(0xFFBB86FC)
-val Purple500 = Color(0xFF6200EE)
-val Purple700 = Color(0xFF3700B3)
-val Teal200 = Color(0xFF03DAC5)
-
 
 val AppPrimary_color = Color(0xFF240141)
 val primary_gradient_color = Color(0xFF0e0017)
@@ -20,9 +13,6 @@ val BottomNav_background_color = Color(0xFF19132B)
 val BottomNav_selected_color = Color(0xFF700AC2)
 val BottomNav_unselected_color = Color(0xFFFFFFFF)
 val dialog_background_color = Color(0xC6C256DA)
-
-val button_clicked_color = Color(0xFFDBDBDB)
-val card_explain_color = Color(0xFF5b5080)
 
 val apple_clicked_color = Color(0xFFfb526a)
 val spotify_clicked_color = Color(0xFF0DD507)

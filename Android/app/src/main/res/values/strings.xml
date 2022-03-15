@@ -8,9 +8,6 @@
     <string name="title_activity_main_ui">Music Switcher</string>
 
     <!--Compose Screens Navigation -->
-    <string name="nav_main">Main Screen</string>
-    <string name="nav_options">Options</string>
-    <string name="nav_about">About</string>
     <!--Compose Screens Navigation end -->
 
     <string name="about_app_heading">About this App</string>
@@ -21,7 +18,6 @@
     <string name="mainscreen_album_playlist_text">Search for albums and playlists</string>
     <string name="mainscreen_heading">Enjoy Music ;)</string>
     <string name="mainscreen_update_pref_btn">Update Preferences</string>
-    <string name="optionScreen_update_Exceptions">Update Exceptions</string>
     <string name="optionScreen_explain">Here you can disable redirecting for a single provider (useful if a song is only available in one provider only)</string>
     <string name="musicprovider_text">Music Provider</string>
     <string name="exception_status">Current Status</string>
