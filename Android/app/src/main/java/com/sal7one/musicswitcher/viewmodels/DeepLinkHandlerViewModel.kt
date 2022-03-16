@@ -15,18 +15,35 @@ import kotlinx.coroutines.launch
 class DeepLinkHandlerViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
-    var chosenProvider = MutableLiveData<String>()
-    private var playlistChoice = MutableLiveData<Boolean>()
-    private var albumChoice = MutableLiveData<Boolean>()
-    private var appleMusicChoice = MutableLiveData<Boolean>()
-    private var spotifyChoice = MutableLiveData<Boolean>()
-    private var anghamiChoice = MutableLiveData<Boolean>()
-    private var ytMusicChoice = MutableLiveData<Boolean>()
-    private var deezerChoice = MutableLiveData<Boolean>()
+    private var _chosenProvider = MutableLiveData<String>()
+    private var _playlistChoice = MutableLiveData<Boolean>()
+    private var _albumChoice = MutableLiveData<Boolean>()
+    private var _appleMusicChoice = MutableLiveData<Boolean>()
+    private var _spotifyChoice = MutableLiveData<Boolean>()
+    private var _anghamiChoice = MutableLiveData<Boolean>()
+    private var _ytMusicChoice = MutableLiveData<Boolean>()
+    private var _deezerChoice = MutableLiveData<Boolean>()
     private var _musicPackage = MutableLiveData<String>()
     private var _searchLink = MutableLiveData<String>()
     private var _sameApp = MutableLiveData<Boolean>()
     private var _differentApp = MutableLiveData<Boolean>()
+
+    val chosenProvider: LiveData<String>
+        get() = _chosenProvider
+    private val playlistChoice: LiveData<Boolean>
+        get() = _playlistChoice
+    private val albumChoice: LiveData<Boolean>
+        get() = _albumChoice
+    private val appleMusicChoice: LiveData<Boolean>
+        get() = _appleMusicChoice
+    private val spotifyChoice: LiveData<Boolean>
+        get() = _spotifyChoice
+    private val anghamiChoice: LiveData<Boolean>
+        get() = _anghamiChoice
+    private val ytMusicChoice: LiveData<Boolean>
+        get() = _ytMusicChoice
+    private val deezerChoice: LiveData<Boolean>
+        get() = _deezerChoice
 
     val musicPackage: LiveData<String>
         get() = _musicPackage
@@ -61,14 +78,14 @@ class DeepLinkHandlerViewModel(
             val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
             val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
 
-            chosenProvider.postValue(provider)
-            playlistChoice.postValue(playList)
-            albumChoice.postValue(album)
-            appleMusicChoice.postValue(appleMusic)
-            spotifyChoice.postValue(spotify)
-            anghamiChoice.postValue(anghami)
-            ytMusicChoice.postValue(ytMusic)
-            deezerChoice.postValue(deezer)
+            _chosenProvider.postValue(provider)
+            _playlistChoice.postValue(playList)
+            _albumChoice.postValue(album)
+            _appleMusicChoice.postValue(appleMusic)
+            _spotifyChoice.postValue(spotify)
+            _anghamiChoice.postValue(anghami)
+            _ytMusicChoice.postValue(ytMusic)
+            _deezerChoice.postValue(deezer)
             updatePackage(provider)
         }
     }
