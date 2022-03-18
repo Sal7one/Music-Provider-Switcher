@@ -27,9 +27,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-        viewModel = ViewModelProvider(this, DeepLinkHandlerViewModelFactory(dataStoreProvider)).get(
-            DeepLinkHandlerViewModel::class.java
-        )
+        viewModel = ViewModelProvider(this, DeepLinkHandlerViewModelFactory(dataStoreProvider))[DeepLinkHandlerViewModel::class.java]
 
         data = intent?.data!!
         intent?.action.also { action = it }

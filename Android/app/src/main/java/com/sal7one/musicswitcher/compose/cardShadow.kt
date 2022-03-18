@@ -1,5 +1,6 @@
 package com.sal7one.musicswitcher.compose
 
+import android.annotation.SuppressLint
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.composed
 import androidx.compose.ui.draw.drawBehind
@@ -11,6 +12,7 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 
+@SuppressLint("UnnecessaryComposedModifier")
 fun Modifier.coloredShadow(
     color: Color,
     alpha: Float = 0.2f,

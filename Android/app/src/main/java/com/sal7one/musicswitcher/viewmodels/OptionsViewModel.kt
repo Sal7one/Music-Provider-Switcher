@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.viewmodels;
+package com.sal7one.musicswitcher.viewmodels
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -16,15 +16,15 @@ class OptionsViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
 
-    private val _OptionsViewModel = MutableStateFlow(TheScreenUiData())
-    val OptionScreenState: StateFlow<TheScreenUiData> = _OptionsViewModel
+    private val _optionsViewModelStateFlow = MutableStateFlow(TheScreenUiData())
+    val optionScreenState: StateFlow<TheScreenUiData> = _optionsViewModelStateFlow
 
 
     init {
         getData()
     }
 
-    fun saveExceptions(
+    private fun saveExceptions(
         appleMusic: Boolean,
         spotify: Boolean,
         anghami: Boolean,
@@ -47,7 +47,7 @@ class OptionsViewModel(
         ytMusic: Boolean? = null,
         deezer: Boolean? = null,
     ) {
-        _OptionsViewModel.update {
+        _optionsViewModelStateFlow.update {
             when {
                 appleMusic != null -> it.copy(appleMusic = !appleMusic)
                 spotify != null -> it.copy(spotify = !spotify)
@@ -57,7 +57,16 @@ class OptionsViewModel(
                 else -> it.copy()
             }
         }
+        // After changing ui state - Save values into Data store Directly
+        saveExceptions(
+            _optionsViewModelStateFlow.value.appleMusic,
+            _optionsViewModelStateFlow.value.spotify,
+            _optionsViewModelStateFlow.value.anghami,
+            _optionsViewModelStateFlow.value.ytMusic,
+            _optionsViewModelStateFlow.value.deezer,
+        )
     }
+
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) { // TODO Find Solution to this
         dataStoreManager.getFromDataStore().collect {
@@ -67,7 +76,7 @@ class OptionsViewModel(
             val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
             val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
 
-            _OptionsViewModel.value = TheScreenUiData(
+            _optionsViewModelStateFlow.value = TheScreenUiData(
                 appleMusic = appleMusic,
                 spotify = spotify,
                 anghami = anghami,

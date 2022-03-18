@@ -41,6 +41,7 @@ fun ApplicationScreen() {
                         icon = { Icon(screen.icon, contentDescription = screen.iconDescription) },
                         selected = currentDestination?.hierarchy?.any { it.route == screen.route } == true,
                         onClick = {
+                            if(currentDestination?.route != screen.route)
                             navController.navigate(screen.route) {
                                 popUpTo(navController.graph.findStartDestination().id) {
                                     saveState = true
