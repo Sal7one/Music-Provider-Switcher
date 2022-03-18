@@ -16,8 +16,8 @@ Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter
 Android
 
 
-<img src="Assets/android1.jpg" alt="drawing" width="320"/>
-<img src="Assets/android2.jpg" alt="drawing" width="320"/>
+<img src="Assets/android1.png" alt="drawing" width="320"/>
+<img src="Assets/android2.png" alt="drawing" width="320"/>
 <img src="Assets/android3.jpg" alt="drawing" width="320"/>
 <img src="Assets/android4.jpg" alt="drawing" width="320"/>
 

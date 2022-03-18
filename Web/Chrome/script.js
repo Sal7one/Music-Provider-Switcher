@@ -160,6 +160,7 @@ function observeTweets(){
     console.log("timeline or children error")
     console.log(error)
   }
+  
   }
 
 
