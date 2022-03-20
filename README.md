@@ -3,9 +3,11 @@
 # Current Available Release version
 
 
-The Android version works outside of Twitter as well. 
+The Android version works from anywhere anywhere. 
 
 Android: Check Github release for APK
+
+The web versions work on Twitter only
 
 Chrome: [Chrome Webstore](https://chrome.google.com/webstore/detail/twitter-music-provider/apkanldijkiplglkhjjajegljppgmgmj)
 
@@ -15,19 +17,14 @@ Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter
 
 Android
 
-
 <img src="Assets/android1.png" alt="drawing" width="320"/>
 <img src="Assets/android2.png" alt="drawing" width="320"/>
 <img src="Assets/android3.jpg" alt="drawing" width="320"/>
 <img src="Assets/android4.jpg" alt="drawing" width="320"/>
 
-
  Web Extension (Chrome, FireFox)
 
 <img src="Assets/web_extension.png" alt="drawing" width="320"/>
-
-
- 
 
 # Contribute
 
