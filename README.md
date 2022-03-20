@@ -1,6 +1,7 @@
 # Music Switcher
 
-# Current Available Release version
+
+## Avaliable Releases
 
 
 The Android version works from anywhere anywhere. 
