@@ -4,12 +4,11 @@
 ## Avaliable Releases
 
 
-The Android version works from anywhere anywhere. 
+The Android version works from anywhere. 
 
 Android: Check Github release for APK
 
 The web versions work on Twitter only
-
 Chrome: [Chrome Webstore](https://chrome.google.com/webstore/detail/twitter-music-provider/apkanldijkiplglkhjjajegljppgmgmj)
 
 Firefox: [Mozilla Addons](https://addons.mozilla.org/en-US/firefox/addon/twitter-music-provider/)
