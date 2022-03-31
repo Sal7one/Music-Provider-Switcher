@@ -96,7 +96,7 @@ fun MainScreen() {
                                 context.startActivity(
                                     Intent(
                                         Intent.ACTION_VIEW,
-                                        Uri.parse("https://github.com/Sal7one")
+                                        Uri.parse(context.getString((R.string.github_link)))
                                     )
                                 )
                             },
