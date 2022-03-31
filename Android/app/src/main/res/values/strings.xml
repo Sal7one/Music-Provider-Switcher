@@ -24,4 +24,6 @@
     <string name="optionsScreen_heading">Options and Exceptions</string>
     <string name="main_screen_info_icon">How to use the app</string>
     <string name="github_link">https://github.com/Sal7one</string>
+    <string name="cd_dev_image">Developer image</string>
+    <string name="cd_app_icon">Application icon</string>
 </resources>

@@ -80,7 +80,7 @@ fun MainScreen() {
             Spacer(modifier = Modifier.width(20.dp))
             Image(
                 painter = painterResource(R.mipmap.ic_launcher_clean_foreground),
-                contentDescription = "app icon",
+                contentDescription = stringResource(R.string.cd_app_icon),
                 contentScale = ContentScale.Crop,  // crop the image if it's not a square
                 modifier = Modifier
                     .size(75.dp)

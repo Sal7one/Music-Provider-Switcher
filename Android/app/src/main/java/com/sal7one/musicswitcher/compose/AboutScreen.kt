@@ -57,7 +57,7 @@ fun AboutScreen() {
         Row {
             Image(
                 painter = painterResource(R.drawable.mypic),
-                contentDescription = "avatar",
+                contentDescription = stringResource(R.string.cd_dev_image),
                 contentScale = ContentScale.Crop,  // crop the image if it's not a square
                 modifier = Modifier
                     .size(85.dp)
