@@ -10,7 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.sal7one.musicswitcher.repository.DataStoreProvider
-import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.StringConstants
 import com.sal7one.musicswitcher.utils.SongExtractor
 import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModel
 import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModelFactory
@@ -80,22 +80,22 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
     private fun sameAppPackage(currentLink: String): String {
         when {
-            currentLink.contains(Constants.SPOTIFY.link) -> {
-                return Constants.SPOTIFY_PACKAGE.link
+            currentLink.contains(StringConstants.SPOTIFY.link) -> {
+                return StringConstants.SPOTIFY_PACKAGE.link
             }
-            currentLink.contains(Constants.APPLE_MUSIC.link) -> {
-                return Constants.APPLE_MUSIC_PACKAGE.link
+            currentLink.contains(StringConstants.APPLE_MUSIC.link) -> {
+                return StringConstants.APPLE_MUSIC_PACKAGE.link
             }
-            currentLink.contains(Constants.ANGHAMI.link) -> {
-                return Constants.ANGHAMI_PACKAGE.link
+            currentLink.contains(StringConstants.ANGHAMI.link) -> {
+                return StringConstants.ANGHAMI_PACKAGE.link
             }
-            currentLink.contains(Constants.DEEZER.link) -> {
-                return Constants.DEEZER_PACKAGE.link
+            currentLink.contains(StringConstants.DEEZER.link) -> {
+                return StringConstants.DEEZER_PACKAGE.link
             }
-            currentLink.contains(Constants.YT_MUSIC.link) -> {
-                return Constants.YT_MUSIC_PACKAGE.link
+            currentLink.contains(StringConstants.YT_MUSIC.link) -> {
+                return StringConstants.YT_MUSIC_PACKAGE.link
             }
-            else -> return Constants.SPOTIFY_PACKAGE.link
+            else -> return StringConstants.SPOTIFY_PACKAGE.link
         }
     }
 

@@ -7,27 +7,27 @@ import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
-import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.StringConstants
 
 class DataStoreProvider(private val context: Context) {
 
     object StoredKeys {
-        val musicProvider = stringPreferencesKey(Constants.MUSIC_PREFERENCES_KEY.link)
-        val playlistChoice = booleanPreferencesKey(Constants.PLAYLIST_PREFERENCES_KEY.link)
-        val albumChoice = booleanPreferencesKey(Constants.ALBUM_PREFERENCES_KEY.link)
+        val musicProvider = stringPreferencesKey(StringConstants.MUSIC_PREFERENCES_KEY.link)
+        val playlistChoice = booleanPreferencesKey(StringConstants.PLAYLIST_PREFERENCES_KEY.link)
+        val albumChoice = booleanPreferencesKey(StringConstants.ALBUM_PREFERENCES_KEY.link)
 
         // If Exception to ignore deep linking is needed
-        val appleMusicException = booleanPreferencesKey(Constants.APPLE_M_PREFERENCES_KEY.link)
-        val spotifyException = booleanPreferencesKey(Constants.SPOTIFY_PREFERENCES_KEY.link)
-        val anghamiException = booleanPreferencesKey(Constants.ANGHAMI_PREFERENCES_KEY.link)
-        val ytMusicException = booleanPreferencesKey(Constants.YT_MUSIC_PREFERENCES_KEY.link)
-        val deezerException = booleanPreferencesKey(Constants.DEEZER_PREFERENCES_KEY.link)
+        val appleMusicException = booleanPreferencesKey(StringConstants.APPLE_M_PREFERENCES_KEY.link)
+        val spotifyException = booleanPreferencesKey(StringConstants.SPOTIFY_PREFERENCES_KEY.link)
+        val anghamiException = booleanPreferencesKey(StringConstants.ANGHAMI_PREFERENCES_KEY.link)
+        val ytMusicException = booleanPreferencesKey(StringConstants.YT_MUSIC_PREFERENCES_KEY.link)
+        val deezerException = booleanPreferencesKey(StringConstants.DEEZER_PREFERENCES_KEY.link)
     }
 
     companion object {
         // One instance of this to avoid leaks
         private val Context.dataStore: DataStore<Preferences> by
-        preferencesDataStore(name = Constants.MUSIC_PREFERENCES_DATASTORE.link)
+        preferencesDataStore(name = StringConstants.MUSIC_PREFERENCES_DATASTORE.link)
     }
 
     // We're passing application context

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.compose.ui.theme.*
 import com.sal7one.musicswitcher.repository.model.MusicProvider
-import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.StringConstants
 
 @Composable
 fun MusicProviderCard(
@@ -36,23 +36,23 @@ fun MusicProviderCard(
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {
-            Constants.APPLE_MUSIC.link -> {
+            StringConstants.APPLE_MUSIC.link -> {
                 cardColor = apple_clicked_color
                 shadowColor = apple_clicked_color
             }
-            Constants.SPOTIFY.link -> {
+            StringConstants.SPOTIFY.link -> {
                 cardColor = spotify_clicked_color
                 shadowColor = spotify_clicked_color
             }
-            Constants.ANGHAMI.link -> {
+            StringConstants.ANGHAMI.link -> {
                 cardColor = anghami_clicked_color
                 shadowColor = anghami_clicked_color
             }
-            Constants.YT_MUSIC.link -> {
+            StringConstants.YT_MUSIC.link -> {
                 cardColor = ytMusic_clicked_color
                 shadowColor = ytMusic_clicked_color
             }
-            Constants.DEEZER.link -> {
+            StringConstants.DEEZER.link -> {
                 cardColor = deezer_clicked_color
                 shadowColor = deezer_clicked_color
             }

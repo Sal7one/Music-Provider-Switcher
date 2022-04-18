@@ -6,7 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.repository.DataStoreProvider
-import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.StringConstants
 import com.sal7one.musicswitcher.utils.typeofLink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -132,44 +132,44 @@ class DeepLinkHandlerViewModel(
 
     private fun updatePackage(savedMusicProvider: String) {
         when {
-            savedMusicProvider.contains(Constants.APPLE_MUSIC.link) -> {
-                _musicPackage.postValue(Constants.APPLE_MUSIC_PACKAGE.link)
-                _searchLink.postValue(Constants.APPLE_MUSIC_SEARCH.link)
+            savedMusicProvider.contains(StringConstants.APPLE_MUSIC.link) -> {
+                _musicPackage.postValue(StringConstants.APPLE_MUSIC_PACKAGE.link)
+                _searchLink.postValue(StringConstants.APPLE_MUSIC_SEARCH.link)
             }
-            savedMusicProvider.contains(Constants.SPOTIFY.link) -> {
-                _musicPackage.postValue(Constants.SPOTIFY_PACKAGE.link)
-                _searchLink.postValue(Constants.SPOTIFY_SEARCH.link)
+            savedMusicProvider.contains(StringConstants.SPOTIFY.link) -> {
+                _musicPackage.postValue(StringConstants.SPOTIFY_PACKAGE.link)
+                _searchLink.postValue(StringConstants.SPOTIFY_SEARCH.link)
             }
-            savedMusicProvider.contains(Constants.ANGHAMI.link) -> {
-                _musicPackage.postValue(Constants.ANGHAMI_PACKAGE.link)
-                _searchLink.postValue(Constants.ANGHAMI_SEARCH.link)
+            savedMusicProvider.contains(StringConstants.ANGHAMI.link) -> {
+                _musicPackage.postValue(StringConstants.ANGHAMI_PACKAGE.link)
+                _searchLink.postValue(StringConstants.ANGHAMI_SEARCH.link)
             }
-            savedMusicProvider.contains(Constants.YT_MUSIC.link) -> {
-                _musicPackage.postValue(Constants.YT_MUSIC_PACKAGE.link)
-                _searchLink.postValue(Constants.YT_MUSIC_SEARCH.link)
+            savedMusicProvider.contains(StringConstants.YT_MUSIC.link) -> {
+                _musicPackage.postValue(StringConstants.YT_MUSIC_PACKAGE.link)
+                _searchLink.postValue(StringConstants.YT_MUSIC_SEARCH.link)
             }
-            savedMusicProvider.contains(Constants.DEEZER.link) -> {
-                _musicPackage.postValue(Constants.DEEZER_PACKAGE.link)
-                _searchLink.postValue(Constants.DEEZER_SEARCH.link)
+            savedMusicProvider.contains(StringConstants.DEEZER.link) -> {
+                _musicPackage.postValue(StringConstants.DEEZER_PACKAGE.link)
+                _searchLink.postValue(StringConstants.DEEZER_SEARCH.link)
             }
         }
     }
 
     private fun updateMusicExceptions(musicProvider: String) {
         when {
-            musicProvider.contains(Constants.APPLE_MUSIC.link) -> {
+            musicProvider.contains(StringConstants.APPLE_MUSIC.link) -> {
                 overrulesPreference = appleMusicChoice.value!!
             }
-            musicProvider.contains(Constants.SPOTIFY.link) -> {
+            musicProvider.contains(StringConstants.SPOTIFY.link) -> {
                 overrulesPreference = spotifyChoice.value!!
             }
-            musicProvider.contains(Constants.ANGHAMI.link) -> {
+            musicProvider.contains(StringConstants.ANGHAMI.link) -> {
                 overrulesPreference = anghamiChoice.value!!
             }
-            musicProvider.contains(Constants.YT_MUSIC.link) -> {
+            musicProvider.contains(StringConstants.YT_MUSIC.link) -> {
                 overrulesPreference = ytMusicChoice.value!!
             }
-            musicProvider.contains(Constants.DEEZER.link) -> {
+            musicProvider.contains(StringConstants.DEEZER.link) -> {
                 overrulesPreference = deezerChoice.value!!
             }
         }

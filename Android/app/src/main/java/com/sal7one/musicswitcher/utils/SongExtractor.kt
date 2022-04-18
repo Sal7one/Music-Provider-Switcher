@@ -11,17 +11,17 @@ class SongExtractor {
             var end = 0
 
             when {
-                url.contains(Constants.SPOTIFY.link) -> {
+                url.contains(StringConstants.SPOTIFY.link) -> {
                     end = 9
                 }
-                url.contains(Constants.APPLE_MUSIC.link) -> {
+                url.contains(StringConstants.APPLE_MUSIC.link) -> {
                     end = 14
 
                 }
-                url.contains(Constants.ANGHAMI.link) -> {
+                url.contains(StringConstants.ANGHAMI.link) -> {
                     end = 17
                 }
-                url.contains(Constants.DEEZER.link) -> {
+                url.contains(StringConstants.DEEZER.link) -> {
                     end = 29
                     responseString = response.substring(
                         response.indexOf("<title>") + begin,
@@ -36,7 +36,7 @@ class SongExtractor {
                     return HtmlCompat.fromHtml(songNameFirst, HtmlCompat.FROM_HTML_MODE_LEGACY)
                         .toString() // Escape special characters in html ' == N&#039;
                 }
-                url.contains(Constants.YT_MUSIC.link) -> {
+                url.contains(StringConstants.YT_MUSIC.link) -> {
                     end = 16
 
                     if (typeofLink(url) == "playlist") {

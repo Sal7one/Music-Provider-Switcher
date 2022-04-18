@@ -2,47 +2,47 @@ package com.sal7one.musicswitcher.repository
 
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.repository.model.MusicProvider
-import com.sal7one.musicswitcher.utils.Constants
+import com.sal7one.musicswitcher.utils.StringConstants
 
 
 val musicProviders = listOf(
     MusicProvider(
         "Apple Music",
-        Constants.APPLE_MUSIC.link,
-        Constants.APPLE_MUSIC_SEARCH.link,
-        Constants.APPLE_MUSIC_PACKAGE.link,
+        StringConstants.APPLE_MUSIC.link,
+        StringConstants.APPLE_MUSIC_SEARCH.link,
+        StringConstants.APPLE_MUSIC_PACKAGE.link,
         false,
         R.drawable.apple_music_white,
     ),
     MusicProvider(
         "Spotify",
-        Constants.SPOTIFY.link,
+        StringConstants.SPOTIFY.link,
 
-        Constants.SPOTIFY_SEARCH.link,
-        Constants.SPOTIFY_PACKAGE.link,
+        StringConstants.SPOTIFY_SEARCH.link,
+        StringConstants.SPOTIFY_PACKAGE.link,
         false,
         R.drawable.spotify_white,
     ),
     MusicProvider(
         "Anghami",
-        Constants.ANGHAMI.link,
-        Constants.ANGHAMI_SEARCH.link,
-        Constants.ANGHAMI_PACKAGE.link,
+        StringConstants.ANGHAMI.link,
+        StringConstants.ANGHAMI_SEARCH.link,
+        StringConstants.ANGHAMI_PACKAGE.link,
         false,
         R.drawable.anghami_white,
     ),
     MusicProvider(
         "Youtube Music",
-        Constants.YT_MUSIC.link,
-        Constants.YT_MUSIC_SEARCH.link,
-        Constants.YT_MUSIC_PACKAGE.link,
+        StringConstants.YT_MUSIC.link,
+        StringConstants.YT_MUSIC_SEARCH.link,
+        StringConstants.YT_MUSIC_PACKAGE.link,
         false,
         R.drawable.yt_music_white,
     ),
     MusicProvider(
-        "Deezer", Constants.DEEZER.link,
-        Constants.DEEZER_SEARCH.link,
-        Constants.DEEZER_PACKAGE.link,
+        "Deezer", StringConstants.DEEZER.link,
+        StringConstants.DEEZER_SEARCH.link,
+        StringConstants.DEEZER_PACKAGE.link,
         false,
         R.drawable.deezer_white,
     )
