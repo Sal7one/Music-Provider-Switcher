@@ -47,7 +47,7 @@ class MainScreenViewModel(
         }
     }
 
-    private fun getData() = viewModelScope.launch(Dispatchers.IO) { // TODO Find Solution to this
+    private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
