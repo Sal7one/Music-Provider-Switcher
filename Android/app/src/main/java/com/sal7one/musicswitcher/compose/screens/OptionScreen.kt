@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.screens
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -20,6 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
+import com.sal7one.musicswitcher.compose.components.Switch
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 import com.sal7one.musicswitcher.repository.DataStoreProvider

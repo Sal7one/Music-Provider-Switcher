@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.screens
 
 import android.content.Intent
 import android.net.Uri

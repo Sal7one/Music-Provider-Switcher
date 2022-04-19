@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.components
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*

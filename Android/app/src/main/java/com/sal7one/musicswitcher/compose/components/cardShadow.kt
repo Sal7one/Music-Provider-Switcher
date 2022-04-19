@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.components
 
 import android.annotation.SuppressLint
 import androidx.compose.ui.Modifier

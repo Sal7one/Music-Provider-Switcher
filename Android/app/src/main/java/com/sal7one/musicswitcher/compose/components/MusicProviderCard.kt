@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.components
 
 import android.util.Log
 import androidx.compose.foundation.Image
@@ -18,6 +18,7 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.R
+import com.sal7one.musicswitcher.compose.components.coloredShadow
 import com.sal7one.musicswitcher.compose.ui.theme.*
 import com.sal7one.musicswitcher.repository.model.MusicProvider
 import com.sal7one.musicswitcher.utils.StringConstants

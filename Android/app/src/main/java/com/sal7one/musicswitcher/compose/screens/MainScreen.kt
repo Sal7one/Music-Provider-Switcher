@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.screens
 
 import android.content.Intent
 import android.net.Uri
@@ -34,6 +34,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
+import com.sal7one.musicswitcher.compose.components.CustomDialog
+import com.sal7one.musicswitcher.compose.components.MusicProviderCard
+import com.sal7one.musicswitcher.compose.components.Switch
+import com.sal7one.musicswitcher.compose.components.UpdateButton
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.TextSecondary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color

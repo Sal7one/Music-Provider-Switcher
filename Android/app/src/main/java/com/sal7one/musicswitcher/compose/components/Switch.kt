@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher.compose.components
 
 import androidx.compose.material.SwitchDefaults
 import androidx.compose.runtime.Composable
