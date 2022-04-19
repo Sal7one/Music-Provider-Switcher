@@ -77,7 +77,7 @@ class OptionsViewModel(
             val anghami = it[DataStoreProvider.StoredKeys.anghamiException] ?: false
             val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
             val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
-            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: false
+            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: true
 
             _optionsViewModelStateFlow.value = TheScreenUiData(
                 appleMusic = appleMusic,

@@ -13,6 +13,7 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
@@ -50,19 +51,27 @@ class DeepLinkHandlerActivity : ComponentActivity() {
 
         setContent {
             MusicSwitcherTheme {
+                val theScreenUiState = viewModel.optionScreenState.collectAsState()
+                val loadingChoice = theScreenUiState.value.loading
+                if (loadingChoice) {
 
+                    val imageLoader = ImageLoader.Builder(LocalContext.current)
+                        .components {
+                            if (SDK_INT >= 28) {
+                                add(ImageDecoderDecoder.Factory())
+                            } else {
+                                add(GifDecoder.Factory())
+                            }
+                        }
+                        .build()
 
-                viewModel.loadingChoice.observe(this){
-                    if(it){
-
-                    }else{
-
-                    }
-
+                    val painter = rememberAsyncImagePainter(
+                        model = R.drawable.loading,
+                        imageLoader = imageLoader
+                    )
+                    Image(painter = painter, contentDescription = getString(R.string.loading_icon))
                 }
-                Image(painter = painter, contentDescription = getString(R.string.loading_icon))
             }
-
 
             // data comes from datastore
             viewModel.chosenProvider.observe(this) {

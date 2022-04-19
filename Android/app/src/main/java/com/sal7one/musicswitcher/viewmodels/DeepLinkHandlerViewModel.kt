@@ -6,19 +6,24 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.repository.DataStoreProvider
+import com.sal7one.musicswitcher.repository.model.TheScreenUiData
 import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.utils.StringConstants
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DeepLinkHandlerViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {
+    private val _optionsViewModelStateFlow = MutableStateFlow(TheScreenUiData())
+    val optionScreenState: StateFlow<TheScreenUiData> = _optionsViewModelStateFlow
+
     private var _chosenProvider = MutableLiveData<String>()
     private var _playlistChoice = MutableLiveData<Boolean>()
     private var _albumChoice = MutableLiveData<Boolean>()
-    private var _loadingChoice = MutableLiveData<Boolean>()
     private var _appleMusicChoice = MutableLiveData<Boolean>()
     private var _spotifyChoice = MutableLiveData<Boolean>()
     private var _anghamiChoice = MutableLiveData<Boolean>()
@@ -35,8 +40,6 @@ class DeepLinkHandlerViewModel(
         get() = _playlistChoice
     private val albumChoice: LiveData<Boolean>
         get() = _albumChoice
-    val loadingChoice: LiveData<Boolean>
-        get() = _loadingChoice
     private val appleMusicChoice: LiveData<Boolean>
         get() = _appleMusicChoice
     private val spotifyChoice: LiveData<Boolean>
@@ -67,6 +70,7 @@ class DeepLinkHandlerViewModel(
         _musicPackage.value = ""
         _searchLink.value = ""
         getData()
+        getLoadingOption()
     }
 
 
@@ -75,7 +79,6 @@ class DeepLinkHandlerViewModel(
             val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
             val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
             val album = it[DataStoreProvider.StoredKeys.albumChoice] ?: false
-            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: false
             val appleMusic = it[DataStoreProvider.StoredKeys.appleMusicException] ?: false
             val spotify = it[DataStoreProvider.StoredKeys.spotifyException] ?: false
             val anghami = it[DataStoreProvider.StoredKeys.anghamiException] ?: false
@@ -85,13 +88,22 @@ class DeepLinkHandlerViewModel(
             _chosenProvider.postValue(provider)
             _playlistChoice.postValue(playList)
             _albumChoice.postValue(album)
-            _loadingChoice.postValue(loading)
             _appleMusicChoice.postValue(appleMusic)
             _spotifyChoice.postValue(spotify)
             _anghamiChoice.postValue(anghami)
             _ytMusicChoice.postValue(ytMusic)
             _deezerChoice.postValue(deezer)
             updatePackage(provider)
+        }
+    }
+    // For composable this is better
+    private fun getLoadingOption() = viewModelScope.launch(Dispatchers.IO) {
+        dataStoreManager.getFromDataStore().collect {
+            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: false
+
+            _optionsViewModelStateFlow.value = TheScreenUiData(
+                loading = loading,
+            )
         }
     }
 
