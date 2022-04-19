@@ -29,4 +29,8 @@
     <string name="loading_icon">Loading icon</string>
     <string name="app_not_installed">"You didn't install %s"</string>
     <string name="loading_internet_tip">This depends on your internet speed</string>
+    <string name="options">Options</string>
+    <string name="loading_after_clicking_link">Loading Image  </string>
+    <string name="updated_excpetions">Updated Exceptions</string>
+    <string name="updated_options">Updated Options</string>
 </resources>

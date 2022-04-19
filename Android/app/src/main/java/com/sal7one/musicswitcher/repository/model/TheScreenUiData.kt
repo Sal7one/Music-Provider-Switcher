@@ -8,5 +8,6 @@ data class TheScreenUiData(
     val spotify: Boolean = false,
     val anghami: Boolean = false,
     val ytMusic: Boolean = false,
-    val deezer: Boolean = false
+    val deezer: Boolean = false,
+    val loading: Boolean = false
 )

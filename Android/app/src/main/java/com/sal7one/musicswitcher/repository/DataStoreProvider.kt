@@ -15,6 +15,7 @@ class DataStoreProvider(private val context: Context) {
         val musicProvider = stringPreferencesKey(StringConstants.MUSIC_PREFERENCES_KEY.link)
         val playlistChoice = booleanPreferencesKey(StringConstants.PLAYLIST_PREFERENCES_KEY.link)
         val albumChoice = booleanPreferencesKey(StringConstants.ALBUM_PREFERENCES_KEY.link)
+        val loadingChoice = booleanPreferencesKey(StringConstants.LOADING_PREFERENCES_KEY.link)
 
         // If Exception to ignore deep linking is needed
         val appleMusicException = booleanPreferencesKey(StringConstants.APPLE_M_PREFERENCES_KEY.link)
@@ -49,7 +50,8 @@ class DataStoreProvider(private val context: Context) {
         spotify: Boolean,
         anghami: Boolean,
         ytMusic: Boolean,
-        deezer: Boolean
+        deezer: Boolean,
+        userLoadingChoice: Boolean
     ) {
         context.dataStore.edit { preference ->
             preference[StoredKeys.appleMusicException] = appleMusic
@@ -57,6 +59,7 @@ class DataStoreProvider(private val context: Context) {
             preference[StoredKeys.anghamiException] = anghami
             preference[StoredKeys.ytMusicException] = ytMusic
             preference[StoredKeys.deezerException] = deezer
+            preference[StoredKeys.loadingChoice] = userLoadingChoice
         }
     }
 

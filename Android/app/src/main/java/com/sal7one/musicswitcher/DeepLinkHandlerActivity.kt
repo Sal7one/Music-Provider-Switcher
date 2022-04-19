@@ -40,6 +40,15 @@ class DeepLinkHandlerActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
+        viewModel = ViewModelProvider(
+            this,
+            DeepLinkHandlerViewModelFactory(dataStoreProvider)
+        )[DeepLinkHandlerViewModel::class.java]
+
+        data = intent?.data!!
+        intent?.action.also { action = it }
+
         setContent {
             MusicSwitcherTheme {
                 val imageLoader = ImageLoader.Builder(LocalContext.current)
@@ -56,18 +65,9 @@ class DeepLinkHandlerActivity : ComponentActivity() {
                     model = R.drawable.loading,
                     imageLoader = imageLoader
                 )
-
                 Image(painter = painter, contentDescription = getString(R.string.loading_icon))
             }
 
-            dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-            viewModel = ViewModelProvider(
-                this,
-                DeepLinkHandlerViewModelFactory(dataStoreProvider)
-            )[DeepLinkHandlerViewModel::class.java]
-
-            data = intent?.data!!
-            intent?.action.also { action = it }
 
             // data comes from datastore
             viewModel.chosenProvider.observe(this) {

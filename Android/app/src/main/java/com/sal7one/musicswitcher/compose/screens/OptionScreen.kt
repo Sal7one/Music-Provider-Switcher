@@ -24,7 +24,6 @@ import com.sal7one.musicswitcher.compose.components.Switch
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 import com.sal7one.musicswitcher.repository.DataStoreProvider
-import com.sal7one.musicswitcher.repository.model.MusicProvider
 import com.sal7one.musicswitcher.repository.musicProviders
 import com.sal7one.musicswitcher.viewmodels.OptionsViewModel
 import com.sal7one.musicswitcher.viewmodels.OptionsViewModelFactory
@@ -43,6 +42,7 @@ fun OptionScreen() {
     val anghamiChoice = theScreenUiState.value.anghami
     val ytMusicChoice = theScreenUiState.value.ytMusic
     val deezerChoice = theScreenUiState.value.deezer
+    val loadingChoice = theScreenUiState.value.loading
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
@@ -58,7 +58,6 @@ fun OptionScreen() {
                     )
                 )
             )
-
     ) {
         Spacer(modifier = Modifier.height(40.dp))
         Text(
@@ -98,34 +97,77 @@ fun OptionScreen() {
         }
         Spacer(modifier = Modifier.height(10.dp))
         Divider()
-        OptionList(musicProviders[0], appleMusicChoice) {
+        OptionList(musicProviders[0].name, appleMusicChoice) {
             viewModel.changeValue(appleMusic = appleMusicChoice)
-            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_excpetions),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        OptionList(musicProviders[1], spotifyChoice) {
+        OptionList(musicProviders[1].name, spotifyChoice) {
             viewModel.changeValue(spotify = spotifyChoice)
-            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_excpetions),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        OptionList(musicProviders[2], anghamiChoice) {
+        OptionList(musicProviders[2].name, anghamiChoice) {
             viewModel.changeValue(anghami = anghamiChoice)
-            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_excpetions),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        OptionList(musicProviders[3], ytMusicChoice) {
+        OptionList(musicProviders[3].name, ytMusicChoice) {
             viewModel.changeValue(ytMusic = ytMusicChoice)
-            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_excpetions),
+                Toast.LENGTH_LONG
+            ).show()
         }
-        OptionList(musicProviders[4], deezerChoice) {
+        OptionList(musicProviders[4].name, deezerChoice) {
             viewModel.changeValue(deezer = deezerChoice)
-            Toast.makeText(context, "Updated Exceptions", Toast.LENGTH_LONG).show()
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_excpetions),
+                Toast.LENGTH_LONG
+            ).show()
         }
         Spacer(modifier = Modifier.height(5.dp))
         Divider()
+        Spacer(modifier = Modifier.height(10.dp))
+        Row(
+            horizontalArrangement = Arrangement.SpaceBetween,
+            verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
+        ) {
+            Box(modifier = Modifier.padding(start = 40.dp)) {
+                Text(
+                    text = stringResource(R.string.options),
+                    style = TextStyle(fontSize = 20.sp)
+                )
+            }
+        }
+        Spacer(modifier = Modifier.height(20.dp))
+        Divider()
+        Spacer(modifier = Modifier.height(10.dp))
+        OptionList(stringResource(R.string.loading_after_clicking_link), loadingChoice) {
+            viewModel.changeValue(loading = loadingChoice)
+            Toast.makeText(
+                context,
+                context.getString(R.string.updated_options),
+                Toast.LENGTH_LONG
+            ).show()
+        }
     }
 }
 
 @Composable
 fun OptionList(
-    musicProvider: MusicProvider, musicProviderState: Boolean, onCheckChanged: (Boolean) -> Unit
+    text: String, state: Boolean, onCheckChanged: (Boolean) -> Unit
 ) {
     Column(
         verticalArrangement = Arrangement.SpaceBetween,
@@ -137,12 +179,12 @@ fun OptionList(
         ) {
             Box(modifier = Modifier.padding(start = 51.dp)) {
                 Text(
-                    text = musicProvider.name,
+                    text = text,
                     style = TextStyle(fontSize = 21.sp)
                 )
             }
             Box(modifier = Modifier.padding(end = 65.dp)) {
-                Switch(musicProviderState) {
+                Switch(state) {
                     onCheckChanged(it)
                 }
             }
