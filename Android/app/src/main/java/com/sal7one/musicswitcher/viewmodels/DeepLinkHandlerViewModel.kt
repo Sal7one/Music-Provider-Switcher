@@ -6,8 +6,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.repository.DataStoreProvider
+import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.utils.StringConstants
-import com.sal7one.musicswitcher.utils.typeofLink
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -98,7 +98,7 @@ class DeepLinkHandlerViewModel(
             // To ignore deep linking by request of user
             updateMusicExceptions(link)
 
-            when (typeofLink(link)) {
+            when (MusicHelpers.typeofLink(link)) {
                 "playlist" -> {
                     isPlaylist = true
                     isAlbum = false

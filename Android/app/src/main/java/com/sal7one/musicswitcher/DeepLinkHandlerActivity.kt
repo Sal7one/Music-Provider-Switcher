@@ -10,8 +10,7 @@ import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
 import com.sal7one.musicswitcher.repository.DataStoreProvider
-import com.sal7one.musicswitcher.utils.StringConstants
-import com.sal7one.musicswitcher.utils.SongExtractor
+import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModel
 import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModelFactory
 
@@ -42,7 +41,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         viewModel.sameApp.observe(this) {
             if (it) {
                 val i = Intent(action, data)
-                val appPackage = sameAppPackage(data.toString())
+                val appPackage = MusicHelpers.getMusicAppPackage(data.toString())
                 i.setPackage(appPackage)
                 startActivity(i)
             }
@@ -56,7 +55,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                 val stringRequest = StringRequest(Request.Method.GET, songURL,
 
                     { response ->
-                        val songName = SongExtractor.extractFromURL(songURL, response)
+                        val songName = MusicHelpers.extractFromURL(songURL, response)
                         val searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
 
@@ -76,27 +75,6 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         val i = Intent(Intent.ACTION_VIEW, uri)
         i.setPackage(viewModel.musicPackage.value)
         startActivity(i)
-    }
-
-    private fun sameAppPackage(currentLink: String): String {
-        when {
-            currentLink.contains(StringConstants.SPOTIFY.link) -> {
-                return StringConstants.SPOTIFY_PACKAGE.link
-            }
-            currentLink.contains(StringConstants.APPLE_MUSIC.link) -> {
-                return StringConstants.APPLE_MUSIC_PACKAGE.link
-            }
-            currentLink.contains(StringConstants.ANGHAMI.link) -> {
-                return StringConstants.ANGHAMI_PACKAGE.link
-            }
-            currentLink.contains(StringConstants.DEEZER.link) -> {
-                return StringConstants.DEEZER_PACKAGE.link
-            }
-            currentLink.contains(StringConstants.YT_MUSIC.link) -> {
-                return StringConstants.YT_MUSIC_PACKAGE.link
-            }
-            else -> return StringConstants.SPOTIFY_PACKAGE.link
-        }
     }
 
     override fun onStop() {

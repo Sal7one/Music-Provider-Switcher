@@ -3,7 +3,7 @@ package com.sal7one.musicswitcher.utils
 import android.util.Log
 import androidx.core.text.HtmlCompat
 
-class SongExtractor {
+class MusicHelpers {
     companion object {
         fun extractFromURL(url: String, response: String): String {
             var responseString: String
@@ -95,18 +95,39 @@ class SongExtractor {
             }
             return responseString// Escape special characters in html ' == N&#039;
         }
-    }
-}
 
-fun typeofLink(url: String): String {
-    return when {
-        url.contains("/playlist/") or url.contains("playlist?") -> "playlist"
-        url.contains("/album/") -> {
-            if (url.contains("?i=")) // apple music song
-                "song"
-            else
-                "album"
+        fun getMusicAppPackage(currentLink: String): String {
+            when {
+                currentLink.contains(StringConstants.SPOTIFY.link) -> {
+                    return StringConstants.SPOTIFY_PACKAGE.link
+                }
+                currentLink.contains(StringConstants.APPLE_MUSIC.link) -> {
+                    return StringConstants.APPLE_MUSIC_PACKAGE.link
+                }
+                currentLink.contains(StringConstants.ANGHAMI.link) -> {
+                    return StringConstants.ANGHAMI_PACKAGE.link
+                }
+                currentLink.contains(StringConstants.DEEZER.link) -> {
+                    return StringConstants.DEEZER_PACKAGE.link
+                }
+                currentLink.contains(StringConstants.YT_MUSIC.link) -> {
+                    return StringConstants.YT_MUSIC_PACKAGE.link
+                }
+                else -> return StringConstants.SPOTIFY_PACKAGE.link
+            }
         }
-        else -> "song"
+
+        fun typeofLink(url: String): String {
+            return when {
+                url.contains("/playlist/") or url.contains("playlist?") -> "playlist"
+                url.contains("/album/") -> {
+                    if (url.contains("?i=")) // apple music song
+                        "song"
+                    else
+                        "album"
+                }
+                else -> "song"
+            }
+        }
     }
 }

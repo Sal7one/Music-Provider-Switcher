@@ -1,11 +1,11 @@
-package com.sal7one.musicswitcher.compose
+package com.sal7one.musicswitcher
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.core.content.ContextCompat
-import com.sal7one.musicswitcher.R
+import com.sal7one.musicswitcher.compose.ApplicationScreen
 import com.sal7one.musicswitcher.compose.ui.theme.MusicSwitcherTheme
 
 class MainActivity : ComponentActivity() {
