@@ -6,20 +6,20 @@ import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
 import android.content.Intent.FLAG_ACTIVITY_REQUIRE_NON_BROWSER
 import android.net.Uri
 import android.os.Build
+import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.CircularProgressIndicator
-import androidx.compose.material.Scaffold
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.dp
+import androidx.compose.foundation.Image
+import androidx.compose.material.Text
+import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
+import coil.ImageLoader
+import coil.compose.rememberAsyncImagePainter
+import coil.decode.GifDecoder
+import coil.decode.ImageDecoderDecoder
 import com.android.volley.Request
 import com.android.volley.toolbox.StringRequest
 import com.android.volley.toolbox.Volley
@@ -42,69 +42,72 @@ class DeepLinkHandlerActivity : ComponentActivity() {
 
         setContent {
             MusicSwitcherTheme {
-                Scaffold(
-                    modifier = Modifier
-                        .width(50.dp)
-                        .height(50.dp)
-                        .background(Color.Transparent)
-                ) {
+                val imageLoader = ImageLoader.Builder(LocalContext.current)
+                    .components {
+                        if (SDK_INT >= 28) {
+                            add(ImageDecoderDecoder.Factory())
+                        } else {
+                            add(GifDecoder.Factory())
+                        }
+                    }
+                    .build()
 
-                    CircularProgressIndicator(
-                        modifier = Modifier
-                            .width(50.dp)
-                            .height(50.dp)
-                            .background(Color.Transparent)
+                val painter = rememberAsyncImagePainter(
+                    model = R.drawable.loading,
+                    imageLoader = imageLoader
+                )
+
+                Image(painter = painter, contentDescription = getString(R.string.loading_icon))
+            }
+
+            dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
+            viewModel = ViewModelProvider(
+                this,
+                DeepLinkHandlerViewModelFactory(dataStoreProvider)
+            )[DeepLinkHandlerViewModel::class.java]
+
+            data = intent?.data!!
+            intent?.action.also { action = it }
+
+            // data comes from datastore
+            viewModel.chosenProvider.observe(this) {
+                viewModel.handleDeepLink(data) // start opening app
+            }
+
+            // Instantiate the RequestQueue.
+            viewModel.sameApp.observe(this) {
+                if (it) {
+                    val appPackage = MusicHelpers.getMusicAppPackage(data.toString())
+                    // Same provider - sameApp
+                    openApp(action, data, appPackage)
+                }
+            }
+
+            viewModel.differentApp.observe(this) {
+                val queue = Volley.newRequestQueue(this)
+
+                if (it) {
+                    val songURL = data.toString()
+                    val stringRequest = StringRequest(Request.Method.GET, songURL,
+
+                        { response ->
+                            val songName = MusicHelpers.extractFromURL(songURL, response)
+                            val searchURL = viewModel.searchLink.value
+                            val query: String = Uri.encode(songName, "utf-8")
+
+                            // Different Provider - differentApp
+                            val uri = Uri.parse(searchURL + query)
+                            openApp(Intent.ACTION_VIEW, uri, viewModel.musicPackage.value!!)
+                        },
+                        {
+                            Log.e("DEEP_LINK", "Volley Error")
+                        }
                     )
-
-                    dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-                    viewModel = ViewModelProvider(
-                        this,
-                        DeepLinkHandlerViewModelFactory(dataStoreProvider)
-                    )[DeepLinkHandlerViewModel::class.java]
-
-                    data = intent?.data!!
-                    intent?.action.also { action = it }
-
-                    // data comes from datastore
-                    viewModel.chosenProvider.observe(this) {
-                        viewModel.handleDeepLink(data) // start opening app
-                    }
-
-                    // Instantiate the RequestQueue.
-                    viewModel.sameApp.observe(this) {
-                        if (it) {
-                            val appPackage = MusicHelpers.getMusicAppPackage(data.toString())
-                            // Same provider - sameApp
-                            openApp(action, data, appPackage)
-                        }
-                    }
-
-                    viewModel.differentApp.observe(this) {
-                        val queue = Volley.newRequestQueue(this)
-
-                        if (it) {
-                            val songURL = data.toString()
-                            val stringRequest = StringRequest(Request.Method.GET, songURL,
-
-                                { response ->
-                                    val songName = MusicHelpers.extractFromURL(songURL, response)
-                                    val searchURL = viewModel.searchLink.value
-                                    val query: String = Uri.encode(songName, "utf-8")
-
-                                    // Different Provider - differentApp
-                                    val uri = Uri.parse(searchURL + query)
-                                    openApp(Intent.ACTION_VIEW, uri, viewModel.musicPackage.value!!)
-                                },
-                                {
-                                    Log.e("DEEP_LINK", "Volley Error")
-                                }
-                            )
-                            queue.add(stringRequest)
-                        }
-                    }
+                    queue.add(stringRequest)
                 }
             }
         }
+
     }
 
     private fun openApp(iAction: String?, iUri: Uri, appPackage: String) {
@@ -112,7 +115,7 @@ class DeepLinkHandlerActivity : ComponentActivity() {
         i.setPackage(appPackage)
         try {
             i.apply {
-                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                if (SDK_INT >= Build.VERSION_CODES.R) {
                     flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_REQUIRE_NON_BROWSER
                 }
             }
@@ -120,7 +123,7 @@ class DeepLinkHandlerActivity : ComponentActivity() {
         } catch (e: ActivityNotFoundException) {
             Toast.makeText(
                 this,
-                "You didn't install ${MusicHelpers.packageNameToApp(appPackage)}",
+                getString(R.string.app_not_installed, MusicHelpers.packageNameToApp(appPackage)),
                 Toast.LENGTH_LONG
             ).show()
             onStop()

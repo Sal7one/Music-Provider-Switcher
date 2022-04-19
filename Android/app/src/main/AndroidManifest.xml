@@ -29,7 +29,7 @@
             android:name=".DeepLinkHandlerActivity"
             android:exported="true"
             android:launchMode="singleInstance"
-            android:theme="@style/Theme.AppCompat.Dialog">
+            android:theme="@style/Theme.DeepLink">
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
 

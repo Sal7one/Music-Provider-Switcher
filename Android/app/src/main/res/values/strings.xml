@@ -9,7 +9,6 @@
 
     <!--Compose Screens Navigation -->
     <!--Compose Screens Navigation end -->
-
     <string name="about_app_heading">About this App</string>
     <string name="about_this_app">This app searches songs for you from other music providers links, in your favorite music provider, So If you see a link of other music providers just click it and the app will try to search for it.</string>
     <string name="dev_name">Saleh Alanazi</string>
@@ -27,4 +26,7 @@
     <string name="cd_dev_image">Developer image</string>
     <string name="cd_app_icon">Application icon</string>
     <string name="no_app_found">No App Found</string>
+    <string name="loading_icon">Loading icon</string>
+    <string name="app_not_installed">"You didn't install %s"</string>
+    <string name="loading_internet_tip">This depends on your internet speed</string>
 </resources>
