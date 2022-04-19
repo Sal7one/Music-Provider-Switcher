@@ -35,7 +35,7 @@ class DeepLinkHandlerViewModel(
         get() = _playlistChoice
     private val albumChoice: LiveData<Boolean>
         get() = _albumChoice
-    private val loadingChoice: LiveData<Boolean>
+    val loadingChoice: LiveData<Boolean>
         get() = _loadingChoice
     private val appleMusicChoice: LiveData<Boolean>
         get() = _appleMusicChoice

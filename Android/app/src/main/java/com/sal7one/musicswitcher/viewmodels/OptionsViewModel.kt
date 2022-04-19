@@ -70,7 +70,7 @@ class OptionsViewModel(
         )
     }
 
-    private fun getData() = viewModelScope.launch(Dispatchers.IO) { // TODO Find Solution to this
+    private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
             val appleMusic = it[DataStoreProvider.StoredKeys.appleMusicException] ?: false
             val spotify = it[DataStoreProvider.StoredKeys.spotifyException] ?: false

@@ -50,20 +50,16 @@ class DeepLinkHandlerActivity : ComponentActivity() {
 
         setContent {
             MusicSwitcherTheme {
-                val imageLoader = ImageLoader.Builder(LocalContext.current)
-                    .components {
-                        if (SDK_INT >= 28) {
-                            add(ImageDecoderDecoder.Factory())
-                        } else {
-                            add(GifDecoder.Factory())
-                        }
-                    }
-                    .build()
 
-                val painter = rememberAsyncImagePainter(
-                    model = R.drawable.loading,
-                    imageLoader = imageLoader
-                )
+
+                viewModel.loadingChoice.observe(this){
+                    if(it){
+
+                    }else{
+
+                    }
+
+                }
                 Image(painter = painter, contentDescription = getString(R.string.loading_icon))
             }
 
