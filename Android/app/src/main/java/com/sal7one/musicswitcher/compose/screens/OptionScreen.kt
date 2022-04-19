@@ -151,7 +151,7 @@ fun OptionScreen() {
                 )
             }
         }
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(10.dp))
         Divider()
         Spacer(modifier = Modifier.height(10.dp))
         OptionList(stringResource(R.string.loading_after_clicking_link), loadingChoice) {
