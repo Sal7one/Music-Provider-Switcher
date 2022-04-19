@@ -26,4 +26,5 @@
     <string name="github_link">https://github.com/Sal7one</string>
     <string name="cd_dev_image">Developer image</string>
     <string name="cd_app_icon">Application icon</string>
+    <string name="no_app_found">No App Found</string>
 </resources>

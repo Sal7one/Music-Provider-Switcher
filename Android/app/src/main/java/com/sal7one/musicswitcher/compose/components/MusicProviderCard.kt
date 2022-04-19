@@ -1,6 +1,5 @@
 package com.sal7one.musicswitcher.compose.components
 
-import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -18,7 +17,6 @@ import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.R
-import com.sal7one.musicswitcher.compose.components.coloredShadow
 import com.sal7one.musicswitcher.compose.ui.theme.*
 import com.sal7one.musicswitcher.repository.model.MusicProvider
 import com.sal7one.musicswitcher.utils.StringConstants
@@ -33,7 +31,6 @@ fun MusicProviderCard(
     var shadowColor by remember { mutableStateOf(CardGlow_color) }
     var cardColor by remember { mutableStateOf(Card_color) }
 
-    Log.d("test0000", "MusicProviderCard = $chosenProvider")
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {

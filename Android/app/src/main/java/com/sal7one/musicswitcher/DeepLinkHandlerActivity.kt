@@ -1,9 +1,14 @@
 package com.sal7one.musicswitcher
 
+import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.Intent.FLAG_ACTIVITY_REQUIRE_NON_BROWSER
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.android.volley.Request
@@ -26,7 +31,10 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
 
         dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-        viewModel = ViewModelProvider(this, DeepLinkHandlerViewModelFactory(dataStoreProvider))[DeepLinkHandlerViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            DeepLinkHandlerViewModelFactory(dataStoreProvider)
+        )[DeepLinkHandlerViewModel::class.java]
 
         data = intent?.data!!
         intent?.action.also { action = it }
@@ -40,10 +48,8 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
 
         viewModel.sameApp.observe(this) {
             if (it) {
-                val i = Intent(action, data)
                 val appPackage = MusicHelpers.getMusicAppPackage(data.toString())
-                i.setPackage(appPackage)
-                startActivity(i)
+                openApp(action, data, appPackage)
             }
         }
 
@@ -59,7 +65,9 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                         val searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
 
-                        switchToApp(searchURL + query)
+                        // Different Provider
+                        val uri = Uri.parse(searchURL + query)
+                        openApp(Intent.ACTION_VIEW, uri, viewModel.musicPackage.value!!)
                     },
                     {
                         Log.e("DEEP_LINK", "Volley Error")
@@ -70,11 +78,24 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         }
     }
 
-    private fun switchToApp(songName: String) {
-        val uri = Uri.parse(songName)
-        val i = Intent(Intent.ACTION_VIEW, uri)
-        i.setPackage(viewModel.musicPackage.value)
-        startActivity(i)
+    private fun openApp(iAction: String?, iUri: Uri, appPackage: String) {
+        val i = Intent(iAction, iUri)
+        i.setPackage(appPackage)
+        try {
+            i.apply {
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    flags = FLAG_ACTIVITY_NEW_TASK or FLAG_ACTIVITY_REQUIRE_NON_BROWSER
+                }
+            }
+            startActivity(i)
+        } catch (e: ActivityNotFoundException) {
+            Toast.makeText(
+                this,
+                "You didn't install ${MusicHelpers.packageNameToApp(appPackage)}",
+                Toast.LENGTH_LONG
+            ).show()
+            onStop()
+        }
     }
 
     override fun onStop() {

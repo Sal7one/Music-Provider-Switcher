@@ -1,6 +1,5 @@
 package com.sal7one.musicswitcher.utils
 
-import android.util.Log
 import androidx.core.text.HtmlCompat
 
 class MusicHelpers {
@@ -69,15 +68,6 @@ class MusicHelpers {
                     }
                 }
                 else -> {
-                    Log.d("SONG_EXTRACTOR", "Link not handled value below..")
-                    Log.d("SONG_EXTRACTOR", url)
-                    Log.d(
-                        "SONG_EXTRACTOR",
-                        response.substring(
-                            response.indexOf("<title>") + begin,
-                            response.lastIndexOf("</title>") - end
-                        )
-                    )
                 }
             }
 
@@ -114,6 +104,27 @@ class MusicHelpers {
                     return StringConstants.YT_MUSIC_PACKAGE.link
                 }
                 else -> return StringConstants.SPOTIFY_PACKAGE.link
+            }
+        }
+
+        fun packageNameToApp(currentLink: String): String {
+            when {
+                currentLink.contains(StringConstants.SPOTIFY_PACKAGE.link) -> {
+                    return StringConstants.SPOTIFY_NAME.link
+                }
+                currentLink.contains(StringConstants.APPLE_MUSIC_PACKAGE.link) -> {
+                    return StringConstants.APPLE_MUSIC_NAME.link
+                }
+                currentLink.contains(StringConstants.ANGHAMI_PACKAGE.link) -> {
+                    return StringConstants.ANGHAMI_NAME.link
+                }
+                currentLink.contains(StringConstants.DEEZER_PACKAGE.link) -> {
+                    return StringConstants.DEEZER_NAME.link
+                }
+                currentLink.contains(StringConstants.YT_MUSIC_PACKAGE.link) -> {
+                    return StringConstants.YT_MUSIC_NAME.link
+                }
+                else -> return ""
             }
         }
 

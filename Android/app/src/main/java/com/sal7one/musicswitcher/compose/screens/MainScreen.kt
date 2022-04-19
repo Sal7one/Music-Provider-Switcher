@@ -2,7 +2,6 @@ package com.sal7one.musicswitcher.compose.screens
 
 import android.content.Intent
 import android.net.Uri
-import android.util.Log
 import android.widget.Toast
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -133,7 +132,6 @@ fun MainScreen() {
         )
         Spacer(modifier = Modifier.height(20.dp))
 
-        Log.d("test0000", "currentProvider = $currentProvider")
         Row(
             horizontalArrangement = Arrangement.SpaceEvenly,
             modifier = Modifier.fillMaxWidth()
