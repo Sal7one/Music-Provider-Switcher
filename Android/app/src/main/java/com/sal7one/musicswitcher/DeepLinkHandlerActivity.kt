@@ -45,10 +45,10 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
         }
 
         // Instantiate the RequestQueue.
-
         viewModel.sameApp.observe(this) {
             if (it) {
                 val appPackage = MusicHelpers.getMusicAppPackage(data.toString())
+                // Same provider - sameApp
                 openApp(action, data, appPackage)
             }
         }
@@ -65,7 +65,7 @@ class DeepLinkHandlerActivity : AppCompatActivity() {
                         val searchURL = viewModel.searchLink.value
                         val query: String = Uri.encode(songName, "utf-8")
 
-                        // Different Provider
+                        // Different Provider - differentApp
                         val uri = Uri.parse(searchURL + query)
                         openApp(Intent.ACTION_VIEW, uri, viewModel.musicPackage.value!!)
                     },
