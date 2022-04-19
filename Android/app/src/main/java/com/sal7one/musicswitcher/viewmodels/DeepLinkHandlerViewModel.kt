@@ -12,7 +12,6 @@ import com.sal7one.musicswitcher.utils.StringConstants
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
 
 class DeepLinkHandlerViewModel(
@@ -96,6 +95,7 @@ class DeepLinkHandlerViewModel(
             updatePackage(provider)
         }
     }
+
     // For composable this is better
     private fun getLoadingOption() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {

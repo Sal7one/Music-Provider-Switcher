@@ -18,7 +18,8 @@ class DataStoreProvider(private val context: Context) {
         val loadingChoice = booleanPreferencesKey(StringConstants.LOADING_PREFERENCES_KEY.link)
 
         // If Exception to ignore deep linking is needed
-        val appleMusicException = booleanPreferencesKey(StringConstants.APPLE_M_PREFERENCES_KEY.link)
+        val appleMusicException =
+            booleanPreferencesKey(StringConstants.APPLE_M_PREFERENCES_KEY.link)
         val spotifyException = booleanPreferencesKey(StringConstants.SPOTIFY_PREFERENCES_KEY.link)
         val anghamiException = booleanPreferencesKey(StringConstants.ANGHAMI_PREFERENCES_KEY.link)
         val ytMusicException = booleanPreferencesKey(StringConstants.YT_MUSIC_PREFERENCES_KEY.link)

@@ -20,7 +20,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.sal7one.musicswitcher.R
-import com.sal7one.musicswitcher.compose.components.Switch
+import com.sal7one.musicswitcher.compose.components.OptionList
 import com.sal7one.musicswitcher.compose.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 import com.sal7one.musicswitcher.repository.DataStoreProvider
@@ -161,33 +161,6 @@ fun OptionScreen() {
                 context.getString(R.string.updated_options),
                 Toast.LENGTH_LONG
             ).show()
-        }
-    }
-}
-
-@Composable
-fun OptionList(
-    text: String, state: Boolean, onCheckChanged: (Boolean) -> Unit
-) {
-    Column(
-        verticalArrangement = Arrangement.SpaceBetween,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Row(
-            horizontalArrangement = Arrangement.SpaceBetween,
-            verticalAlignment = Alignment.CenterVertically, modifier = Modifier.fillMaxWidth()
-        ) {
-            Box(modifier = Modifier.padding(start = 51.dp)) {
-                Text(
-                    text = text,
-                    style = TextStyle(fontSize = 21.sp)
-                )
-            }
-            Box(modifier = Modifier.padding(end = 65.dp)) {
-                Switch(state) {
-                    onCheckChanged(it)
-                }
-            }
         }
     }
 }
