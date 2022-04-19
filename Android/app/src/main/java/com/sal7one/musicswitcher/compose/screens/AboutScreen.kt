@@ -89,6 +89,7 @@ fun AboutScreen() {
                 style = MaterialTheme.typography.h2
             )
         }
+        Spacer(modifier = Modifier.height(20.dp))
         Text(
             text = stringResource(R.string.about_developer),
             modifier = Modifier.padding(start = 10.dp),
@@ -105,6 +106,5 @@ fun AboutScreen() {
             modifier = Modifier.padding(start = 10.dp),
             style = MaterialTheme.typography.h2
         )
-        Spacer(modifier = Modifier.height(20.dp))
     }
 }
