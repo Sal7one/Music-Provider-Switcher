@@ -13,7 +13,13 @@ import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Column
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Text
 import androidx.compose.runtime.collectAsState
+import androidx.compose.ui.Alignment
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
 import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
@@ -69,7 +75,21 @@ class DeepLinkHandlerActivity : ComponentActivity() {
                         model = R.drawable.loading,
                         imageLoader = imageLoader
                     )
-                    Image(painter = painter, contentDescription = getString(R.string.loading_icon))
+                    Column(
+                        verticalArrangement = Arrangement.Center,
+                        horizontalAlignment = Alignment.CenterHorizontally
+                    ) {
+                        Image(
+                            painter = painter,
+                            contentDescription = getString(R.string.loading_icon)
+                        )
+                        Text(
+                            getString(R.string.depend_on_intenet_tip),
+                            style = MaterialTheme.typography.body1.copy(
+                                Color.White
+                            )
+                        )
+                    }
                 }
             }
 
@@ -111,7 +131,6 @@ class DeepLinkHandlerActivity : ComponentActivity() {
                 }
             }
         }
-
     }
 
     private fun openApp(iAction: String?, iUri: Uri, appPackage: String) {

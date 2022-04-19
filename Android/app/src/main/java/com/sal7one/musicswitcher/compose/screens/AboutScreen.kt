@@ -58,7 +58,7 @@ fun AboutScreen() {
             Image(
                 painter = painterResource(R.drawable.mypic),
                 contentDescription = stringResource(R.string.cd_dev_image),
-                contentScale = ContentScale.Crop,  // crop the image if it's not a square
+                contentScale = ContentScale.Fit,  // crop the image if it's not a square
                 modifier = Modifier
                     .size(85.dp)
                     .clip(CircleShape) // clip to the circle shape
