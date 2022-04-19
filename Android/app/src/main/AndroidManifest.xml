@@ -11,7 +11,7 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.MusicSwitcher">
         <activity
-            android:name=".compose.MainUi"
+            android:name=".compose.MainActivity"
             android:exported="true"
             android:label="@string/title_activity_main_ui"
             android:theme="@style/Theme.MusicSwitcher">

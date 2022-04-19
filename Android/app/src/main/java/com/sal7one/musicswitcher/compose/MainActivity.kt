@@ -8,7 +8,7 @@ import androidx.core.content.ContextCompat
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.compose.ui.theme.MusicSwitcherTheme
 
-class MainUi : ComponentActivity() {
+class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {

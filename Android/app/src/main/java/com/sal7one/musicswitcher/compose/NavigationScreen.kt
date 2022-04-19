@@ -6,12 +6,12 @@ import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
 import androidx.compose.ui.graphics.vector.ImageVector
 
-sealed class Screen(
+sealed class NavigationScreen(
     val route: String,
     val icon: ImageVector,
     val iconDescription: String
 ) {
-    object MainScreen : Screen("home", Icons.Default.Home, "Home")
-    object Options : Screen("options", Icons.Default.Edit, "Edit")
-    object About : Screen("about", Icons.Default.Info, "About")
+    object MainScreen : NavigationScreen("home", Icons.Default.Home, "Home")
+    object Options : NavigationScreen("options", Icons.Default.Edit, "Edit")
+    object About : NavigationScreen("about", Icons.Default.Info, "About")
 }

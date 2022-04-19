@@ -22,9 +22,9 @@ import com.sal7one.musicswitcher.compose.ui.theme.BottomNav_unselected_color
 fun ApplicationScreen() {
     // Routes for bottom navigation
     val items = listOf(
-        Screen.MainScreen,
-        Screen.Options,
-        Screen.About,
+        NavigationScreen.MainScreen,
+        NavigationScreen.Options,
+        NavigationScreen.About,
     )
     val navController = rememberNavController()
     Scaffold(
