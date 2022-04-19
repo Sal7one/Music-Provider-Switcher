@@ -28,7 +28,8 @@
         <activity
             android:name=".DeepLinkHandlerActivity"
             android:exported="true"
-            android:theme="@style/Theme.deepLinker">
+            android:launchMode="singleInstance"
+            android:theme="@style/Theme.AppCompat.Dialog">
             <intent-filter android:autoVerify="false">
                 <action android:name="android.intent.action.VIEW" />
 
