@@ -34,4 +34,6 @@
     <string name="updated_excpetions">Updated Exceptions</string>
     <string name="updated_options">Updated Options</string>
     <string name="depend_on_intenet_tip">This depends on your internet speed</string>
+    <string name="Choose_an_option">Chose an option to update</string>
+    <string name="pref_updated">Preference Updated!</string>
 </resources>

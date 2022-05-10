@@ -77,7 +77,7 @@ class MusicHelpers {
             )
             responseString = responseString.replace("song by", " ")
 
-            if (url.contains("music.apple.com")) {
+            if (url.contains(StringConstants.APPLE_MUSIC.value)) {
                 responseString = responseString.replace("لـ", " ")  // apple music problems
                 responseString = responseString.replace("ع", " ") // apple music problems
                 responseString =

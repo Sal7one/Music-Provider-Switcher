@@ -5,8 +5,8 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.material.Scaffold
 import androidx.core.content.ContextCompat
-import com.sal7one.musicswitcher.compose.ApplicationScreen
-import com.sal7one.musicswitcher.compose.ui.theme.MusicSwitcherTheme
+import com.sal7one.musicswitcher.ui.ApplicationScreen
+import com.sal7one.musicswitcher.ui.ui.theme.MusicSwitcherTheme
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
