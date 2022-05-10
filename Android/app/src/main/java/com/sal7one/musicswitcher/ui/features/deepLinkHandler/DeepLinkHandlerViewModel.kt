@@ -15,7 +15,10 @@ import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableSharedFlow
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asSharedFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -31,10 +34,10 @@ class DeepLinkHandlerViewModel @Inject constructor(
     private var _songURI = MutableSharedFlow<String>()
     val songURI = _songURI.asSharedFlow()
 
-    private val providerExceptionsState = MutableStateFlow(ProviderExceptionsUiData())
-
     private val _musicProviderState = MutableStateFlow(ChooseMusicProviderUiData())
     val musicProviderState: StateFlow<ChooseMusicProviderUiData> = _musicProviderState
+
+    private val providerExceptionsState = MutableStateFlow(ProviderExceptionsUiData())
 
     var musicPackage = ""
     private var searchLink = ""

@@ -16,8 +16,8 @@ android {
         applicationId "com.sal7one.musicswitcher"
         minSdk 23
         targetSdk 32
-        versionCode 250
-        versionName "2.5.0"
+        versionCode 260
+        versionName "2.6.0"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
