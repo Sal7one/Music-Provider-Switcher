@@ -5,9 +5,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import com.sal7one.musicswitcher.ui.screens.AboutScreen
-import com.sal7one.musicswitcher.ui.screens.ChooseMusicProviderScreen
-import com.sal7one.musicswitcher.ui.screens.OptionScreen
+import com.sal7one.musicswitcher.ui.features.about.AboutScreen
+import com.sal7one.musicswitcher.ui.features.chooseMusicProvider.ChooseMusicProviderScreen
+import com.sal7one.musicswitcher.ui.features.options.OptionScreen
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable

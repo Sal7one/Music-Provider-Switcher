@@ -8,9 +8,9 @@ import androidx.datastore.preferences.core.stringPreferencesKey
 import com.sal7one.musicswitcher.utils.StringConstants
 import javax.inject.Inject
 
-class DataStoreProvider @Inject constructor(
+class MusicPreferenceDataStore @Inject constructor(
     private val dataStore: DataStore<Preferences>
-) {
+)  {
 
     object StoredKeys {
         val musicProvider = stringPreferencesKey(StringConstants.MUSIC_PREFERENCES_KEY.value)

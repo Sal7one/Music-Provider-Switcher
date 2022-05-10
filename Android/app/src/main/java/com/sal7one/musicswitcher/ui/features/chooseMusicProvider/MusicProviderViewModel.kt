@@ -1,9 +1,9 @@
-package com.sal7one.musicswitcher.ui.features.ChooseMusicProvider
+package com.sal7one.musicswitcher.ui.features.chooseMusicProvider
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.sal7one.musicswitcher.domain.repository.DataStoreProvider
 import com.sal7one.musicswitcher.domain.model.ChooseMusicProviderUiData
+import com.sal7one.musicswitcher.domain.repository.MusicPreferenceDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -14,11 +14,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class MusicProviderViewModel @Inject constructor(
-    private val dataStoreManager: DataStoreProvider
+    private val dataStoreManager: MusicPreferenceDataStore,
 ) : ViewModel() {
 
     private val _chooseMusicProviderScreenUiState = MutableStateFlow(ChooseMusicProviderUiData())
-    val chooseMusicProviderScreenUiState: StateFlow<ChooseMusicProviderUiData> = _chooseMusicProviderScreenUiState
+    val chooseMusicProviderScreenUiState: StateFlow<ChooseMusicProviderUiData> =
+        _chooseMusicProviderScreenUiState
 
     init {
         getData()
@@ -51,9 +52,9 @@ class MusicProviderViewModel @Inject constructor(
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
-            val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
-            val album = it[DataStoreProvider.StoredKeys.albumChoice] ?: false
+            val provider = it[MusicPreferenceDataStore.StoredKeys.musicProvider] ?: ""
+            val playList = it[MusicPreferenceDataStore.StoredKeys.playlistChoice] ?: false
+            val album = it[MusicPreferenceDataStore.StoredKeys.albumChoice] ?: false
 
             _chooseMusicProviderScreenUiState.value = ChooseMusicProviderUiData(
                 provider = provider,

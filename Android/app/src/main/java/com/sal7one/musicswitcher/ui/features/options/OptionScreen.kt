@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.ui.screens
+package com.sal7one.musicswitcher.ui.features.options
 
 import android.widget.Toast
 import androidx.compose.foundation.background
@@ -18,11 +18,10 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.domain.musicProviders
 import com.sal7one.musicswitcher.ui.common.OptionList
-import com.sal7one.musicswitcher.ui.features.Options.OptionsViewModel
 import com.sal7one.musicswitcher.ui.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.ui.ui.theme.primary_gradient_color
 
@@ -30,15 +29,15 @@ import com.sal7one.musicswitcher.ui.ui.theme.primary_gradient_color
 @Composable
 fun OptionScreen() {
     val context = LocalContext.current
-    val viewModel: OptionsViewModel = viewModel()
-    val theScreenUiState = viewModel.optionScreenState.collectAsState()
+    val viewModel = hiltViewModel<OptionsViewModel>()
+    val optionScreenUiState = viewModel.optionScreenState.collectAsState()
 
-    val appleMusicChoice = theScreenUiState.value.appleMusic
-    val spotifyChoice = theScreenUiState.value.spotify
-    val anghamiChoice = theScreenUiState.value.anghami
-    val ytMusicChoice = theScreenUiState.value.ytMusic
-    val deezerChoice = theScreenUiState.value.deezer
-    val loadingChoice = theScreenUiState.value.loading
+    val appleMusicChoice = optionScreenUiState.value.appleMusic
+    val spotifyChoice = optionScreenUiState.value.spotify
+    val anghamiChoice = optionScreenUiState.value.anghami
+    val ytMusicChoice = optionScreenUiState.value.ytMusic
+    val deezerChoice = optionScreenUiState.value.deezer
+    val loadingChoice = optionScreenUiState.value.loading
 
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,

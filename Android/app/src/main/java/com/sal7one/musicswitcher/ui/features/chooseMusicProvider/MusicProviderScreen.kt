@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.ui.screens
+package com.sal7one.musicswitcher.ui.features.chooseMusicProvider
 
 import android.content.Intent
 import android.net.Uri
@@ -10,7 +10,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.gestures.detectTapGestures
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -31,8 +30,9 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.hilt.navigation.compose.hiltViewModel
 import com.sal7one.musicswitcher.R
+import com.sal7one.musicswitcher.domain.musicProviders
 import com.sal7one.musicswitcher.ui.common.CustomDialog
 import com.sal7one.musicswitcher.ui.common.MusicProviderCard
 import com.sal7one.musicswitcher.ui.common.Switch
@@ -40,16 +40,13 @@ import com.sal7one.musicswitcher.ui.common.UpdateButton
 import com.sal7one.musicswitcher.ui.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.ui.ui.theme.TextSecondary_color
 import com.sal7one.musicswitcher.ui.ui.theme.primary_gradient_color
-import com.sal7one.musicswitcher.domain.musicProviders
-import com.sal7one.musicswitcher.ui.features.ChooseMusicProvider.MusicProviderViewModel
 
 
-@ExperimentalMaterialApi
 @Composable
 fun ChooseMusicProviderScreen() {
     val context = LocalContext.current
     val showExplainDialog = remember { mutableStateOf(false) }
-    val viewModel: MusicProviderViewModel = viewModel()
+    val viewModel = hiltViewModel<MusicProviderViewModel>()
     val theScreenUiState = viewModel.chooseMusicProviderScreenUiState.collectAsState()
 
     val currentProvider = theScreenUiState.value.provider
@@ -213,7 +210,11 @@ fun ChooseMusicProviderScreen() {
                         playlistChoice,
                         albumChoice,
                     )
-                    Toast.makeText(context, context.getString(R.string.pref_updated), Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        context,
+                        context.getString(R.string.pref_updated),
+                        Toast.LENGTH_SHORT
+                    ).show()
                 } else {
                     Toast.makeText(
                         context,

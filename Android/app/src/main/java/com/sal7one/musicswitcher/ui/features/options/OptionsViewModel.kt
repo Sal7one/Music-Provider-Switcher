@@ -1,9 +1,9 @@
-package com.sal7one.musicswitcher.ui.features.Options
+package com.sal7one.musicswitcher.ui.features.options
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.sal7one.musicswitcher.domain.model.ChooseMusicProviderUiData
-import com.sal7one.musicswitcher.domain.repository.DataStoreProvider
+import com.sal7one.musicswitcher.domain.repository.MusicPreferenceDataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,7 +15,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class OptionsViewModel @Inject constructor(
-    private val dataStoreManager: DataStoreProvider
+    private val dataStoreManager: MusicPreferenceDataStore
 ) : ViewModel() {
 
     private val _optionsViewModelStateFlow = MutableStateFlow(ChooseMusicProviderUiData())
@@ -75,12 +75,12 @@ class OptionsViewModel @Inject constructor(
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            val appleMusic = it[DataStoreProvider.StoredKeys.appleMusicException] ?: false
-            val spotify = it[DataStoreProvider.StoredKeys.spotifyException] ?: false
-            val anghami = it[DataStoreProvider.StoredKeys.anghamiException] ?: false
-            val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
-            val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
-            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: true
+            val appleMusic = it[MusicPreferenceDataStore.StoredKeys.appleMusicException] ?: false
+            val spotify = it[MusicPreferenceDataStore.StoredKeys.spotifyException] ?: false
+            val anghami = it[MusicPreferenceDataStore.StoredKeys.anghamiException] ?: false
+            val ytMusic = it[MusicPreferenceDataStore.StoredKeys.ytMusicException] ?: false
+            val deezer = it[MusicPreferenceDataStore.StoredKeys.deezerException] ?: false
+            val loading = it[MusicPreferenceDataStore.StoredKeys.loadingChoice] ?: true
 
             _optionsViewModelStateFlow.value = ChooseMusicProviderUiData(
                 appleMusic = appleMusic,

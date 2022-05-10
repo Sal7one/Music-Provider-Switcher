@@ -10,7 +10,7 @@ import com.android.volley.toolbox.StringRequest
 import com.sal7one.musicswitcher.domain.model.ChooseMusicProviderUiData
 import com.sal7one.musicswitcher.domain.model.DeepLinkUiData
 import com.sal7one.musicswitcher.domain.model.ProviderExceptionsUiData
-import com.sal7one.musicswitcher.domain.repository.DataStoreProvider
+import com.sal7one.musicswitcher.domain.repository.MusicPreferenceDataStore
 import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.utils.StringConstants
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -21,7 +21,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DeepLinkHandlerViewModel @Inject constructor(
-    private val dataStoreManager: DataStoreProvider,
+    private val dataStoreManager: MusicPreferenceDataStore,
     private val queue: RequestQueue,
 ) : ViewModel() {
 
@@ -46,15 +46,15 @@ class DeepLinkHandlerViewModel @Inject constructor(
 
     private fun getData() = viewModelScope.launch(Dispatchers.IO) {
         dataStoreManager.getFromDataStore().collect {
-            val provider = it[DataStoreProvider.StoredKeys.musicProvider] ?: ""
-            val playList = it[DataStoreProvider.StoredKeys.playlistChoice] ?: false
-            val album = it[DataStoreProvider.StoredKeys.albumChoice] ?: false
-            val appleMusic = it[DataStoreProvider.StoredKeys.appleMusicException] ?: false
-            val spotify = it[DataStoreProvider.StoredKeys.spotifyException] ?: false
-            val anghami = it[DataStoreProvider.StoredKeys.anghamiException] ?: false
-            val ytMusic = it[DataStoreProvider.StoredKeys.ytMusicException] ?: false
-            val deezer = it[DataStoreProvider.StoredKeys.deezerException] ?: false
-            val loading = it[DataStoreProvider.StoredKeys.loadingChoice] ?: false
+            val provider = it[MusicPreferenceDataStore.StoredKeys.musicProvider] ?: ""
+            val playList = it[MusicPreferenceDataStore.StoredKeys.playlistChoice] ?: false
+            val album = it[MusicPreferenceDataStore.StoredKeys.albumChoice] ?: false
+            val appleMusic = it[MusicPreferenceDataStore.StoredKeys.appleMusicException] ?: false
+            val spotify = it[MusicPreferenceDataStore.StoredKeys.spotifyException] ?: false
+            val anghami = it[MusicPreferenceDataStore.StoredKeys.anghamiException] ?: false
+            val ytMusic = it[MusicPreferenceDataStore.StoredKeys.ytMusicException] ?: false
+            val deezer = it[MusicPreferenceDataStore.StoredKeys.deezerException] ?: false
+            val loading = it[MusicPreferenceDataStore.StoredKeys.loadingChoice] ?: false
 
             providerExceptionsState.value = ProviderExceptionsUiData(
                 appleMusicChoice = appleMusic,
