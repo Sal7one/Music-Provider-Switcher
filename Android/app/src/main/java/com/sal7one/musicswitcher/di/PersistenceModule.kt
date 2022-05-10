@@ -23,7 +23,7 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 @Module
 object PersistenceModule {
-    private val MUSIC_PREFERENCES = StringConstants.MUSIC_PREFERENCES_DATASTORE.link
+    private val MUSIC_PREFERENCES = StringConstants.MUSIC_PREFERENCES_DATASTORE.value
 
     @Singleton
     @Provides

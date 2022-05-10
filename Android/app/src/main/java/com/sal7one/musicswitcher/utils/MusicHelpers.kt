@@ -10,17 +10,17 @@ class MusicHelpers {
             var end = 0
 
             when {
-                url.contains(StringConstants.SPOTIFY.link) -> {
+                url.contains(StringConstants.SPOTIFY.value) -> {
                     end = 9
                 }
-                url.contains(StringConstants.APPLE_MUSIC.link) -> {
+                url.contains(StringConstants.APPLE_MUSIC.value) -> {
                     end = 14
 
                 }
-                url.contains(StringConstants.ANGHAMI.link) -> {
+                url.contains(StringConstants.ANGHAMI.value) -> {
                     end = 17
                 }
-                url.contains(StringConstants.DEEZER.link) -> {
+                url.contains(StringConstants.DEEZER.value) -> {
                     end = 29
                     responseString = response.substring(
                         response.indexOf("<title>") + begin,
@@ -35,7 +35,7 @@ class MusicHelpers {
                     return HtmlCompat.fromHtml(songNameFirst, HtmlCompat.FROM_HTML_MODE_LEGACY)
                         .toString() // Escape special characters in html ' == N&#039;
                 }
-                url.contains(StringConstants.YT_MUSIC.link) -> {
+                url.contains(StringConstants.YT_MUSIC.value) -> {
                     end = 16
 
                     if (typeofLink(url) == "playlist") {
@@ -88,41 +88,41 @@ class MusicHelpers {
 
         fun getMusicAppPackage(currentLink: String): String {
             when {
-                currentLink.contains(StringConstants.SPOTIFY.link) -> {
-                    return StringConstants.SPOTIFY_PACKAGE.link
+                currentLink.contains(StringConstants.SPOTIFY.value) -> {
+                    return StringConstants.SPOTIFY_PACKAGE.value
                 }
-                currentLink.contains(StringConstants.APPLE_MUSIC.link) -> {
-                    return StringConstants.APPLE_MUSIC_PACKAGE.link
+                currentLink.contains(StringConstants.APPLE_MUSIC.value) -> {
+                    return StringConstants.APPLE_MUSIC_PACKAGE.value
                 }
-                currentLink.contains(StringConstants.ANGHAMI.link) -> {
-                    return StringConstants.ANGHAMI_PACKAGE.link
+                currentLink.contains(StringConstants.ANGHAMI.value) -> {
+                    return StringConstants.ANGHAMI_PACKAGE.value
                 }
-                currentLink.contains(StringConstants.DEEZER.link) -> {
-                    return StringConstants.DEEZER_PACKAGE.link
+                currentLink.contains(StringConstants.DEEZER.value) -> {
+                    return StringConstants.DEEZER_PACKAGE.value
                 }
-                currentLink.contains(StringConstants.YT_MUSIC.link) -> {
-                    return StringConstants.YT_MUSIC_PACKAGE.link
+                currentLink.contains(StringConstants.YT_MUSIC.value) -> {
+                    return StringConstants.YT_MUSIC_PACKAGE.value
                 }
-                else -> return StringConstants.SPOTIFY_PACKAGE.link
+                else -> return StringConstants.SPOTIFY_PACKAGE.value
             }
         }
 
         fun packageNameToApp(currentLink: String): String {
             when {
-                currentLink.contains(StringConstants.SPOTIFY_PACKAGE.link) -> {
-                    return StringConstants.SPOTIFY_NAME.link
+                currentLink.contains(StringConstants.SPOTIFY_PACKAGE.value) -> {
+                    return StringConstants.SPOTIFY_NAME.value
                 }
-                currentLink.contains(StringConstants.APPLE_MUSIC_PACKAGE.link) -> {
-                    return StringConstants.APPLE_MUSIC_NAME.link
+                currentLink.contains(StringConstants.APPLE_MUSIC_PACKAGE.value) -> {
+                    return StringConstants.APPLE_MUSIC_NAME.value
                 }
-                currentLink.contains(StringConstants.ANGHAMI_PACKAGE.link) -> {
-                    return StringConstants.ANGHAMI_NAME.link
+                currentLink.contains(StringConstants.ANGHAMI_PACKAGE.value) -> {
+                    return StringConstants.ANGHAMI_NAME.value
                 }
-                currentLink.contains(StringConstants.DEEZER_PACKAGE.link) -> {
-                    return StringConstants.DEEZER_NAME.link
+                currentLink.contains(StringConstants.DEEZER_PACKAGE.value) -> {
+                    return StringConstants.DEEZER_NAME.value
                 }
-                currentLink.contains(StringConstants.YT_MUSIC_PACKAGE.link) -> {
-                    return StringConstants.YT_MUSIC_NAME.link
+                currentLink.contains(StringConstants.YT_MUSIC_PACKAGE.value) -> {
+                    return StringConstants.YT_MUSIC_NAME.value
                 }
                 else -> return ""
             }
@@ -130,14 +130,16 @@ class MusicHelpers {
 
         fun typeofLink(url: String): String {
             return when {
-                url.contains("/playlist/") or url.contains("playlist?") -> "playlist"
+                url.contains("/playlist/") or url.contains("playlist?") -> StringConstants.LINK_TYPE_PLAYLIST.value
                 url.contains("/album/") -> {
                     if (url.contains("?i=")) // apple music song
-                        "song"
+                        StringConstants.LINK_TYPE_SONG.value
+
                     else
-                        "album"
+                        StringConstants.LINK_TYPE_ALBUM.value
                 }
-                else -> "song"
+                else -> StringConstants.LINK_TYPE_SONG.value
+
             }
         }
     }

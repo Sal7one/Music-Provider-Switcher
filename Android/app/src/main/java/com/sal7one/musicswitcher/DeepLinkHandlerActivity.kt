@@ -22,7 +22,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.lifecycle.ViewModelProvider
 import coil.ImageLoader
 import coil.compose.rememberAsyncImagePainter
 import coil.decode.GifDecoder
@@ -41,7 +40,6 @@ import dagger.hilt.android.AndroidEntryPoint
 class DeepLinkHandlerActivity : ComponentActivity() {
 
     private lateinit var data: Uri
-    private lateinit var dataStoreProvider: DataStoreProvider
     private var action: String? = null
     private val viewModel: DeepLinkHandlerViewModel by viewModels()
 

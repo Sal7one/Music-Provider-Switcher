@@ -1,7 +1,10 @@
 package com.sal7one.musicswitcher.utils
 
-enum class StringConstants(val link: String) {
+enum class StringConstants(val value: String) {
     SPOTIFY_SEARCH("https://open.spotify.com/search/"),
+    LINK_TYPE_SONG("song"),
+    LINK_TYPE_ALBUM("album"),
+    LINK_TYPE_PLAYLIST("playlist"),
     APPLE_MUSIC_SEARCH("http://music.apple.com/us/search?term="),
     ANGHAMI_SEARCH("https://play.anghami.com/search/"),
     DEEZER_SEARCH("deezer://www.deezer.com/search/"),

@@ -34,23 +34,23 @@ fun MusicProviderCard(
 
     if (MusicProvider.nameReference == chosenProvider) {
         when (chosenProvider) {
-            StringConstants.APPLE_MUSIC.link -> {
+            StringConstants.APPLE_MUSIC.value -> {
                 cardColor = apple_clicked_color
                 shadowColor = apple_clicked_color
             }
-            StringConstants.SPOTIFY.link -> {
+            StringConstants.SPOTIFY.value -> {
                 cardColor = spotify_clicked_color
                 shadowColor = spotify_clicked_color
             }
-            StringConstants.ANGHAMI.link -> {
+            StringConstants.ANGHAMI.value -> {
                 cardColor = anghami_clicked_color
                 shadowColor = anghami_clicked_color
             }
-            StringConstants.YT_MUSIC.link -> {
+            StringConstants.YT_MUSIC.value -> {
                 cardColor = ytMusic_clicked_color
                 shadowColor = ytMusic_clicked_color
             }
-            StringConstants.DEEZER.link -> {
+            StringConstants.DEEZER.value -> {
                 cardColor = deezer_clicked_color
                 shadowColor = deezer_clicked_color
             }
