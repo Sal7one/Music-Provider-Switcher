@@ -29,10 +29,12 @@ class DeepLinkHandlerViewModel @Inject constructor(
     val deepLinkScreenState: StateFlow<DeepLinkUiData> = _deepLinkScreenState
 
     private var _songURI = MutableSharedFlow<String>()
-    val songURI: SharedFlow<String> = _songURI.asSharedFlow()
+    val songURI = _songURI.asSharedFlow()
 
     private val providerExceptionsState = MutableStateFlow(ProviderExceptionsUiData())
-    private val musicProviderState = MutableStateFlow(ChooseMusicProviderUiData())
+
+    private val _musicProviderState = MutableStateFlow(ChooseMusicProviderUiData())
+    val musicProviderState: StateFlow<ChooseMusicProviderUiData> = _musicProviderState
 
     var musicPackage = ""
     private var searchLink = ""
@@ -56,19 +58,23 @@ class DeepLinkHandlerViewModel @Inject constructor(
             val deezer = it[MusicPreferenceDataStore.StoredKeys.deezerException] ?: false
             val loading = it[MusicPreferenceDataStore.StoredKeys.loadingChoice] ?: false
 
+            _deepLinkScreenState.value = DeepLinkUiData(
+                loading = loading
+            )
+
+            _musicProviderState.value = ChooseMusicProviderUiData(
+                provider = provider,
+                playListChoice = playList,
+                albumChoice = album,
+                loading = loading
+            )
+
             providerExceptionsState.value = ProviderExceptionsUiData(
                 appleMusicChoice = appleMusic,
                 spotifyChoice = spotify,
                 anghamiChoice = anghami,
                 ytMusicChoice = ytMusic,
                 deezerChoice = deezer
-            )
-
-            musicProviderState.value = ChooseMusicProviderUiData(
-                provider = provider,
-                playListChoice = playList,
-                albumChoice = album,
-                loading = loading
             )
             updatePackage(provider)
         }
@@ -89,7 +95,7 @@ class DeepLinkHandlerViewModel @Inject constructor(
                     _songURI.emit(uri.toString())
                 }
             }, {
-                Log.e("DEEP_LINK", "Volley Error")
+                Log.e("DEEP_Link", "Volley Error")
             }
         )
         queue.add(songRequest)

@@ -8,6 +8,7 @@ import android.net.Uri
 import android.os.Build
 import android.os.Build.VERSION.SDK_INT
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -19,6 +20,7 @@ import com.sal7one.musicswitcher.ui.ui.theme.MusicSwitcherTheme
 import com.sal7one.musicswitcher.utils.MusicHelpers
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
@@ -42,13 +44,16 @@ class DeepLinkHandlerActivity : ComponentActivity() {
         // Intent Data
         songData = intent?.data!!
 
-        // Data from datastore
         lifecycleScope.launchWhenStarted {
-            viewModel.deepLinkScreenState.collectLatest {
-                viewModel.handleDeepLink(songData)
+            launch {
+                viewModel.musicProviderState.collectLatest {
+                    viewModel.handleDeepLink(songData)
+                }
             }
-            viewModel.songURI.collectLatest { uri ->
-                openApp(Uri.parse(uri))
+            launch {
+                viewModel.songURI.collectLatest { uri ->
+                    openApp(Uri.parse(uri))
+                }
             }
         }
     }
