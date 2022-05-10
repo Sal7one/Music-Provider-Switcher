@@ -26,7 +26,6 @@ import com.sal7one.musicswitcher.compose.ui.theme.primary_gradient_color
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.musicProviders
 import com.sal7one.musicswitcher.viewmodels.OptionsViewModel
-import com.sal7one.musicswitcher.viewmodels.OptionsViewModelFactory
 
 
 @Composable

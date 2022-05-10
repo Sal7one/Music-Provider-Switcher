@@ -9,11 +9,13 @@ import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.repository.model.TheScreenUiData
 import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.utils.StringConstants
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 
+@HiltViewModel
 class DeepLinkHandlerViewModel(
     private val dataStoreManager: DataStoreProvider
 ) : ViewModel() {

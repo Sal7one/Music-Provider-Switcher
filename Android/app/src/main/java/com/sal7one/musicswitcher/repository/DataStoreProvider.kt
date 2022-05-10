@@ -8,8 +8,11 @@ import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.sal7one.musicswitcher.utils.StringConstants
+import javax.inject.Inject
 
-class DataStoreProvider(private val context: Context) {
+class DataStoreProvider @Inject constructor(
+    private val dataStore: DataStore<Preferences>
+)  {
 
     object StoredKeys {
         val musicProvider = stringPreferencesKey(StringConstants.MUSIC_PREFERENCES_KEY.link)
@@ -26,26 +29,6 @@ class DataStoreProvider(private val context: Context) {
         val deezerException = booleanPreferencesKey(StringConstants.DEEZER_PREFERENCES_KEY.link)
     }
 
-    companion object {
-        // One instance of this to avoid leaks
-        private val Context.dataStore: DataStore<Preferences> by
-        preferencesDataStore(name = StringConstants.MUSIC_PREFERENCES_DATASTORE.link)
-    }
-
-    // We're passing application context
-    private var instance: DataStoreProvider? = null
-
-    fun getInstance(): DataStoreProvider {
-        return instance ?: synchronized(this) {
-            instance?.let {
-                return it
-            }
-            val instance = DataStoreProvider(context)
-            this.instance = instance
-            instance
-        }
-    }
-
     suspend fun saveExceptions(
         appleMusic: Boolean,
         spotify: Boolean,
@@ -54,7 +37,7 @@ class DataStoreProvider(private val context: Context) {
         deezer: Boolean,
         userLoadingChoice: Boolean
     ) {
-        context.dataStore.edit { preference ->
+        dataStore.edit { preference ->
             preference[StoredKeys.appleMusicException] = appleMusic
             preference[StoredKeys.spotifyException] = spotify
             preference[StoredKeys.anghamiException] = anghami
@@ -69,12 +52,12 @@ class DataStoreProvider(private val context: Context) {
         userPlaylist: Boolean,
         userAlbum: Boolean,
     ) {
-        context.dataStore.edit { preference ->
+        dataStore.edit { preference ->
             preference[StoredKeys.musicProvider] = userMusicProvider
             preference[StoredKeys.playlistChoice] = userPlaylist
             preference[StoredKeys.albumChoice] = userAlbum
         }
     }
 
-    fun getFromDataStore() = context.dataStore.data
+    fun getFromDataStore() = dataStore.data
 }

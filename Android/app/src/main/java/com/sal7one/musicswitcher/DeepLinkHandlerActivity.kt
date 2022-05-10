@@ -12,6 +12,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -33,24 +34,20 @@ import com.sal7one.musicswitcher.compose.ui.theme.MusicSwitcherTheme
 import com.sal7one.musicswitcher.repository.DataStoreProvider
 import com.sal7one.musicswitcher.utils.MusicHelpers
 import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModel
-import com.sal7one.musicswitcher.viewmodels.DeepLinkHandlerViewModelFactory
+import dagger.hilt.android.AndroidEntryPoint
 
 
+@AndroidEntryPoint
 class DeepLinkHandlerActivity : ComponentActivity() {
 
-    private lateinit var viewModel: DeepLinkHandlerViewModel
     private lateinit var data: Uri
     private lateinit var dataStoreProvider: DataStoreProvider
     private var action: String? = null
+    private val viewModel: DeepLinkHandlerViewModel by viewModels()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        dataStoreProvider = DataStoreProvider(applicationContext).getInstance()
-        viewModel = ViewModelProvider(
-            this,
-            DeepLinkHandlerViewModelFactory(dataStoreProvider)
-        )[DeepLinkHandlerViewModel::class.java]
 
         data = intent?.data!!
         intent?.action.also { action = it }
