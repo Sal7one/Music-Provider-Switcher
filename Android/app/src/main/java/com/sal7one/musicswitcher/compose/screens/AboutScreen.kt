@@ -23,6 +23,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.sal7one.musicswitcher.R
@@ -58,9 +59,8 @@ fun AboutScreen() {
             Image(
                 painter = painterResource(R.drawable.mypic),
                 contentDescription = stringResource(R.string.cd_dev_image),
-                contentScale = ContentScale.Fit,  // crop the image if it's not a square
                 modifier = Modifier
-                    .size(85.dp)
+                    .size(95.dp)
                     .clip(CircleShape) // clip to the circle shape
                     .border(
                         2.dp,
@@ -107,4 +107,10 @@ fun AboutScreen() {
             style = MaterialTheme.typography.h2
         )
     }
+}
+
+@Preview
+@Composable
+fun Prev_AboutScreen(){
+    AboutScreen()
 }

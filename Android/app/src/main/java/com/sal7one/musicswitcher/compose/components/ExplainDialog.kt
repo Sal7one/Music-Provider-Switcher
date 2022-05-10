@@ -31,9 +31,7 @@ fun CustomDialogUI(
     showExplainDialog: MutableState<Boolean>
 ) {
     Card(
-        //shape = MaterialTheme.shapes.medium,
         shape = RoundedCornerShape(10.dp),
-        // modifier = modifier.size(280.dp, 240.dp)
         modifier = Modifier.padding(10.dp, 5.dp, 10.dp, 10.dp),
         elevation = 8.dp
     ) {
@@ -57,7 +55,17 @@ fun CustomDialogUI(
                     showExplainDialog.value = false
                 }) {
                     Text(
-                        "Done!",
+                        "Done",
+                        fontWeight = FontWeight.ExtraBold,
+                        color = Color.White,
+                        modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
+                    )
+                }
+                TextButton(onClick = {
+                   // intent
+                }) {
+                    Text(
+                        "Open Settings",
                         fontWeight = FontWeight.ExtraBold,
                         color = Color.White,
                         modifier = Modifier.padding(top = 5.dp, bottom = 5.dp)
