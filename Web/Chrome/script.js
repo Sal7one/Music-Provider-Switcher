@@ -151,7 +151,8 @@ function observeTweets(){
 // Use Arrive js to obeserve all tweets (around 25 max are loaded and if the data changes this code will also run)
   try {
     document.arrive(`[data-testid="tweet"]`, arriveOptions, (tweet)=>{
-      tweet.addEventListener('mouseover', function() {
+      findMusicTweets();
+      document.addEventListener('scroll', function() {
         findMusicTweets();
       });
     })
