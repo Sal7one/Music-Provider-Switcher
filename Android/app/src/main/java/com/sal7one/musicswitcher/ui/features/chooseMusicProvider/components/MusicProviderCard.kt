@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.ui.ui.theme.*
 import com.sal7one.musicswitcher.domain.model.MusicProvider
+import com.sal7one.musicswitcher.ui.features.chooseMusicProvider.components.coloredShadow
 import com.sal7one.musicswitcher.utils.StringConstants
 
 @Composable

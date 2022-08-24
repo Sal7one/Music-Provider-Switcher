@@ -19,7 +19,6 @@ import com.sal7one.musicswitcher.R
 @Composable
 fun LoadingUi() {
     val context = LocalContext.current
-
     val imageLoader = ImageLoader.Builder(LocalContext.current)
         .components {
             if (Build.VERSION.SDK_INT >= 28) {

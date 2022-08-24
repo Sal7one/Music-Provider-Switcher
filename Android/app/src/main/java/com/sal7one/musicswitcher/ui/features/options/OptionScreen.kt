@@ -21,7 +21,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.domain.musicProviders
-import com.sal7one.musicswitcher.ui.common.OptionList
+import com.sal7one.musicswitcher.ui.features.options.components.OptionList
 import com.sal7one.musicswitcher.ui.ui.theme.AppPrimary_color
 import com.sal7one.musicswitcher.ui.ui.theme.primary_gradient_color
 
@@ -31,7 +31,6 @@ fun OptionScreen() {
     val context = LocalContext.current
     val viewModel = hiltViewModel<OptionsViewModel>()
     val optionScreenUiState = viewModel.optionScreenState.collectAsState()
-
     val appleMusicChoice = optionScreenUiState.value.appleMusic
     val spotifyChoice = optionScreenUiState.value.spotify
     val anghamiChoice = optionScreenUiState.value.anghami

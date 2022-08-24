@@ -33,7 +33,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.sal7one.musicswitcher.R
 import com.sal7one.musicswitcher.domain.musicProviders
-import com.sal7one.musicswitcher.ui.common.CustomDialog
+import com.sal7one.musicswitcher.ui.features.chooseMusicProvider.components.CustomDialog
 import com.sal7one.musicswitcher.ui.common.MusicProviderCard
 import com.sal7one.musicswitcher.ui.common.Switch
 import com.sal7one.musicswitcher.ui.common.UpdateButton
@@ -48,7 +48,6 @@ fun ChooseMusicProviderScreen() {
     val showExplainDialog = remember { mutableStateOf(false) }
     val viewModel = hiltViewModel<MusicProviderViewModel>()
     val theScreenUiState = viewModel.chooseMusicProviderScreenUiState.collectAsState()
-
     val currentProvider = theScreenUiState.value.provider
     val playlistChoice = theScreenUiState.value.playListChoice
     val albumChoice = theScreenUiState.value.albumChoice
@@ -197,8 +196,8 @@ fun ChooseMusicProviderScreen() {
                 }
             }
         }
-        Spacer(modifier = Modifier.height(36.dp))
 
+        Spacer(modifier = Modifier.height(36.dp))
         Row(modifier = Modifier.fillMaxWidth(), horizontalArrangement = Arrangement.Center) {
 
             UpdateButton(

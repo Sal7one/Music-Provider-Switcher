@@ -1,4 +1,4 @@
-package com.sal7one.musicswitcher.ui.common
+package com.sal7one.musicswitcher.ui.features.options.components
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
@@ -8,6 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.sal7one.musicswitcher.ui.common.Switch
 
 
 @Composable
