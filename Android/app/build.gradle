@@ -42,6 +42,10 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
+    buildFeatures {
+        compose true
+    }
     composeOptions {
         //  androidx.compose.compiler
         kotlinCompilerExtensionVersion "1.2.0"
@@ -56,15 +60,18 @@ android {
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.8.0'
-    implementation 'com.google.android.material:material:1.6.1'
     implementation 'androidx.appcompat:appcompat:1.5.0'
     implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.5.1'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.5.1'
 
+    // Material
+    implementation 'com.google.android.material:material:1.6.1'
+    implementation "androidx.compose.material:material:$compose_version"
+
     // Hilt
-    implementation "com.google.dagger:hilt-android:2.41"
+    implementation "com.google.dagger:hilt-android:$hilt_version"
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    kapt "com.google.dagger:hilt-compiler:2.41"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
     // Coil
     implementation "io.coil-kt:coil-compose:$coil_version"
@@ -86,7 +93,6 @@ dependencies {
 
     // Compose
     implementation "androidx.compose.ui:ui:$compose_version"
-    implementation "androidx.compose.material:material:$compose_version"
     implementation "androidx.compose.ui:ui-tooling-preview:$compose_version"
     implementation 'androidx.activity:activity-compose:1.5.1'
     implementation "androidx.compose.runtime:runtime-livedata:1.2.1"
