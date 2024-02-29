@@ -1,5 +1,14 @@
 # Music Switcher
 
+### Todo: ~ April 2024
+
+ - Write actual good compose code lol, this project came out when compose was beta and the code is bad
+ - Dialog sends you to settings
+ - Support Android 12, 13, 14
+ - Refactor code
+
+
+
 
 ## Avaliable Releases
 
